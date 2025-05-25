@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="PDFBench">
+  <meta name="keywords" content="PDFBench">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDFBench: A Benchmark for De novo Protein Design from Function</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title small-caps">PDFBench</h1>
+          <h3 class="subtitle is-3 publication-subtitle">A Benchmark for <em>De novo</em> Protein Design from Function</h3>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/Knlife">Jiahao Kuang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/sornkL">Nuowei Liu</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://pdfbench.github.io">Changzhi Sun</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://pdfbench.github.io">Tao Ji</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://ybwu.org">Yuanbin Wu</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>School of Computer Science and Technology, East China Normal University</span><br/>
+            <span class="author-block"><sup>2</sup>Institute of Artificial Intelligence (TeleAI), China Telecom</span><br/>
+            <span class="author-block"><sup>3</sup>School of Computer Science, Fudan University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/pdfbench/PDFBench"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href=" https://huggingface.co/datasets/Knlife/SwissInPro"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <!-- <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span> -->
+                  <span>🤗 Dataset</span>
+                  </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          In recent years, while natural language processing and multimodal learning have seen rapid advancements, the field of <em>de novo</em> protein design has also experienced significant growth. However, most current methods rely on proprietary datasets and evaluation rubrics, making fair comparisons between different approaches challenging. Moreover, these methods often employ evaluation metrics that capture only a subset of the desired properties of designed proteins, lacking a comprehensive assessment framework. To address these, we introduce <span class="small-caps">PDFBench</span>, the first comprehensive benchmark for evaluating <em>de novo</em> protein design from function. <span class="small-caps">PDFBench</span> supports two tasks: description-guided design and keyword-guided design. To ensure fair and multifaceted evaluation, we compile 22 metrics covering sequence plausibility, structural fidelity, and language-protein alignment, along with measures of novelty and diversity. We evaluate five state-of-the-art baselines, revealing their respective strengths and weaknesses across tasks. Finally, we analyze inter-metric correlations, exploring the relationships between four categories of metrics, and offering guidelines for metric selection. <span class="small-caps">PDFBench</span> establishes a unified framework to drive future advances in function-driven <em>de novo</em> protein design.
+        </div>
+        <img src="./static/images/intro.png" alt="Abstract">
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Keyword-guided -->
+    <div class="is-centered has-text-centered">
+      <h2 class="title is-3">Keyword-Guided</h2>
+      <div class="content has-text-justified">
+        TODO
+      </div>
+    </div>
+    <!-- Function-guided -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Description-guided -->
+    <div class="is-centered has-text-centered">
+      <h2 class="title is-3">Description-Guided</h2>
+      <div class="content has-text-justified">
+        TODO
+      </div>
+    </div>
+    <!-- Description-guided -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- rethinking -->
+    <div class="is-centered has-text-centered">
+      <h2 class="title is-3">Rethinking the Evaluation Metrics</h2>
+      <div class="content has-text-justified">
+        TODO
+      </div>
+    </div>
+    <!-- rethinking -->
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>Coming Soon ...
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website's source code is based on the <a href="https://nerfies.github.io" class="external-link">Nerfies</a>,
+            licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
