@@ -1,1000 +1,1112 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta name="description"
-        content="PDFBench">
-  <meta name="keywords" content="PDFBench">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PDFBench: A Benchmark for De novo Protein Design from Function</title>
+    <meta charset="utf-8">
+    <meta name="description" content="PDFBench">
+    <meta name="keywords" content="PDFBench">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PDFBench: A Benchmark for De novo Protein Design from Function</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-    gtag('js', new Date());
+        gtag('js', new Date());
 
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="stylesheet" href="./static/css/leaderboard.css">
-  <link rel="icon" href="./static/images/favicon.svg">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="./static/css/leaderboard.css">
+    <link rel="icon" href="./static/images/favicon.svg">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
 </head>
+
 <body>
 
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title small-caps">PDFBench</h1>
-          <h3 class="subtitle is-3 publication-subtitle">A Benchmark for <em>De novo</em> Protein Design from Function</h3>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://github.com/Knlife">Jiahao Kuang</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="https://github.com/sornkL">Nuowei Liu</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="https://pdfbench.github.io">Changzhi Sun</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://pdfbench.github.io">Tao Ji</a><sup>3</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://ybwu.org">Yuanbin Wu</a><sup>1</sup>,
-            </span>
-          </div>
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title small-caps">PDFBench</h1>
+                        <h3 class="subtitle is-3 publication-subtitle">A Benchmark for <em>De novo</em> Protein Design
+                            from Function</h3>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a href="https://github.com/Knlife">Jiahao Kuang</a><sup>1</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://github.com/sornkL">Nuowei Liu</a><sup>1</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://pdfbench.github.io">Changzhi Sun</a><sup>2</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://pdfbench.github.io">Tao Ji</a><sup>3</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://ybwu.org">Yuanbin Wu</a><sup>1</sup>,
+                            </span>
+                        </div>
 
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>School of Computer Science and Technology, East China Normal University</span><br/>
-            <span class="author-block"><sup>2</sup>Institute of Artificial Intelligence (TeleAI), China Telecom</span><br/>
-            <span class="author-block"><sup>3</sup>School of Computer Science, Fudan University</span>
-          </div>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>1</sup>School of Computer Science and Technology, East China
+                                Normal University</span><br />
+                            <span class="author-block"><sup>2</sup>Institute of Artificial Intelligence (TeleAI), China
+                                Telecom</span><br />
+                            <span class="author-block"><sup>3</sup>School of Computer Science, Fudan University</span>
+                        </div>
 
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/pdfbench/PDFBench"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href=" https://huggingface.co/datasets/Knlife/SwissInPro"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <!-- <span class="icon">
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- PDF Link. -->
+                                <span class="link-block">
+                                    <a href="" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span>Paper</span>
+                                    </a>
+                                </span>
+                                <!-- Code Link. -->
+                                <span class="link-block">
+                                    <a href="https://github.com/pdfbench/PDFBench"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code</span>
+                                    </a>
+                                </span>
+                                <!-- Dataset Link. -->
+                                <span class="link-block">
+                                    <a href=" https://huggingface.co/datasets/Knlife/SwissInPro"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <!-- <span class="icon">
                       <i class="far fa-images"></i>
                   </span> -->
-                  <span>🤗 Dataset</span>
-                  </a>
+                                        <span>🤗 Dataset</span>
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="section" id="abstract">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          In recent years, while natural language processing and multimodal learning have seen rapid advancements, the field of <em>de novo</em> protein design has also experienced significant growth. However, most current methods rely on proprietary datasets and evaluation rubrics, making fair comparisons between different approaches challenging. Moreover, these methods often employ evaluation metrics that capture only a subset of the desired properties of designed proteins, lacking a comprehensive assessment framework. To address these, we introduce <span class="small-caps">PDFBench</span>, the first comprehensive benchmark for evaluating <em>de novo</em> protein design from function. <span class="small-caps">PDFBench</span> supports two tasks: description-guided design and keyword-guided design. To ensure fair and multifaceted evaluation, we compile 22 metrics covering sequence plausibility, structural fidelity, and language-protein alignment, along with measures of novelty and diversity. We evaluate five state-of-the-art baselines, revealing their respective strengths and weaknesses across tasks. Finally, we analyze inter-metric correlations, exploring the relationships between four categories of metrics, and offering guidelines for metric selection. <span class="small-caps">PDFBench</span> establishes a unified framework to drive future advances in function-driven <em>de novo</em> protein design.
+    <section class="section" id="abstract">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        In recent years, while natural language processing and multimodal learning have seen rapid
+                        advancements, the field of <em>de novo</em> protein design has also experienced significant
+                        growth. However, most current methods rely on proprietary datasets and evaluation rubrics,
+                        making fair comparisons between different approaches challenging. Moreover, these methods often
+                        employ evaluation metrics that capture only a subset of the desired properties of designed
+                        proteins, lacking a comprehensive assessment framework. To address these, we introduce <span
+                            class="small-caps">PDFBench</span>, the first comprehensive benchmark for evaluating <em>de
+                            novo</em> protein design from function. <span class="small-caps">PDFBench</span> supports
+                        two tasks: description-guided design and keyword-guided design. To ensure fair and multifaceted
+                        evaluation, we compile 22 metrics covering sequence plausibility, structural fidelity, and
+                        language-protein alignment, along with measures of novelty and diversity. We evaluate five
+                        state-of-the-art baselines, revealing their respective strengths and weaknesses across tasks.
+                        Finally, we analyze inter-metric correlations, exploring the relationships between four
+                        categories of metrics, and offering guidelines for metric selection. <span
+                            class="small-caps">PDFBench</span> establishes a unified framework to drive future advances
+                        in function-driven <em>de novo</em> protein design.
+                    </div>
+                </div>
+            </div>
+            <img src="./static/images/intro.png" alt="Abstract">
+            <div style="text-align: center;font-size: 1.2rem;margin-bottom: 1%;font-weight: bold;">Figure 1:
+                summarization of existing protein design from function models. </div>
+            <!--/ Abstract. -->
         </div>
-      </div>
-    </div>
-    <img src="./static/images/intro.png" alt="Abstract">
-    <div style="text-align: center;font-size: 1.2rem;margin-bottom: 1%;font-weight: bold;">Figure 1:  summarization of existing protein design from function models. </div>
-    <!--/ Abstract. -->
-  </div>
-</section>
+    </section>
 
-<section class="section" id="results-keyword">
-  <div class="container is-max-desktop">
-    <!-- Keyword-guided -->
-    <div class="is-centered has-text-centered">
-    <h2 class="title is-3">Keyword-Guided</h2>
-    <div class="content has-text-justified">
-      <p>In <a href="#results-key-seq">Table 1</a>, <a href="#results-key-stc">Table 2</a>, <a href="#results-key-alt">Table 3</a> and <a href="#results-key-nov-div">Table 4</a>, we report the benchmark results for keyword-guided task. Based on these results, our key findings are as follows:</p>
-      <ul>
-        <li><strong>The keyword-guided task is more challenging than the description-guided task.</strong> Compared to their performance on the description-guided task, baselines exhibit substantial degradation on the keyword-guided task, with the exception of the PPL-ProtGPT2, Novelty and Diversity. For structure-based metrics, the optimal pLDDT score drops from 75.25 to 66.20, while the optimal PAE increases from 0.96 to 14.53. In terms of language alignment, the ProTrek Score declines from 17.50 to 14.14, and the optimal Keyword Recovery score decreases from 42.65\% to 28.74\%. Most sequence-based metrics also show a similar downward trend.</li>
-        <li><strong>Fine-tuning provides limited benefit.</strong> Unlike in the description-guided task, fine-tuning led to only modest gains in the keyword-guided task, likely due to its greater complexity. Specifically, both ProteinDT<sub>FT</sub> and PAAG<sub>FT</sub> showed only marginal improvements on most structure-based and language alignment metrics, with PAAG<sub>FT</sub> even experiencing a decline in ProTrek Score and PAE.</li>
-        <li><strong>No model demonstrates satisfactory Foldability.</strong> For the four foldability metrics, a pLDDT score greater than 70 and a PAE less than 10 are generally required to indicate that the designed protein has good foldability. However, the highest pLDDT score, 66.20, is achieved by Pinal, with only 45.97\% of sequences exceeding this threshold, while the lowest PAE, 12.55, is achieved by Chroma, with just 40% of sequences meeting the PAE < 10 criterion. These results indicate that none of the models exhibit satisfactory foldability in the keyword-guided task.</li>
-        <li><strong>Protein designed by Pinal perform best in Language Alignment.</strong> Pinal significantly outperforms all other baselines across all Language Alignment metrics, with its advantage even more pronounced than on the description-guided task. This suggests that Pinal maintains relatively strong performance and robustness in the more challenging keyword-guided task.</li>
-        <li><strong>ESM-designed protein perform best only in Plausibility.</strong> ESM3, optimized specifically for multiple-hot encoded keywords, uses InterProIDs as input rather than keyword name prompts, resulting in the best performance only on Plausibility. Moreover, it exhibits suboptimal or even inferior performance on more critical metrics such as Foldability and Language Alignment.</li>
-      </ul>
-    </div>
-    <table class="js-sort-table" id="results-key-seq">
-        <caption>Table 1: Sequence-based results on the keyword-guided task</caption>
-        <thead>
-            <tr>
-                <th rowspan="2" class="js-sort-number">Models</th>
-                <th colspan="2" class="js-sort-number">Plausibility</th>
-                <th colspan="3" class="js-sort-number">Repetitiveness</th>
-                <th colspan="3" class="js-sort-number">ESMscore</th>
-                <th rowspan="2" class="js-sort-number">GT-Identity &uarr;</th>
-            </tr>
-            <tr>
-                <th class="js-sort-number">PPL-ProtGPT2 &darr;</th>
-                <th class="js-sort-number">PPL-ProGen &darr;</th>
-                <th class="js-sort-number">Repeat &darr;</th>
-                <th class="js-sort-number">Rep-2 &darr;</th>
-                <th class="js-sort-number">Rep-5 &darr;</th>
-                <th class="js-sort-number">F1 &uarr;</th>
-                <th class="js-sort-number">Precision &uarr;</th>
-                <th class="js-sort-number">Recall &uarr;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="background-color: #f7f7f7">
-                <td>Natural</td>
-                <td>604.34</td>
-                <td>8.28</td>
-                <td>2.36</td>
-                <td>37.01</td>
-                <td>1.14</td>
-                <td>100.00</td>
-                <td>100.00</td>
-                <td>100.00</td>
-                <td>100.00</td>
-            </tr>
-            <tr>
-                <td>Random (U)</td>
-                <td>2436.77±21.26</td>
-                <td>21.87±0.03</td>
-                <td>0.01±0.00</td>
-                <td>0.28±0.00</td>
-                <td>0.00±0.00</td>
-                <td>0.72±0.00</td>
-                <td>0.82±0.00</td>
-                <td>0.64±0.00</td>
-                <td>0.32±0.13</td>
-            </tr>
-            <tr>
-                <td>Random (E)</td>
-                <td>3041.98±38.97</td>
-                <td>18.70±0.02</td>
-                <td>1.15±0.06</td>
-                <td>33.95±0.06</td>
-                <td>0.00±0.00</td>
-                <td>72.47±0.05</td>
-                <td>82.78±0.05</td>
-                <td>65.01±0.06</td>
-                <td>0.19±0.06</td>
-            </tr>
-            <tr>
-                <td>ProteinDT</td>
-                <td>1429.68±22.19</td>
-                <td id="third">11.52±0.17</td>
-                <td>10.87±0.58</td>
-                <td>66.57±0.36</td>
-                <td>6.03±0.59</td>
-                <td>72.42±0.04</td>
-                <td>80.69±0.12</td>
-                <td>66.34±0.04</td>
-                <td>0.10±0.09</td>
-            </tr>
-            <tr>
-                <td>ProteinDT<sub>FT</sub></td>
-                <td>1860.43±7.88</td>
-                <td>14.09±0.04</td>
-                <td>4.38±0.11</td>
-                <td>50.41±0.16</td>
-                <td>0.86±0.08</td>
-                <td id="first">73.71±0.04</td>
-                <td id="third">82.57±0.05</td>
-                <td id="third">67.09±0.04</td>
-                <td id="third">0.37±0.17</td>
-            </tr>
-            <tr>
-                <td>Pinal</td>
-                <td id="second">584.25±12.33</td>
-                <td id="second">8.48±0.07</td>
-                <td>14.69±0.21</td>
-                <td>61.50±0.18</td>
-                <td>4.99±0.07</td>
-                <td>72.43±0.08</td>
-                <td>75.67±0.06</td>
-                <td id="first">69.86±0.12</td>
-                <td id="first">5.87±0.44</td>
-            </tr>
-            <tr>
-                <td>PAAG</td>
-                <td>2545.89±9.82</td>
-                <td>18.26±0.01</td>
-                <td id="first">2.36±0.09</td>
-                <td id="first">33.98±0.29</td>
-                <td id="first">0.04±0.01</td>
-                <td id="third">73.58±0.01</td>
-                <td id="first">83.40±0.03</td>
-                <td>66.38±0.03</td>
-                <td>0.10±0.04</td>
-            </tr>
-            <tr>
-                <td>PAAG<sub>FT</sub></td>
-                <td>2044.39±31.75</td>
-                <td>14.74±0.11</td>
-                <td id="third">4.10±0.33</td>
-                <td id="second">47.92±0.36</td>
-                <td id="third">0.90±0.21</td>
-                <td id="second">73.59±0.06</td>
-                <td id="second">83.19±0.11</td>
-                <td>66.53±0.03</td>
-                <td>0.05±0.05</td>
-            </tr>
-            <tr>
-                <td>Chroma</td>
-                <td id="third">1322.71±18.13</td>
-                <td>12.21±0.02</td>
-                <td id="second">2.70±0.12</td>
-                <td id="third">49.07±0.05</td>
-                <td id="second">0.29±0.05</td>
-                <td>72.76±0.05</td>
-                <td>80.06±0.06</td>
-                <td id="second">67.13±0.04</td>
-                <td>0.11±0.09</td>
-            </tr>
-            <tr>
-                <td>ESM3</td>
-                <td id="first">282.82±7.74</td>
-                <td id="first">6.05±0.17</td>
-                <td>29.09±4.31</td>
-                <td>67.56±2.73</td>
-                <td>21.81±4.09</td>
-                <td>69.02±1.24</td>
-                <td>72.89±0.56</td>
-                <td>66.07±1.73</td>
-                <td id="third">2.19±1.68</td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="js-sort-table" id="results-key-stc">
-        <caption>Table 2: Structure-based results on the keyword-guided task</caption>
-        <thead>
-            <tr>
-                <th class="js-sort-number">Models</th>
-                <th class="js-sort-number">pLDDT &uarr;</th>
-                <th class="js-sort-number">pLDDT &gt; 70% &uarr;</th>
-                <th class="js-sort-number">PAE &darr;</th>
-                <th class="js-sort-number">PAE &lt; 10% &uarr;</th>
-                <th class="js-sort-number">TMscore % &uarr;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="background-color: #f7f7f7">
-                <td>Natural</td>
-                <td>80.57</td>
-                <td>88.87</td>
-                <td>7.10</td>
-                <td>82.13</td>
-                <td>100.00</td>
-            </tr>
-            <tr>
-                <td>Random (U)</td>
-                <td>24.95±0.05</td>
-                <td>0.05±0.09</td>
-                <td>23.57±0.03</td>
-                <td>0.16±0.16</td>
-                <td>17.44±0.03</td>
-            </tr>
-            <tr>
-                <td>Random (E)</td>
-                <td>27.89±0.12</td>
-                <td>0.16±0.16</td>
-                <td>23.45±0.02</td>
-                <td>0.31±0.00</td>
-                <td>17.42±0.07</td>
-            </tr>
-            <tr>
-                <td>ProteinDT</td>
-                <td>38.72±0.20</td>
-                <td>0.10±0.18</td>
-                <td>26.26±0.06</td>
-                <td>0.00±0.00</td>
-                <td>11.58±0.01</td>
-            </tr>
-            <tr>
-                <td>ProteinDT<sub>FT</sub></td>
-                <td>38.66±0.11</td>
-                <td>1.04±0.36</td>
-                <td>23.90±0.06</td>
-                <td>0.42±0.32</td>
-                <td>14.30±0.06</td>
-            </tr>
-            <tr>
-                <td>Pinal</td>
-                <td id="first">66.20±0.61</td>
-                <td id="first">45.97±1.59</td>
-                <td id="second">14.53±0.29</td>
-                <td id="second">32.94±1.61</td>
-                <td>15.76±0.22</td>
-            </tr>
-            <tr>
-                <td>PAAG</td>
-                <td>33.78±0.18</td>
-                <td>0.16±0.16</td>
-                <td>23.02±0.06</td>
-                <td>0.21±0.36</td>
-                <td id="third">17.28±0.12</td>
-            </tr>
-            <tr>
-                <td>PAAG<sub>FT</sub></td>
-                <td>41.06±0.24</td>
-                <td>1.14±0.09</td>
-                <td>24.10±0.01</td>
-                <td>0.62±0.63</td>
-                <td>0.05±0.05</td>
-            </tr>
-            <tr>
-                <td>Chroma</td>
-                <td id="second">62.30±0.67</td>
-                <td id="third">29.52±0.86</td>
-                <td id="first">12.55±0.22</td>
-                <td id="first">40.80±1.46</td>
-                <td id="second">18.55±0.07</td>
-            </tr>
-            <tr>
-                <td>ESM3</td>
-                <td id="third">62.89±3.44</td>
-                <td id="second">37.36±9.16</td>
-                <td id="third">15.65±1.64</td>
-                <td id="third">29.15±9.78</td>
-                <td id="first">19.92±2.35</td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="js-sort-table" id="results-key-alt">
-        <caption>Table 3: Language Alignment on the keyword-guided task</caption>
-        <thead>
-            <tr>
-                <th rowspan="2" class="js-sort-number">Models</th>
-                <th rowspan="2" class="js-sort-number">ProTrek Score % &uarr;</th>
-                <th colspan="3" class="js-sort-number">Retrieval Accuracy@T % &uarr;</th>
-                <th rowspan="2" class="js-sort-number">Keyword Recovery % &uarr;</th>
-            </tr>
-            <tr>
-                <th class="js-sort-number">T=4</th>
-                <th class="js-sort-number">T=10</th>
-                <th class="js-sort-number">T=20</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="background-color: #f7f7f7">
-                <td>Natural</td>
-                <td>20.32</td>
-                <td>86.29</td>
-                <td>77.41</td>
-                <td>67.6</td>
-                <td>100.00</td>
-            </tr>
-            <tr>
-                <td>Random (U)</td>
-                <td>7.18±0.17</td>
-                <td>26.74±0.24</td>
-                <td>11.68±1.09</td>
-                <td>5.45±1.40</td>
-                <td>0.00±0.00</td>
-            </tr>
-            <tr>
-                <td>Random (E)</td>
-                <td>6.43±0.04</td>
-                <td>26.90±0.44</td>
-                <td>10.70±0.63</td>
-                <td>6.02±0.63</td>
-                <td>0.00±0.00</td>
-            </tr>
-            <tr>
-                <td>ProteinDT</td>
-                <td>3.89±0.17</td>
-                <td>31.57±0.77</td>
-                <td>13.97±0.63</td>
-                <td>7.43±0.63</td>
-                <td>0.03±0.05</td>
-            </tr>
-            <tr>
-                <td>ProteinDT<sub>FT</sub></td>
-                <td id="second">6.28±0.08</td>
-                <td id="second">44.91±1.80</td>
-                <td id="second">24.87±0.80</td>
-                <td id="third">17.03±1.19</td>
-                <td id="third">1.08±0.14</td>
-            </tr>
-            <tr>
-                <td>Pinal</td>
-                <td id="first">14.14±0.29</td>
-                <td id="first">69.83±2.01</td>
-                <td id="first">59.08±2.95</td>
-                <td id="first">49.95±1.97</td>
-                <td id="first">28.74±0.24</td>
-            </tr>
-            <tr>
-                <td>PAAG</td>
-                <td id="third">5.40±0.04</td>
-                <td>28.92±1.40</td>
-                <td>12.57±1.09</td>
-                <td>7.74±0.88</td>
-                <td>0.15±0.03</td>
-            </tr>
-            <tr>
-                <td>PAAG<sub>FT</sub></td>
-                <td>3.86±0.07</td>
-                <td>32.03±0.65</td>
-                <td>15.47±1.56</td>
-                <td>9.14±0.39</td>
-                <td>0.02±0.03</td>
-            </tr>
-            <tr>
-                <td>Chroma</td>
-                <td>3.13±0.14</td>
-                <td>26.58±1.56</td>
-                <td>10.90±1.50</td>
-                <td>6.02±0.24</td>
-                <td>0.18±0.08</td>
-            </tr>
-            <tr>
-                <td>ESM3</td>
-                <td>4.87±1.51</td>
-                <td id="third">37.85±9.71</td>
-                <td id="third">23.31±7.22</td>
-                <td id="second">17.13±6.48</td>
-                <td id="second">11.68±7.36</td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="js-sort-table" id="results-key-nov-div" style="width: 50%;">
-        <caption>Table 4: Novelty and Diversity on the keyword-guided task</caption>
-        <thead>
-            <tr>
-                <th class="js-sort-number">Models</th>
-                <th class="js-sort-number">Novelty % &uarr;</th>
-                <th class="js-sort-number">Diversity % &uarr;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="background-color: #f7f7f7">
-                <td>Natural</td>
-                <td>39.16</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>Random (U)</td>
-                <td>98.70±0.01</td>
-                <td>97.98</td>
-            </tr>
-            <tr>
-                <td>Random (E)</td>
-                <td>98.23±0.04</td>
-                <td>99.75</td>
-            </tr>
-            <tr>
-                <td>ProteinDT</td>
-                <td id="first">99.22±0.11</td>
-                <td id="second">99.76</td>
-            </tr>
-            <tr>
-                <td>ProteinDT<sub>FT</sub></td>
-                <td id="second">99.02±0.02</td>
-                <td id="third">99.54</td>
-            </tr>
-            <tr>
-                <td>Pinal</td>
-                <td>75.40±0.72</td>
-                <td>93.70</td>
-            </tr>
-            <tr>
-                <td>PAAG</td>
-                <td id="third">98.60±0.08</td>
-                <td>99.17</td>
-            </tr>
-            <tr>
-                <td>PAAG<sub>FT</sub></td>
-                <td>97.06±0.14</td>
-                <td id="first">99.82</td>
-            </tr>
-            <tr>
-                <td>Chroma</td>
-                <td>98.00±0.17</td>
-                <td>98.18</td>
-            </tr>
-            <tr>
-                <td>ESM3</td>
-                <td>85.12±4.19</td>
-                <td>97.63</td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    <!-- Function-guided -->
-  </div>
-</section>
+    <section class="section" id="results-keyword">
+        <div class="container is-max-desktop">
+            <!-- Keyword-guided -->
+            <div class="is-centered has-text-centered">
+                <h2 class="title is-3">Keyword-Guided</h2>
+                <div class="content has-text-justified">
+                    <p>In <a href="#results-key-seq">Table 1</a>, <a href="#results-key-stc">Table 2</a>, <a
+                            href="#results-key-alt">Table 3</a> and <a href="#results-key-nov-div">Table 4</a>, we
+                        report the benchmark results for keyword-guided task. Based on these results, our key findings
+                        are as follows:</p>
+                    <ul>
+                        <li><strong>The keyword-guided task is more challenging than the description-guided
+                                task.</strong> Compared to their performance on the description-guided task, baselines
+                            exhibit substantial degradation on the keyword-guided task, with the exception of the
+                            PPL-ProtGPT2, Novelty and Diversity. For structure-based metrics, the optimal pLDDT score
+                            drops from 75.25 to 66.20, while the optimal PAE increases from 0.96 to 14.53. In terms of
+                            language alignment, the ProTrek Score declines from 17.50 to 14.14, and the optimal Keyword
+                            Recovery score decreases from 42.65\% to 28.74\%. Most sequence-based metrics also show a
+                            similar downward trend.</li>
+                        <li><strong>Fine-tuning provides limited benefit.</strong> Unlike in the description-guided
+                            task, fine-tuning led to only modest gains in the keyword-guided task, likely due to its
+                            greater complexity. Specifically, both ProteinDT<sub>FT</sub> and PAAG<sub>FT</sub> showed
+                            only marginal improvements on most structure-based and language alignment metrics, with
+                            PAAG<sub>FT</sub> even experiencing a decline in ProTrek Score and PAE.</li>
+                        <li><strong>No model demonstrates satisfactory Foldability.</strong> For the four foldability
+                            metrics, a pLDDT score greater than 70 and a PAE less than 10 are generally required to
+                            indicate that the designed protein has good foldability. However, the highest pLDDT score,
+                            66.20, is achieved by Pinal, with only 45.97\% of sequences exceeding this threshold, while
+                            the lowest PAE, 12.55, is achieved by Chroma, with just 40% of sequences meeting the PAE <
+                                10 criterion. These results indicate that none of the models exhibit satisfactory
+                                foldability in the keyword-guided task.</li>
+                        <li><strong>Protein designed by Pinal perform best in Language Alignment.</strong> Pinal
+                            significantly outperforms all other baselines across all Language Alignment metrics, with
+                            its advantage even more pronounced than on the description-guided task. This suggests that
+                            Pinal maintains relatively strong performance and robustness in the more challenging
+                            keyword-guided task.</li>
+                        <li><strong>ESM-designed protein perform best only in Plausibility.</strong> ESM3, optimized
+                            specifically for multiple-hot encoded keywords, uses InterProIDs as input rather than
+                            keyword name prompts, resulting in the best performance only on Plausibility. Moreover, it
+                            exhibits suboptimal or even inferior performance on more critical metrics such as
+                            Foldability and Language Alignment.</li>
+                    </ul>
+                </div>
+                <table class="js-sort-table" id="results-key-seq">
+                    <caption>Table 1: Sequence-based results on the keyword-guided task</caption>
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="js-sort-number">Models</th>
+                            <th colspan="2" class="js-sort-number">Plausibility</th>
+                            <th colspan="3" class="js-sort-number">Repetitiveness</th>
+                            <th colspan="3" class="js-sort-number">ESMscore</th>
+                            <th rowspan="2" class="js-sort-number">GT-Identity &uarr;</th>
+                        </tr>
+                        <tr>
+                            <th class="js-sort-number">PPL-ProtGPT2 &darr;</th>
+                            <th class="js-sort-number">PPL-ProGen &darr;</th>
+                            <th class="js-sort-number">Repeat &darr;</th>
+                            <th class="js-sort-number">Rep-2 &darr;</th>
+                            <th class="js-sort-number">Rep-5 &darr;</th>
+                            <th class="js-sort-number">F1 &uarr;</th>
+                            <th class="js-sort-number">Precision &uarr;</th>
+                            <th class="js-sort-number">Recall &uarr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f7f7f7">
+                            <td>Natural</td>
+                            <td>604.34</td>
+                            <td>8.28</td>
+                            <td>2.36</td>
+                            <td>37.01</td>
+                            <td>1.14</td>
+                            <td>100.00</td>
+                            <td>100.00</td>
+                            <td>100.00</td>
+                            <td>100.00</td>
+                        </tr>
+                        <tr>
+                            <td>Random (U)</td>
+                            <td>2436.77±21.26</td>
+                            <td>21.87±0.03</td>
+                            <td>0.01±0.00</td>
+                            <td>0.28±0.00</td>
+                            <td>0.00±0.00</td>
+                            <td>0.72±0.00</td>
+                            <td>0.82±0.00</td>
+                            <td>0.64±0.00</td>
+                            <td>0.32±0.13</td>
+                        </tr>
+                        <tr>
+                            <td>Random (E)</td>
+                            <td>3041.98±38.97</td>
+                            <td>18.70±0.02</td>
+                            <td>1.15±0.06</td>
+                            <td>33.95±0.06</td>
+                            <td>0.00±0.00</td>
+                            <td>72.47±0.05</td>
+                            <td>82.78±0.05</td>
+                            <td>65.01±0.06</td>
+                            <td>0.19±0.06</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>1429.68±22.19</td>
+                            <td id="third">11.52±0.17</td>
+                            <td>10.87±0.58</td>
+                            <td>66.57±0.36</td>
+                            <td>6.03±0.59</td>
+                            <td>72.42±0.04</td>
+                            <td>80.69±0.12</td>
+                            <td>66.34±0.04</td>
+                            <td>0.10±0.09</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT<sub>FT</sub></td>
+                            <td>1860.43±7.88</td>
+                            <td>14.09±0.04</td>
+                            <td>4.38±0.11</td>
+                            <td>50.41±0.16</td>
+                            <td>0.86±0.08</td>
+                            <td id="first">73.71±0.04</td>
+                            <td id="third">82.57±0.05</td>
+                            <td id="third">67.09±0.04</td>
+                            <td id="third">0.37±0.17</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="second">584.25±12.33</td>
+                            <td id="second">8.48±0.07</td>
+                            <td>14.69±0.21</td>
+                            <td>61.50±0.18</td>
+                            <td>4.99±0.07</td>
+                            <td>72.43±0.08</td>
+                            <td>75.67±0.06</td>
+                            <td id="first">69.86±0.12</td>
+                            <td id="first">5.87±0.44</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>2545.89±9.82</td>
+                            <td>18.26±0.01</td>
+                            <td id="first">2.36±0.09</td>
+                            <td id="first">33.98±0.29</td>
+                            <td id="first">0.04±0.01</td>
+                            <td id="third">73.58±0.01</td>
+                            <td id="first">83.40±0.03</td>
+                            <td>66.38±0.03</td>
+                            <td>0.10±0.04</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG<sub>FT</sub></td>
+                            <td>2044.39±31.75</td>
+                            <td>14.74±0.11</td>
+                            <td id="third">4.10±0.33</td>
+                            <td id="second">47.92±0.36</td>
+                            <td id="third">0.90±0.21</td>
+                            <td id="second">73.59±0.06</td>
+                            <td id="second">83.19±0.11</td>
+                            <td>66.53±0.03</td>
+                            <td>0.05±0.05</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td id="third">1322.71±18.13</td>
+                            <td>12.21±0.02</td>
+                            <td id="second">2.70±0.12</td>
+                            <td id="third">49.07±0.05</td>
+                            <td id="second">0.29±0.05</td>
+                            <td>72.76±0.05</td>
+                            <td>80.06±0.06</td>
+                            <td id="second">67.13±0.04</td>
+                            <td>0.11±0.09</td>
+                        </tr>
+                        <tr>
+                            <td>ESM3</td>
+                            <td id="first">282.82±7.74</td>
+                            <td id="first">6.05±0.17</td>
+                            <td>29.09±4.31</td>
+                            <td>67.56±2.73</td>
+                            <td>21.81±4.09</td>
+                            <td>69.02±1.24</td>
+                            <td>72.89±0.56</td>
+                            <td>66.07±1.73</td>
+                            <td id="third">2.19±1.68</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="js-sort-table" id="results-key-stc">
+                    <caption>Table 2: Structure-based results on the keyword-guided task</caption>
+                    <thead>
+                        <tr>
+                            <th class="js-sort-number">Models</th>
+                            <th class="js-sort-number">pLDDT &uarr;</th>
+                            <th class="js-sort-number">pLDDT &gt; 70% &uarr;</th>
+                            <th class="js-sort-number">PAE &darr;</th>
+                            <th class="js-sort-number">PAE &lt; 10% &uarr;</th>
+                            <th class="js-sort-number">TMscore % &uarr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f7f7f7">
+                            <td>Natural</td>
+                            <td>80.57</td>
+                            <td>88.87</td>
+                            <td>7.10</td>
+                            <td>82.13</td>
+                            <td>100.00</td>
+                        </tr>
+                        <tr>
+                            <td>Random (U)</td>
+                            <td>24.95±0.05</td>
+                            <td>0.05±0.09</td>
+                            <td>23.57±0.03</td>
+                            <td>0.16±0.16</td>
+                            <td>17.44±0.03</td>
+                        </tr>
+                        <tr>
+                            <td>Random (E)</td>
+                            <td>27.89±0.12</td>
+                            <td>0.16±0.16</td>
+                            <td>23.45±0.02</td>
+                            <td>0.31±0.00</td>
+                            <td>17.42±0.07</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>38.72±0.20</td>
+                            <td>0.10±0.18</td>
+                            <td>26.26±0.06</td>
+                            <td>0.00±0.00</td>
+                            <td>11.58±0.01</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT<sub>FT</sub></td>
+                            <td>38.66±0.11</td>
+                            <td>1.04±0.36</td>
+                            <td>23.90±0.06</td>
+                            <td>0.42±0.32</td>
+                            <td>14.30±0.06</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="first">66.20±0.61</td>
+                            <td id="first">45.97±1.59</td>
+                            <td id="second">14.53±0.29</td>
+                            <td id="second">32.94±1.61</td>
+                            <td>15.76±0.22</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>33.78±0.18</td>
+                            <td>0.16±0.16</td>
+                            <td>23.02±0.06</td>
+                            <td>0.21±0.36</td>
+                            <td id="third">17.28±0.12</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG<sub>FT</sub></td>
+                            <td>41.06±0.24</td>
+                            <td>1.14±0.09</td>
+                            <td>24.10±0.01</td>
+                            <td>0.62±0.63</td>
+                            <td>0.05±0.05</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td id="second">62.30±0.67</td>
+                            <td id="third">29.52±0.86</td>
+                            <td id="first">12.55±0.22</td>
+                            <td id="first">40.80±1.46</td>
+                            <td id="second">18.55±0.07</td>
+                        </tr>
+                        <tr>
+                            <td>ESM3</td>
+                            <td id="third">62.89±3.44</td>
+                            <td id="second">37.36±9.16</td>
+                            <td id="third">15.65±1.64</td>
+                            <td id="third">29.15±9.78</td>
+                            <td id="first">19.92±2.35</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="js-sort-table" id="results-key-alt">
+                    <caption>Table 3: Language Alignment on the keyword-guided task</caption>
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="js-sort-number">Models</th>
+                            <th rowspan="2" class="js-sort-number">ProTrek Score % &uarr;</th>
+                            <th colspan="3" class="js-sort-number">Retrieval Accuracy@T % &uarr;</th>
+                            <th rowspan="2" class="js-sort-number">Keyword Recovery % &uarr;</th>
+                        </tr>
+                        <tr>
+                            <th class="js-sort-number">T=4</th>
+                            <th class="js-sort-number">T=10</th>
+                            <th class="js-sort-number">T=20</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f7f7f7">
+                            <td>Natural</td>
+                            <td>20.32</td>
+                            <td>86.29</td>
+                            <td>77.41</td>
+                            <td>67.6</td>
+                            <td>100.00</td>
+                        </tr>
+                        <tr>
+                            <td>Random (U)</td>
+                            <td>7.18±0.17</td>
+                            <td>26.74±0.24</td>
+                            <td>11.68±1.09</td>
+                            <td>5.45±1.40</td>
+                            <td>0.00±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Random (E)</td>
+                            <td>6.43±0.04</td>
+                            <td>26.90±0.44</td>
+                            <td>10.70±0.63</td>
+                            <td>6.02±0.63</td>
+                            <td>0.00±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>3.89±0.17</td>
+                            <td>31.57±0.77</td>
+                            <td>13.97±0.63</td>
+                            <td>7.43±0.63</td>
+                            <td>0.03±0.05</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT<sub>FT</sub></td>
+                            <td id="second">6.28±0.08</td>
+                            <td id="second">44.91±1.80</td>
+                            <td id="second">24.87±0.80</td>
+                            <td id="third">17.03±1.19</td>
+                            <td id="third">1.08±0.14</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="first">14.14±0.29</td>
+                            <td id="first">69.83±2.01</td>
+                            <td id="first">59.08±2.95</td>
+                            <td id="first">49.95±1.97</td>
+                            <td id="first">28.74±0.24</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td id="third">5.40±0.04</td>
+                            <td>28.92±1.40</td>
+                            <td>12.57±1.09</td>
+                            <td>7.74±0.88</td>
+                            <td>0.15±0.03</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG<sub>FT</sub></td>
+                            <td>3.86±0.07</td>
+                            <td>32.03±0.65</td>
+                            <td>15.47±1.56</td>
+                            <td>9.14±0.39</td>
+                            <td>0.02±0.03</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>3.13±0.14</td>
+                            <td>26.58±1.56</td>
+                            <td>10.90±1.50</td>
+                            <td>6.02±0.24</td>
+                            <td>0.18±0.08</td>
+                        </tr>
+                        <tr>
+                            <td>ESM3</td>
+                            <td>4.87±1.51</td>
+                            <td id="third">37.85±9.71</td>
+                            <td id="third">23.31±7.22</td>
+                            <td id="second">17.13±6.48</td>
+                            <td id="second">11.68±7.36</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="js-sort-table" id="results-key-nov-div" style="width: 50%;">
+                    <caption>Table 4: Novelty and Diversity on the keyword-guided task</caption>
+                    <thead>
+                        <tr>
+                            <th class="js-sort-number">Models</th>
+                            <th class="js-sort-number">Novelty % &uarr;</th>
+                            <th class="js-sort-number">Diversity % &uarr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f7f7f7">
+                            <td>Natural</td>
+                            <td>39.16</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Random (U)</td>
+                            <td>98.70±0.01</td>
+                            <td>97.98</td>
+                        </tr>
+                        <tr>
+                            <td>Random (E)</td>
+                            <td>98.23±0.04</td>
+                            <td>99.75</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td id="first">99.22±0.11</td>
+                            <td id="second">99.76</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT<sub>FT</sub></td>
+                            <td id="second">99.02±0.02</td>
+                            <td id="third">99.54</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td>75.40±0.72</td>
+                            <td>93.70</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td id="third">98.60±0.08</td>
+                            <td>99.17</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG<sub>FT</sub></td>
+                            <td>97.06±0.14</td>
+                            <td id="first">99.82</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>98.00±0.17</td>
+                            <td>98.18</td>
+                        </tr>
+                        <tr>
+                            <td>ESM3</td>
+                            <td>85.12±4.19</td>
+                            <td>97.63</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Function-guided -->
+        </div>
+    </section>
 
-<section class="section" id="results-description">
-  <div class="container is-max-desktop">
-    <!-- Description-guided -->
-    <div class="is-centered has-text-centered">
-      <h2 class="title is-3">Description-Guided</h2>
-      <div class="content has-text-justified">
-        <p>In <a href="#res-desc-seq">Table 5</a>, <a href="#results-desc-stc">Table 6</a>, <a href="#res-desc-alt">Table 7</a> and <a href="#res-desc-nov-div">Table 8</a>, we report the benchmark results for description-guided task on all 22 main metrics. Based on these results, we have findings as follows:</p>
-        <ul>
-          <li><strong>Chroma perform uneven on foldability and language alignment.</strong> Chroma performs relatively well in terms of foldability but shows markedly poor results across all six language alignment metrics. This may be attributed to Chroma's incorporation of protein structure from the PDB in its training, while the emphasis on "programmability" potentially reduces its focus on language alignment. In addition, Chroma-designed proteins perform well in terms of Seqeuncial Plausibilty, Repeat, Novelty and Diversity.</li>
-          <li><strong>Finetuning improves performance tremendously.</strong> ProteinDT<sub>FT</sub> and PAAG<sub>FT</sub> demonstrate substantial performance gains over their original versions across PPL-ProtGPT2, pLDDT, PAE, and all language alignment metrics. Notably, the fine-tuned versions exhibit 1-2 orders of magnitude improvement in Retrieval Accuracy. However, this fine-tuning also results in more pronounced declines in GT-Identity, GT-TMscore, Novelty, and Diversity. In summary, we argue that fine-tuning on SwissMolInst extremely enhances the model's understanding of function descriptions at the cost of reduced sequncical and structural diversity.</li>
-          <li><strong>Pinal can design plausible, foldable, and language-aligned proteins.</strong> Apart from Repeat, Novelty and Diversity, Pinal performs best on 11 out of 14 metrics. Such results suggest that the two-stage approach employed by Pinal for protein sequence design excels in sequencical plausibility, structural foldability, and language alignment.</li>
-          <li><strong>Baselines receive a fairer evaluation.</strong> PAAG uses only the Success Rate metric (closely aligned with the definition of Keyword Recovery) for evaluating conditional generation and claims to outperform ProteinDT and Chroma. However, both PAAG and PAAG<sub>FT</sub> perform significantly worse on Keyword Recovery. ProteinDT introduces the Retrieval Accuracy metric to assess the language alignment of designed proteins, reporting accuracy of over 90. However, while ProteinDT ranks second only to Pinal in language alignment, no model has actually achieved such a high level of accuracy in our evaluations.</li>
-          <li><strong>Baselines receive a more comprehensive evaluation.</strong> Proteins generated by all versions of PAAG and ProteinDT exhibit poor foldability and sequence plausibility, aspects not considered in their original evaluations. Although these models show a clear advantage in Novelty and Diversity, this alone is insufficient to establish strong design capabilities for description-guided tasks.</li>
-        </ul>
-      </div>
-      <table class="js-sort-table" id="res-desc-seq">
-        <caption>Table 5: Sequence-based results on the description-guided task</caption>
-        <thead>
-            <tr>
-                <th rowspan="2" class="js-sort-number">Models</th>
-                <th colspan="2" class="js-sort-number">Plausibility</th>
-                <th colspan="3" class="js-sort-number">Repetitiveness</th>
-                <th colspan="3" class="js-sort-number">ESMscore</th>
-                <th rowspan="2" class="js-sort-number">GT-Identity &uarr;</th>
-            </tr>
-            <tr>
-                <th class="js-sort-number">PPL-ProtGPT2 &darr;</th>
-                <th class="js-sort-number">PPL-ProGen &darr;</th>
-                <th class="js-sort-number">Repeat &darr;</th>
-                <th class="js-sort-number">Rep-2 &darr;</th>
-                <th class="js-sort-number">Rep-5 &darr;</th>
-                <th class="js-sort-number">F1 &uarr;</th>
-                <th class="js-sort-number">Precision &uarr;</th>
-                <th class="js-sort-number">Recall &uarr;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="background-color: #f7f7f7">
-                <td>Natural</td>
-                <td>318.15</td>
-                <td>5.99</td>
-                <td>1.99</td>
-                <td>44.24</td>
-                <td>0.21</td>
-                <td>100</td>
-                <td>100</td>
-                <td>100</td>
-                <td>100.00</td>
-            </tr>
-            <tr>
-                <td>Random (U)</td>
-                <td>2484.03±4.53</td>
-                <td>21.71±0.00</td>
-                <td>0.01±0.00</td>
-                <td>0.34±0.00</td>
-                <td>0.00±0.00</td>
-                <td>0.71±0.00</td>
-                <td>0.82±0.01</td>
-                <td>0.63±0.00</td>
-                <td>0.37±0.03</td>
-            </tr>
-            <tr>
-                <td>Random (E)</td>
-                <td>3136.88±4.17</td>
-                <td>18.68±0.00</td>
-                <td>0.01±0.00</td>
-                <td>0.41±0.00</td>
-                <td>0.00±0.00</td>
-                <td>0.72±0.00</td>
-                <td>0.83±0.01</td>
-                <td>0.64±0.00</td>
-                <td>0.23±0.04</td>
-            </tr>
-            <tr>
-                <td>ProteinDT</td>
-                <td>1576.23±4.33</td>
-                <td>12.41±0.01</td>
-                <td>6.83±0.10</td>
-                <td>62.36±0.15</td>
-                <td>2.69±0.05</td>
-                <td>72.80±0.05</td>
-                <td>81.44±0.03</td>
-                <td>66.38±0.05</td>
-                <td>0.18±0.02</td>
-            </tr>
-            <tr>
-                <td>ProteinDT<sub>FT</sub></td>
-                <td id="second">1213.38±1.92</td>
-                <td id="second">10.80±0.02</td>
-                <td>3.80±0.03</td>
-                <td id="third">50.08±0.08</td>
-                <td id="third">0.79±0.03</td>
-                <td id="first">78.61±0.04</td>
-                <td id="second">83.68±0.04</td>
-                <td id="second">74.68±0.04</td>
-                <td id="second">16.88±0.08</td>
-            </tr>
-            <tr>
-                <td>Pinal</td>
-                <td id="first">308.97±0.67</td>
-                <td id="first">5.81±0.02</td>
-                <td>12.83±0.13</td>
-                <td>58.13±0.16</td>
-                <td>58.13±0.16</td>
-                <td id="third">76.63±0.06</td>
-                <td>77.74±0.08</td>
-                <td id="first">75.99±0.06</td>
-                <td id="first">18.65±0.15</td>
-            </tr>
-            <tr>
-                <td>PAAG</td>
-                <td>2782.70±9.64</td>
-                <td>17.84±0.02</td>
-                <td id="second">2.34±0.02</td>
-                <td id="second">45.66±0.03</td>
-                <td id="second">0.05±0.01</td>
-                <td>73.26±0.03</td>
-                <td id="third">83.10±0.02</td>
-                <td>66.04±0.03</td>
-                <td>0.17±0.02</td>
-            </tr>
-            <tr>
-                <td>PAAG<sub>FT</sub></td>
-                <td>1332.35±3.82</td>
-                <td id="third">11.09±0.01</td>
-                <td id="third">3.53±0.04</td>
-                <td>52.25±0.05</td>
-                <td>0.83±0.05</td>
-                <td id="second">77.67±0.00</td>
-                <td id="first">83.80±0.02</td>
-                <td id="third">73.04±0.02</td>
-                <td id="third">13.99±0.12</td>
-            </tr>
-            <tr>
-                <td>Chroma</td>
-                <td id="third">1322.38±13.61</td>
-                <td>12.22±0.02</td>
-                <td id="first">0.03±0.00</td>
-                <td id="first">0.55±0.00</td>
-                <td id="first">0.00±0.00</td>
-                <td>0.73±0.00</td>
-                <td>0.80±0.00</td>
-                <td>0.67±0.00</td>
-                <td>0.22±0.04</td>
-            </tr>
-        </tbody>
-      </table>  
-      <table class="js-sort-table" id="results-desc-stc">
-        <caption>Table 6: Structure-based results on the description-guided task</caption>
-        <thead>
-            <tr>
-                <th class="js-sort-number">Models</th>
-                <th class="js-sort-number">pLDDT &uarr;</th>
-                <th class="js-sort-number">pLDDT &gt; 70% &uarr;</th>
-                <th class="js-sort-number">PAE &darr;</th>
-                <th class="js-sort-number">PAE &lt; 10% &uarr;</th>
-                <th class="js-sort-number">TMscore % &uarr;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="background-color: #f7f7f7">
-                <td>Natural</td>
-                <td>80.64</td>
-                <td>81.27</td>
-                <td>9.20</td>
-                <td>65.73</td>
-                <td>100.00</td>
-            </tr>
-            <tr>
-                <td>Random (U)</td>
-                <td>22.96±0.04</td>
-                <td>0.16±0.04</td>
-                <td>24.85±0.01</td>
-                <td>0.56±0.03</td>
-                <td>16.95±0.03</td>
-            </tr>
-            <tr>
-                <td>Random (E)</td>
-                <td>25.77±0.03</td>
-                <td>0.20±0.06</td>
-                <td>24.71±0.01</td>
-                <td>0.60±0.04</td>
-                <td>17.10±0.00</td>
-            </tr>
-            <tr>
-                <td>ProteinDT</td>
-                <td>38.29±0.05</td>
-                <td>0.98±0.17</td>
-                <td>25.13±0.02</td>
-                <td>0.40±0.09</td>
-                <td>13.94±0.03</td>
-            </tr>
-            <tr>
-                <td>ProteinDT<sub>FT</sub></td>
-                <td id="third">51.42±0.04</td>
-                <td id="second">25.61±0.30</td>
-                <td id="third">18.57±0.02</td>
-                <td id="third">23.92±0.17</td>
-                <td id="second">22.79±0.10</td>
-            </tr>
-            <tr>
-                <td>Pinal</td>
-                <td id="first">75.25±0.19</td>
-                <td id="first">68.97±0.35</td>
-                <td id="first">10.96±0.10</td>
-                <td id="first">58.44±0.38</td>
-                <td id="first">23.77±0.15</td>
-            </tr>
-            <tr>
-                <td>PAAG</td>
-                <td>28.39±0.07</td>
-                <td>0.07±0.03</td>
-                <td>25.38±0.01</td>
-                <td>0.10±0.03</td>
-                <td>14.63±0.03</td>
-            </tr>
-            <tr>
-                <td>PAAG<sub>FT</sub></td>
-                <td>50.37±0.17</td>
-                <td id="third">23.86±0.22</td>
-                <td>19.96±0.02</td>
-                <td>21.99±0.26</td>
-                <td id="third">21.67±0.11</td>
-            </tr>
-            <tr>
-                <td>Chroma</td>
-                <td id="second">59.18±0.09</td>
-                <td>20.17±0.23</td>
-                <td id="second">15.03±0.04</td>
-                <td id="second">28.62±0.62</td>
-                <td>17.93±0.02</td>
-            </tr>
-        </tbody>
-      </table>
-      <table class="js-sort-table" id="res-desc-alt">
-        <caption>Table 7: Language Alignment on the description-guided task</caption>
-        <thead>
-            <tr>
-                <th rowspan="2" class="js-sort-number">Models</th>
-                <th rowspan="2" class="js-sort-number">ProTrek Score % &uarr;</th>
-                <th rowspan="2" class="js-sort-number">EvoLlama Score % &uarr;</th>
-                <th colspan="3" class="js-sort-number">Retrieval Accuracy@T % &uarr;</th>
-                <th rowspan="2" class="js-sort-number">Keyword Recovery % &uarr;</th>
-            </tr>
-            <tr>
-                <th class="js-sort-number">T=4</th>
-                <th class="js-sort-number">T=10</th>
-                <th class="js-sort-number">T=20</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="background-color: #f7f7f7">
-                <td>Natural</td>
-                <td>27.00</td>
-                <td>60.33</td>
-                <td>68.57</td>
-                <td>45.23</td>
-                <td>28.06</td>
-                <td>100.00</td>
-            </tr>
-            <tr>
-                <td>Random (U)</td>
-                <td>1.03±0.04</td>
-                <td>36.23±0.07</td>
-                <td>29.33±0.40</td>
-                <td>13.06±0.39</td>
-                <td>6.89±0.07</td>
-                <td>1.86±0.00</td>
-            </tr>
-            <tr>
-                <td>Random (E)</td>
-                <td>1.04±0.06</td>
-                <td>34.11±0.11</td>
-                <td>29.39±0.46</td>
-                <td>12.91±0.24</td>
-                <td>6.78±0.36</td>
-                <td>1.86±0.00</td>
-            </tr>
-            <tr>
-                <td>ProteinDT</td>
-                <td>1.20±0.06</td>
-                <td>40.57±0.05</td>
-                <td>34.24±0.23</td>
-                <td>16.93±0.39</td>
-                <td>9.28±0.36</td>
-                <td>2.03±0.03</td>
-            </tr>
-            <tr>
-                <td>ProteinDT<sub>FT</sub></td>
-                <td id="second">13.89±0.04</td>
-                <td id="second">52.84±0.20</td>
-                <td id="second">68.88±0.61</td>
-                <td id="second">55.56±0.37</td>
-                <td id="second">47.29±0.53</td>
-                <td id="second">37.00±0.08</td>
-            </tr>
-            <tr>
-                <td>Pinal</td>
-                <td id="first">17.50±0.08</td>
-                <td id="first">53.42±0.31</td>
-                <td id="first">71.53±0.66</td>
-                <td id="first">63.49±0.81</td>
-                <td id="first">57.95±0.31</td>
-                <td id="first">42.65±0.38</td>
-            </tr>
-            <tr>
-                <td>PAAG</td>
-                <td>1.29±0.04</td>
-                <td>34.39±0.18</td>
-                <td>29.54±0.23</td>
-                <td>13.63±0.23</td>
-                <td>7.06±0.27</td>
-                <td>1.86±0.00</td>
-            </tr>
-            <tr>
-                <td>PAAG<sub>FT</sub></td>
-                <td id="third">10.04±0.06</td>
-                <td id="third">49.69±0.12</td>
-                <td id="third">55.66±0.17</td>
-                <td id="third">40.66±0.73</td>
-                <td id="third">33.66±0.55</td>
-                <td id="third">28.86±0.07</td>
-            </tr>
-            <tr>
-                <td>Chroma</td>
-                <td>2.10±0.02</td>
-                <td>40.10±0.24</td>
-                <td>29.63±0.27</td>
-                <td>13.58±0.62</td>
-                <td>7.33±0.33</td>
-                <td>1.94±0.03</td>
-            </tr>
-        </tbody>
-      </table>
-      <table class="js-sort-table" id="res-desc-nov-div" style="width: 50%;">
-        <caption>Table 8: Novelty and Diversity on the description-guided task</caption>
-        <thead>
-            <tr>
-                <th class="js-sort-number">Models</th>
-                <th class="js-sort-number">Novelty % &uarr;</th>
-                <th class="js-sort-number">Diversity % &uarr;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="background-color: #f7f7f7">
-                <td>Natural</td>
-                <td>36.12</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>Random (U)</td>
-                <td>98.77±0.03</td>
-                <td>97.01</td>
-            </tr>
-            <tr>
-                <td>Random (E)</td>
-                <td>98.46±0.01</td>
-                <td>99.56</td>
-            </tr>
-            <tr>
-                <td>ProteinDT</td>
-                <td id="third">96.93±0.12</td>
-                <td id="first">99.23</td>
-            </tr>
-            <tr>
-                <td>ProteinDT<sub>FT</sub></td>
-                <td>75.09±0.04</td>
-                <td>79.87</td>
-            </tr>
-            <tr>
-                <td>Pinal</td>
-                <td>55.56±0.17</td>
-                <td>95.28</td>
-            </tr>
-            <tr>
-                <td>PAAG</td>
-                <td id="first">98.90±0.02</td>
-                <td id="second">99.15</td>
-            </tr>
-            <tr>
-                <td>PAAG<sub>FT</sub></td>
-                <td>78.55±0.11</td>
-                <td>86.09</td>
-            </tr>
-            <tr>
-                <td>Chroma</td>
-                <td id="second">97.27±0.02</td>
-                <td id="third">97</td>
-            </tr>
-        </tbody>
-      </table>
-    </div>
-    <!-- Description-guided -->
-  </div>
-</section>
+    <section class="section" id="results-description">
+        <div class="container is-max-desktop">
+            <!-- Description-guided -->
+            <div class="is-centered has-text-centered">
+                <h2 class="title is-3">Description-Guided</h2>
+                <div class="content has-text-justified">
+                    <p>In <a href="#res-desc-seq">Table 5</a>, <a href="#results-desc-stc">Table 6</a>, <a
+                            href="#res-desc-alt">Table 7</a> and <a href="#res-desc-nov-div">Table 8</a>, we report the
+                        benchmark results for description-guided task on all 22 main metrics. Based on these results, we
+                        have findings as follows:</p>
+                    <ul>
+                        <li><strong>Chroma perform uneven on foldability and language alignment.</strong> Chroma
+                            performs relatively well in terms of foldability but shows markedly poor results across all
+                            six language alignment metrics. This may be attributed to Chroma's incorporation of protein
+                            structure from the PDB in its training, while the emphasis on "programmability" potentially
+                            reduces its focus on language alignment. In addition, Chroma-designed proteins perform well
+                            in terms of Seqeuncial Plausibilty, Repeat, Novelty and Diversity.</li>
+                        <li><strong>Finetuning improves performance tremendously.</strong> ProteinDT<sub>FT</sub> and
+                            PAAG<sub>FT</sub> demonstrate substantial performance gains over their original versions
+                            across PPL-ProtGPT2, pLDDT, PAE, and all language alignment metrics. Notably, the fine-tuned
+                            versions exhibit 1-2 orders of magnitude improvement in Retrieval Accuracy. However, this
+                            fine-tuning also results in more pronounced declines in GT-Identity, GT-TMscore, Novelty,
+                            and Diversity. In summary, we argue that fine-tuning on SwissMolInst extremely enhances the
+                            model's understanding of function descriptions at the cost of reduced sequncical and
+                            structural diversity.</li>
+                        <li><strong>Pinal can design plausible, foldable, and language-aligned proteins.</strong> Apart
+                            from Repeat, Novelty and Diversity, Pinal performs best on 11 out of 14 metrics. Such
+                            results suggest that the two-stage approach employed by Pinal for protein sequence design
+                            excels in sequencical plausibility, structural foldability, and language alignment.</li>
+                        <li><strong>Baselines receive a fairer evaluation.</strong> PAAG uses only the Success Rate
+                            metric (closely aligned with the definition of Keyword Recovery) for evaluating conditional
+                            generation and claims to outperform ProteinDT and Chroma. However, both PAAG and
+                            PAAG<sub>FT</sub> perform significantly worse on Keyword Recovery. ProteinDT introduces the
+                            Retrieval Accuracy metric to assess the language alignment of designed proteins, reporting
+                            accuracy of over 90. However, while ProteinDT ranks second only to Pinal in language
+                            alignment, no model has actually achieved such a high level of accuracy in our evaluations.
+                        </li>
+                        <li><strong>Baselines receive a more comprehensive evaluation.</strong> Proteins generated by
+                            all versions of PAAG and ProteinDT exhibit poor foldability and sequence plausibility,
+                            aspects not considered in their original evaluations. Although these models show a clear
+                            advantage in Novelty and Diversity, this alone is insufficient to establish strong design
+                            capabilities for description-guided tasks.</li>
+                    </ul>
+                </div>
+                <table class="js-sort-table" id="res-desc-seq">
+                    <caption>Table 5: Sequence-based results on the description-guided task</caption>
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="js-sort-number">Models</th>
+                            <th colspan="2" class="js-sort-number">Plausibility</th>
+                            <th colspan="3" class="js-sort-number">Repetitiveness</th>
+                            <th colspan="3" class="js-sort-number">ESMscore</th>
+                            <th rowspan="2" class="js-sort-number">GT-Identity &uarr;</th>
+                        </tr>
+                        <tr>
+                            <th class="js-sort-number">PPL-ProtGPT2 &darr;</th>
+                            <th class="js-sort-number">PPL-ProGen &darr;</th>
+                            <th class="js-sort-number">Repeat &darr;</th>
+                            <th class="js-sort-number">Rep-2 &darr;</th>
+                            <th class="js-sort-number">Rep-5 &darr;</th>
+                            <th class="js-sort-number">F1 &uarr;</th>
+                            <th class="js-sort-number">Precision &uarr;</th>
+                            <th class="js-sort-number">Recall &uarr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f7f7f7">
+                            <td>Natural</td>
+                            <td>318.15</td>
+                            <td>5.99</td>
+                            <td>1.99</td>
+                            <td>44.24</td>
+                            <td>0.21</td>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>100.00</td>
+                        </tr>
+                        <tr>
+                            <td>Random (U)</td>
+                            <td>2484.03±4.53</td>
+                            <td>21.71±0.00</td>
+                            <td>0.01±0.00</td>
+                            <td>0.34±0.00</td>
+                            <td>0.00±0.00</td>
+                            <td>0.71±0.00</td>
+                            <td>0.82±0.01</td>
+                            <td>0.63±0.00</td>
+                            <td>0.37±0.03</td>
+                        </tr>
+                        <tr>
+                            <td>Random (E)</td>
+                            <td>3136.88±4.17</td>
+                            <td>18.68±0.00</td>
+                            <td>0.01±0.00</td>
+                            <td>0.41±0.00</td>
+                            <td>0.00±0.00</td>
+                            <td>0.72±0.00</td>
+                            <td>0.83±0.01</td>
+                            <td>0.64±0.00</td>
+                            <td>0.23±0.04</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>1576.23±4.33</td>
+                            <td>12.41±0.01</td>
+                            <td>6.83±0.10</td>
+                            <td>62.36±0.15</td>
+                            <td>2.69±0.05</td>
+                            <td>72.80±0.05</td>
+                            <td>81.44±0.03</td>
+                            <td>66.38±0.05</td>
+                            <td>0.18±0.02</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT<sub>FT</sub></td>
+                            <td id="second">1213.38±1.92</td>
+                            <td id="second">10.80±0.02</td>
+                            <td>3.80±0.03</td>
+                            <td id="third">50.08±0.08</td>
+                            <td id="third">0.79±0.03</td>
+                            <td id="first">78.61±0.04</td>
+                            <td id="second">83.68±0.04</td>
+                            <td id="second">74.68±0.04</td>
+                            <td id="second">16.88±0.08</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="first">308.97±0.67</td>
+                            <td id="first">5.81±0.02</td>
+                            <td>12.83±0.13</td>
+                            <td>58.13±0.16</td>
+                            <td>58.13±0.16</td>
+                            <td id="third">76.63±0.06</td>
+                            <td>77.74±0.08</td>
+                            <td id="first">75.99±0.06</td>
+                            <td id="first">18.65±0.15</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>2782.70±9.64</td>
+                            <td>17.84±0.02</td>
+                            <td id="second">2.34±0.02</td>
+                            <td id="second">45.66±0.03</td>
+                            <td id="second">0.05±0.01</td>
+                            <td>73.26±0.03</td>
+                            <td id="third">83.10±0.02</td>
+                            <td>66.04±0.03</td>
+                            <td>0.17±0.02</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG<sub>FT</sub></td>
+                            <td>1332.35±3.82</td>
+                            <td id="third">11.09±0.01</td>
+                            <td id="third">3.53±0.04</td>
+                            <td>52.25±0.05</td>
+                            <td>0.83±0.05</td>
+                            <td id="second">77.67±0.00</td>
+                            <td id="first">83.80±0.02</td>
+                            <td id="third">73.04±0.02</td>
+                            <td id="third">13.99±0.12</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td id="third">1322.38±13.61</td>
+                            <td>12.22±0.02</td>
+                            <td id="first">0.03±0.00</td>
+                            <td id="first">0.55±0.00</td>
+                            <td id="first">0.00±0.00</td>
+                            <td>0.73±0.00</td>
+                            <td>0.80±0.00</td>
+                            <td>0.67±0.00</td>
+                            <td>0.22±0.04</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="js-sort-table" id="results-desc-stc">
+                    <caption>Table 6: Structure-based results on the description-guided task</caption>
+                    <thead>
+                        <tr>
+                            <th class="js-sort-number">Models</th>
+                            <th class="js-sort-number">pLDDT &uarr;</th>
+                            <th class="js-sort-number">pLDDT &gt; 70% &uarr;</th>
+                            <th class="js-sort-number">PAE &darr;</th>
+                            <th class="js-sort-number">PAE &lt; 10% &uarr;</th>
+                            <th class="js-sort-number">TMscore % &uarr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f7f7f7">
+                            <td>Natural</td>
+                            <td>80.64</td>
+                            <td>81.27</td>
+                            <td>9.20</td>
+                            <td>65.73</td>
+                            <td>100.00</td>
+                        </tr>
+                        <tr>
+                            <td>Random (U)</td>
+                            <td>22.96±0.04</td>
+                            <td>0.16±0.04</td>
+                            <td>24.85±0.01</td>
+                            <td>0.56±0.03</td>
+                            <td>16.95±0.03</td>
+                        </tr>
+                        <tr>
+                            <td>Random (E)</td>
+                            <td>25.77±0.03</td>
+                            <td>0.20±0.06</td>
+                            <td>24.71±0.01</td>
+                            <td>0.60±0.04</td>
+                            <td>17.10±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>38.29±0.05</td>
+                            <td>0.98±0.17</td>
+                            <td>25.13±0.02</td>
+                            <td>0.40±0.09</td>
+                            <td>13.94±0.03</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT<sub>FT</sub></td>
+                            <td id="third">51.42±0.04</td>
+                            <td id="second">25.61±0.30</td>
+                            <td id="third">18.57±0.02</td>
+                            <td id="third">23.92±0.17</td>
+                            <td id="second">22.79±0.10</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="first">75.25±0.19</td>
+                            <td id="first">68.97±0.35</td>
+                            <td id="first">10.96±0.10</td>
+                            <td id="first">58.44±0.38</td>
+                            <td id="first">23.77±0.15</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>28.39±0.07</td>
+                            <td>0.07±0.03</td>
+                            <td>25.38±0.01</td>
+                            <td>0.10±0.03</td>
+                            <td>14.63±0.03</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG<sub>FT</sub></td>
+                            <td>50.37±0.17</td>
+                            <td id="third">23.86±0.22</td>
+                            <td>19.96±0.02</td>
+                            <td>21.99±0.26</td>
+                            <td id="third">21.67±0.11</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td id="second">59.18±0.09</td>
+                            <td>20.17±0.23</td>
+                            <td id="second">15.03±0.04</td>
+                            <td id="second">28.62±0.62</td>
+                            <td>17.93±0.02</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="js-sort-table" id="res-desc-alt">
+                    <caption>Table 7: Language Alignment on the description-guided task</caption>
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="js-sort-number">Models</th>
+                            <th rowspan="2" class="js-sort-number">ProTrek Score % &uarr;</th>
+                            <th rowspan="2" class="js-sort-number">EvoLlama Score % &uarr;</th>
+                            <th colspan="3" class="js-sort-number">Retrieval Accuracy@T % &uarr;</th>
+                            <th rowspan="2" class="js-sort-number">Keyword Recovery % &uarr;</th>
+                        </tr>
+                        <tr>
+                            <th class="js-sort-number">T=4</th>
+                            <th class="js-sort-number">T=10</th>
+                            <th class="js-sort-number">T=20</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f7f7f7">
+                            <td>Natural</td>
+                            <td>27.00</td>
+                            <td>60.33</td>
+                            <td>68.57</td>
+                            <td>45.23</td>
+                            <td>28.06</td>
+                            <td>100.00</td>
+                        </tr>
+                        <tr>
+                            <td>Random (U)</td>
+                            <td>1.03±0.04</td>
+                            <td>36.23±0.07</td>
+                            <td>29.33±0.40</td>
+                            <td>13.06±0.39</td>
+                            <td>6.89±0.07</td>
+                            <td>1.86±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Random (E)</td>
+                            <td>1.04±0.06</td>
+                            <td>34.11±0.11</td>
+                            <td>29.39±0.46</td>
+                            <td>12.91±0.24</td>
+                            <td>6.78±0.36</td>
+                            <td>1.86±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>1.20±0.06</td>
+                            <td>40.57±0.05</td>
+                            <td>34.24±0.23</td>
+                            <td>16.93±0.39</td>
+                            <td>9.28±0.36</td>
+                            <td>2.03±0.03</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT<sub>FT</sub></td>
+                            <td id="second">13.89±0.04</td>
+                            <td id="second">52.84±0.20</td>
+                            <td id="second">68.88±0.61</td>
+                            <td id="second">55.56±0.37</td>
+                            <td id="second">47.29±0.53</td>
+                            <td id="second">37.00±0.08</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="first">17.50±0.08</td>
+                            <td id="first">53.42±0.31</td>
+                            <td id="first">71.53±0.66</td>
+                            <td id="first">63.49±0.81</td>
+                            <td id="first">57.95±0.31</td>
+                            <td id="first">42.65±0.38</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>1.29±0.04</td>
+                            <td>34.39±0.18</td>
+                            <td>29.54±0.23</td>
+                            <td>13.63±0.23</td>
+                            <td>7.06±0.27</td>
+                            <td>1.86±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG<sub>FT</sub></td>
+                            <td id="third">10.04±0.06</td>
+                            <td id="third">49.69±0.12</td>
+                            <td id="third">55.66±0.17</td>
+                            <td id="third">40.66±0.73</td>
+                            <td id="third">33.66±0.55</td>
+                            <td id="third">28.86±0.07</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>2.10±0.02</td>
+                            <td>40.10±0.24</td>
+                            <td>29.63±0.27</td>
+                            <td>13.58±0.62</td>
+                            <td>7.33±0.33</td>
+                            <td>1.94±0.03</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="js-sort-table" id="res-desc-nov-div" style="width: 50%;">
+                    <caption>Table 8: Novelty and Diversity on the description-guided task</caption>
+                    <thead>
+                        <tr>
+                            <th class="js-sort-number">Models</th>
+                            <th class="js-sort-number">Novelty % &uarr;</th>
+                            <th class="js-sort-number">Diversity % &uarr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f7f7f7">
+                            <td>Natural</td>
+                            <td>36.12</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Random (U)</td>
+                            <td>98.77±0.03</td>
+                            <td>97.01</td>
+                        </tr>
+                        <tr>
+                            <td>Random (E)</td>
+                            <td>98.46±0.01</td>
+                            <td>99.56</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td id="third">96.93±0.12</td>
+                            <td id="first">99.23</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT<sub>FT</sub></td>
+                            <td>75.09±0.04</td>
+                            <td>79.87</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td>55.56±0.17</td>
+                            <td>95.28</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td id="first">98.90±0.02</td>
+                            <td id="second">99.15</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG<sub>FT</sub></td>
+                            <td>78.55±0.11</td>
+                            <td>86.09</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td id="second">97.27±0.02</td>
+                            <td id="third">97</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Description-guided -->
+        </div>
+    </section>
 
-<section class="section" id="rethinking">
-  <div class="container is-max-desktop">
-    <!-- rethinking -->
-    <div class="is-centered has-text-centered">
-      <h2 class="title is-3">Rethinking the Evaluation Metrics</h2>
-      <div class="content has-text-justified">
-        <p>In this section, we provide a comprehensive analysis regarding the correlations among different evaluation metrics on <strong>PDFBENCH</strong>.</p>
-        <ul>
-          <li><strong>Does PPL Accurately Reflect pLDDT and PAE?</strong> In the low PPL range, proteins are well-folded, exhibiting high pLDDT scoresand low PAE values. In contrast, proteins in the high PPL range struggle to fold into plausible structures. Within the medium PPL range, proteins with higher PPL values tend to display lower pLDDT scores and higher PAE values.</li>
-          <img src="./static/images/ppl_plddt_merged.png" alt="PPL_PLDDT">
-          <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;"><strong>Figure 2:</strong> <strong>(a)</strong> presents the distribution of PPL and pLDDT. <strong>(b)</strong> displays the distribution of PPL and PAE. <strong>(c)</strong> illustrates the Pearson correlation among these metrics. Note that PPL values are categorized into three ranges: values below 500 indicate a low PPL range, values between 500 and 2,000 represent a medium PPL range, and values above 2,000 correspond to a high PPL range. </div>
-          <li><strong>Do Repetitive Patterns Lead to Lower Structural Plausibility?</strong> High Repeat scores (typically above 10) in protein sequences are associated with lower structural plausibility as indicated by lower pLDDT and higher PAE values.</li>
-          <img src="./static/images/pae_plddt_merged.png" alt="Repeat">
-          <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;"><strong>Figure 3:</strong> <strong>(a)</strong> presents the distribution of Repeat and pLDDT. <strong>(b)</strong> presents the distribution of Repeat and PAE. </div>
-          <li><strong>How Faithfully Do Designed Proteins Align with Functional Descriptions?</strong> The ProTrek Score and the EvoLlama Score are two oracle-based metrics that demonstrate high agreement in evaluating protein functions. Proteins with a ProTrek Score above 15 and an EvoLlama Score above 50 are considered well-aligned, indicating they faithfully match the input functional descriptions.</li>
-          <img src="./static/images/language_alignment_merged.png" alt="Language Alignment">
-          <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;"><strong>Figure 4:</strong> <strong>(a)</strong> presents the distribution of the ProTrek Score and EvoLlama Score for natural proteins. <strong>(b)</strong> and <strong>(c)</strong> present the distributions of the GT-TM Score, ProTrek Score, and EvoLlama Score for proteins designed by Pinal and the fine-tuned ProteinDT. </div>
-          <li><strong>Does High Dtructural Dimilarity Indicate High Language Alignment?</strong> A high GT-TM Score generally indicates functional similarity among structurally similar proteins. However, high structural similarity is not a prerequisite for designing well-aligned proteins. Therefore, relying solely on this metric provides limited insight into whether the designed proteins align well with their functional descriptions.</li>
-          <li><strong>Retrieval Accuracy Varies with Changes in Strategy.</strong> As Shown in Figure{}, the retrieval strategy employed in the Retrieval Accuracy metric has a significant impact on the evaluation results. Randomly sampling the negative pairs can serve as a workaround, but caution should be exercised when interpreting the absolute values of the metric.</li>
-          <img src="./static/images/retrieval_accuracy_merged.png" alt="Retrieval Accuracy">
-          <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">Figure 5: Experimental results are reported for Soft, Random, and Hard Retrieval Accuracy. The random variant refers to the original implementation. </div>
-        </ul>
-      </div>
-    </div>
-    <!-- rethinking -->
-  </div>
-</section>
+    <section class="section" id="rethinking">
+        <div class="container is-max-desktop">
+            <!-- rethinking -->
+            <div class="is-centered has-text-centered">
+                <h2 class="title is-3">Rethinking the Evaluation Metrics</h2>
+                <div class="content has-text-justified">
+                    <p>In this section, we provide a comprehensive analysis regarding the correlations among different
+                        evaluation metrics on <strong>PDFBENCH</strong>.</p>
+                    <ul>
+                        <li><strong>Does PPL Accurately Reflect pLDDT and PAE?</strong> In the low PPL range, proteins
+                            are well-folded, exhibiting high pLDDT scoresand low PAE values. In contrast, proteins in
+                            the high PPL range struggle to fold into plausible structures. Within the medium PPL range,
+                            proteins with higher PPL values tend to display lower pLDDT scores and higher PAE values.
+                        </li>
+                        <img src="./static/images/ppl_plddt_merged.png" alt="PPL_PLDDT">
+                        <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
+                            <strong>Figure 2:</strong> <strong>(a)</strong> presents the distribution of PPL and pLDDT.
+                            <strong>(b)</strong> displays the distribution of PPL and PAE. <strong>(c)</strong>
+                            illustrates the Pearson correlation among these metrics. Note that PPL values are
+                            categorized into three ranges: values below 500 indicate a low PPL range, values between 500
+                            and 2,000 represent a medium PPL range, and values above 2,000 correspond to a high PPL
+                            range.
+                        </div>
+                        <li><strong>Do Repetitive Patterns Lead to Lower Structural Plausibility?</strong> High Repeat
+                            scores (typically above 10) in protein sequences are associated with lower structural
+                            plausibility as indicated by lower pLDDT and higher PAE values.</li>
+                        <img src="./static/images/pae_plddt_merged.png" alt="Repeat">
+                        <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
+                            <strong>Figure 3:</strong> <strong>(a)</strong> presents the distribution of Repeat and
+                            pLDDT. <strong>(b)</strong> presents the distribution of Repeat and PAE.
+                        </div>
+                        <li><strong>How Faithfully Do Designed Proteins Align with Functional Descriptions?</strong> The
+                            ProTrek Score and the EvoLlama Score are two oracle-based metrics that demonstrate high
+                            agreement in evaluating protein functions. Proteins with a ProTrek Score above 15 and an
+                            EvoLlama Score above 50 are considered well-aligned, indicating they faithfully match the
+                            input functional descriptions.</li>
+                        <img src="./static/images/language_alignment_merged.png" alt="Language Alignment">
+                        <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
+                            <strong>Figure 4:</strong> <strong>(a)</strong> presents the distribution of the ProTrek
+                            Score and EvoLlama Score for natural proteins. <strong>(b)</strong> and <strong>(c)</strong>
+                            present the distributions of the GT-TM Score, ProTrek Score, and EvoLlama Score for proteins
+                            designed by Pinal and the fine-tuned ProteinDT.
+                        </div>
+                        <li><strong>Does High Dtructural Dimilarity Indicate High Language Alignment?</strong> A high
+                            GT-TM Score generally indicates functional similarity among structurally similar proteins.
+                            However, high structural similarity is not a prerequisite for designing well-aligned
+                            proteins. Therefore, relying solely on this metric provides limited insight into whether the
+                            designed proteins align well with their functional descriptions.</li>
+                        <li><strong>Retrieval Accuracy Varies with Changes in Strategy.</strong> As Shown in Figure{},
+                            the retrieval strategy employed in the Retrieval Accuracy metric has a significant impact on
+                            the evaluation results. Randomly sampling the negative pairs can serve as a workaround, but
+                            caution should be exercised when interpreting the absolute values of the metric.</li>
+                        <img src="./static/images/retrieval_accuracy_merged.png" alt="Retrieval Accuracy">
+                        <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">Figure 5:
+                            Experimental results are reported for Soft, Random, and Hard Retrieval Accuracy. The random
+                            variant refers to the original implementation. </div>
+                    </ul>
+                </div>
+            </div>
+            <!-- rethinking -->
+        </div>
+    </section>
 
 
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre>Coming Soon ...
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre>Coming Soon ...
     </pre>
-  </div>
-</section>
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website's source code is based on the <a href="https://proteinbench.github.io" class="external-link">ProteinBench</a>,
-            licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
         </div>
-      </div>
-    </div>
-  </div>
-</footer>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content">
+                        <p>
+                            This website's source code is based on the <a href="https://proteinbench.github.io"
+                                class="external-link">ProteinBench</a>,
+                            licensed under a <a rel="license"
+                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                                Commons Attribution-ShareAlike 4.0 International License</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
+
 </html>
