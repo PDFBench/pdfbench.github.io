@@ -109,7 +109,7 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="abstract">
   <div class="container is-max-desktop">
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
@@ -126,7 +126,7 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="results-keyword">
   <div class="container is-max-desktop">
     <!-- Keyword-guided -->
     <div class="is-centered has-text-centered">
@@ -545,7 +545,7 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="results-description">
   <div class="container is-max-desktop">
     <!-- Description-guided -->
     <div class="is-centered has-text-centered">
@@ -941,13 +941,28 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="rethinking">
   <div class="container is-max-desktop">
     <!-- rethinking -->
     <div class="is-centered has-text-centered">
       <h2 class="title is-3">Rethinking the Evaluation Metrics</h2>
       <div class="content has-text-justified">
-        TODO
+        <p>In this section, we provide a comprehensive analysis regarding the correlations among different evaluation metrics on <strong>PDFBENCH</strong>.</p>
+        <ul>
+          <li><strong>Does PPL Accurately Reflect pLDDT and PAE?</strong> In the low PPL range, proteins are well-folded, exhibiting high pLDDT scoresand low PAE values. In contrast, proteins in the high PPL range struggle to fold into plausible structures. Within the medium PPL range, proteins with higher PPL values tend to display lower pLDDT scores and higher PAE values.</li>
+          <img src="./static/images/ppl_plddt_merged.png" alt="PPL_PLDDT">
+          <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;"><strong>Figure 2:</strong> <strong>(a)</strong> presents the distribution of PPL and pLDDT. <strong>(b)</strong> displays the distribution of PPL and PAE. <strong>(c)</strong> illustrates the Pearson correlation among these metrics. Note that PPL values are categorized into three ranges: values below 500 indicate a low PPL range, values between 500 and 2,000 represent a medium PPL range, and values above 2,000 correspond to a high PPL range. </div>
+          <li><strong>Do Repetitive Patterns Lead to Lower Structural Plausibility?</strong> High Repeat scores (typically above 10) in protein sequences are associated with lower structural plausibility as indicated by lower pLDDT and higher PAE values.</li>
+          <img src="./static/images/pae_plddt_merged.png" alt="Repeat">
+          <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;"><strong>Figure 3:</strong> <strong>(a)</strong> presents the distribution of Repeat and pLDDT. <strong>(b)</strong> presents the distribution of Repeat and PAE. </div>
+          <li><strong>How Faithfully Do Designed Proteins Align with Functional Descriptions?</strong> The ProTrek Score and the EvoLlama Score are two oracle-based metrics that demonstrate high agreement in evaluating protein functions. Proteins with a ProTrek Score above 15 and an EvoLlama Score above 50 are considered well-aligned, indicating they faithfully match the input functional descriptions.</li>
+          <img src="./static/images/language_alignment_merged.png" alt="Language Alignment">
+          <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;"><strong>Figure 4:</strong> <strong>(a)</strong> presents the distribution of the ProTrek Score and EvoLlama Score for natural proteins. <strong>(b)</strong> and <strong>(c)</strong> present the distributions of the GT-TM Score, ProTrek Score, and EvoLlama Score for proteins designed by Pinal and the fine-tuned ProteinDT. </div>
+          <li><strong>Does High Dtructural Dimilarity Indicate High Language Alignment?</strong> A high GT-TM Score generally indicates functional similarity among structurally similar proteins. However, high structural similarity is not a prerequisite for designing well-aligned proteins. Therefore, relying solely on this metric provides limited insight into whether the designed proteins align well with their functional descriptions.</li>
+          <li><strong>Retrieval Accuracy Varies with Changes in Strategy.</strong> As Shown in Figure{}, the retrieval strategy employed in the Retrieval Accuracy metric has a significant impact on the evaluation results. Randomly sampling the negative pairs can serve as a workaround, but caution should be exercised when interpreting the absolute values of the metric.</li>
+          <img src="./static/images/retrieval_accuracy_merged.png" alt="Retrieval Accuracy">
+          <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">Figure 5: Experimental results are reported for Soft, Random, and Hard Retrieval Accuracy. The random variant refers to the original implementation. </div>
+        </ul>
       </div>
     </div>
     <!-- rethinking -->
