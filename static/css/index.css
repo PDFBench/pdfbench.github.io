@@ -143,3 +143,8 @@ body {
   border-collapse: collapse; /* 可选：合并边框 */
   width: auto; /* 或保持原有宽度设置 */
 }
+
+.pdfbench {
+  font-variant: small-caps;
+  font-weight: bold;
+}

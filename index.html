@@ -31,7 +31,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="./static/css/index.css">
     <link rel="stylesheet" href="./static/css/leaderboard.css">
-    <link rel="icon" href="./static/images/favicon.svg">
+    <link rel="icon" sizes="144x144" href="./static/images/PDFBench1.2.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./static/images/PDFBench1.2.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script defer src="./static/js/fontawesome.all.min.js"></script>
     <script src="./static/js/bulma-carousel.min.js"></script>
@@ -46,7 +47,10 @@
             <div class="container is-max-desktop">
                 <div class="columns is-centered">
                     <div class="column has-text-centered">
-                        <h1 class="title is-1 publication-title small-caps">PDFBench</h1>
+                        <h1 class="title is-1 publication-title small-caps">
+                            <img src="./static/images/PDFBench1.2.png" height="8%" width="8%" alt="Logo">
+                            <span class="pdfbench">PDFBench</span>
+                        </h1>
                         <h3 class="subtitle is-3 publication-subtitle">A Benchmark for <em>De novo</em> Protein Design
                             from Function</h3>
                         <div class="is-size-5 publication-authors">
@@ -77,7 +81,8 @@
                             <div class="publication-links">
                                 <!-- PDF Link. -->
                                 <span class="link-block">
-                                    <a href="" class="external-link button is-normal is-rounded is-dark">
+                                    <a href="https://arxiv.org/abs/2505.20346"
+                                        class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon">
                                             <i class="fas fa-file-pdf"></i>
                                         </span>
@@ -123,16 +128,17 @@
                         growth. However, most current methods rely on proprietary datasets and evaluation rubrics,
                         making fair comparisons between different approaches challenging. Moreover, these methods often
                         employ evaluation metrics that capture only a subset of the desired properties of designed
-                        proteins, lacking a comprehensive assessment framework. To address these, we introduce <span
-                            class="small-caps">PDFBench</span>, the first comprehensive benchmark for evaluating <em>de
-                            novo</em> protein design from function. <span class="small-caps">PDFBench</span> supports
+                        proteins, lacking a comprehensive assessment framework. To address these, we introduce <img
+                            src="./static/images/PDFBench1.2.png" height="3%" width="3%" alt="Logo"><span
+                            class="pdfbench">PDFBench</span>, the first comprehensive benchmark for evaluating <em>de
+                            novo</em> protein design from function. <span class="pdfbench">PDFBench</span> supports
                         two tasks: description-guided design and keyword-guided design. To ensure fair and multifaceted
                         evaluation, we compile 22 metrics covering sequence plausibility, structural fidelity, and
                         language-protein alignment, along with measures of novelty and diversity. We evaluate five
                         state-of-the-art baselines, revealing their respective strengths and weaknesses across tasks.
                         Finally, we analyze inter-metric correlations, exploring the relationships between four
                         categories of metrics, and offering guidelines for metric selection. <span
-                            class="small-caps">PDFBench</span> establishes a unified framework to drive future advances
+                            class="pdfbench">PDFBench</span> establishes a unified framework to drive future advances
                         in function-driven <em>de novo</em> protein design.
                     </div>
                 </div>
@@ -1083,8 +1089,15 @@
     <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">
             <h2 class="title">BibTeX</h2>
-            <pre>Coming Soon ...
-    </pre>
+            <pre>@misc{kuang2025pdfbenchbenchmarknovoprotein,
+    title={PDFBench: A Benchmark for De novo Protein Design from Function}, 
+    author={Jiahao Kuang and Nuowei Liu and Changzhi Sun and Tao Ji and Yuanbin Wu},
+    year={2025},
+    eprint={2505.20346},
+    archivePrefix={arXiv},
+    primaryClass={cs.LG},
+    url={https://arxiv.org/abs/2505.20346}, 
+}</pre>
         </div>
     </section>
 
