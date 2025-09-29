@@ -59,6 +59,8 @@
                             <span class="author-block">
                                 <a href="https://github.com/sornkL">Nuowei Liu</a><sup>1</sup>,</span>
                             <span class="author-block">
+                                <a href="https://github.com/sornkL">Jie Wang</a><sup>1</sup>,</span>
+                            <span class="author-block">
                                 <a href="https://pdfbench.github.io">Changzhi Sun</a><sup>2</sup>,
                             </span>
                             <span class="author-block">
@@ -101,7 +103,7 @@
                                 </span>
                                 <!-- Dataset Link. -->
                                 <span class="link-block">
-                                    <a href=" https://huggingface.co/datasets/Knlife/SwissInPro"
+                                    <a href=" https://huggingface.co/datasets/Knlife/SwiwwProtIPG"
                                         class="external-link button is-normal is-rounded is-dark">
                                         <!-- <span class="icon">
                       <i class="far fa-images"></i>
@@ -116,6 +118,7 @@
         </div>
     </section>
 
+    <!-- Abstract -->
     <section class="section" id="abstract">
         <div class="container is-max-desktop">
             <!-- Abstract. -->
@@ -123,543 +126,78 @@
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
-                        In recent years, while natural language processing and multimodal learning have seen rapid
-                        advancements, the field of <em>de novo</em> protein design has also experienced significant
-                        growth. However, most current methods rely on proprietary datasets and evaluation rubrics,
-                        making fair comparisons between different approaches challenging. Moreover, these methods often
-                        employ evaluation metrics that capture only a subset of the desired properties of designed
-                        proteins, lacking a comprehensive assessment framework. To address these, we introduce <img
-                            src="./static/images/PDFBench1.2.png" height="3%" width="3%" alt="Logo"><span
-                            class="pdfbench">PDFBench</span>, the first comprehensive benchmark for evaluating <em>de
-                            novo</em> protein design from function. <span class="pdfbench">PDFBench</span> supports
-                        two tasks: description-guided design and keyword-guided design. To ensure fair and multifaceted
-                        evaluation, we compile 22 metrics covering sequence plausibility, structural fidelity, and
-                        language-protein alignment, along with measures of novelty and diversity. We evaluate five
-                        state-of-the-art baselines, revealing their respective strengths and weaknesses across tasks.
-                        Finally, we analyze inter-metric correlations, exploring the relationships between four
-                        categories of metrics, and offering guidelines for metric selection. <span
-                            class="pdfbench">PDFBench</span> establishes a unified framework to drive future advances
-                        in function-driven <em>de novo</em> protein design.
+                        Function-guided protein design is a crucial task with significant applications in drug discovery and enzyme engineering. However, the field lacks a unified and comprehensive evaluation framework. Current models are assessed using inconsistent and limited subsets of metrics, which prevents fair comparison and a clear understanding of the relationships between different evaluation criteria. To address this gap, we introduce <img
+                        src="./static/images/PDFBench1.2.png" height="3%" width="3%" alt="Logo" style="vertical-align: middle"><span class="pdfbench">PDFBench</span>, the first comprehensive benchmark for function-guided <em>de novo</em> protein design. Our benchmark systematically evaluates eight state-of-the-art models on 16 metrics across two key settings: description-guided design, for which we repurpose the Mol-Instructions dataset, originally lacking quantitative benchmarking, and keyword-guided design, for which we introduce a new test set, <em>SwissTest</em>, created with a strict datetime cutoff to ensure data integrity. By benchmarking across a wide array of metrics and analyzing their correlations, <img
+                        src="./static/images/PDFBench1.2.png" height="3%" width="3%" alt="Logo" style="vertical-align: middle"><span class="pdfbench">PDFBench</span> enables more reliable model comparisons and provides key insights to guide future research.
                     </div>
                 </div>
             </div>
-            <img src="./static/images/intro.png" alt="Abstract">
-            <div style="text-align: center;font-size: 1.2rem;margin-bottom: 1%;font-weight: bold;">Figure 1:
-                summarization of existing protein design from function models. </div>
+            <img id="fig-task-overview" src="static/images/introduction/task_overview.png" alt="Task Overview">
+            <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
+                <strong>Figure 1:</strong>
+                Examples of inputs and outputs for the description-guided protein design task and the keyword-guided protein design task (using GO and/or IPR keywords as inputs). Note that the GO and IPR terms can be converted into textual descriptions. 
+            </div>
+            <img id="fig-metric-coverage" src="static/images/introduction/merge.png" alt="Metric Coverage">
+            <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
+                <strong>Figure 2:</strong> 
+                Overview of current function-guided protein design models evaluated using different metrics, highlighting the lack of a unified and comprehensive evaluation framework. (a) Proportion of metrics employed in each previous work. In <img src="./static/images/PDFBench1.2.png" height="3%" width="3%" alt="Logo" style="vertical-align: middle"><span class="pdfbench">PDFBench</span>, metrics are categorized into 6 dimensions, and we show that none of the prior works have been evaluated across all dimensions. (b) Detailed view of the metrics in <img src="./static/images/PDFBench1.2.png" height="3%" width="3%" alt="Logo" style="vertical-align: middle"><span class="pdfbench">PDFBench</span>, with several representative metrics from each dimension presented 
+            </div>
             <!--/ Abstract. -->
         </div>
     </section>
 
-    <section class="section" id="results-keyword">
-        <div class="container is-max-desktop">
-            <!-- Keyword-guided -->
-            <div class="is-centered has-text-centered">
-                <h2 class="title is-3">Keyword-Guided</h2>
-                <div class="content has-text-justified">
-                    <p>In <a href="#results-key-seq">Table 1</a>, <a href="#results-key-stc">Table 2</a>, <a
-                            href="#results-key-alt">Table 3</a> and <a href="#results-key-nov-div">Table 4</a>, we
-                        report the benchmark results for keyword-guided task. Based on these results, our key findings
-                        are as follows:</p>
-                    <ul>
-                        <li><strong>The keyword-guided task is more challenging than the description-guided
-                                task.</strong> Compared to their performance on the description-guided task, baselines
-                            exhibit substantial degradation on the keyword-guided task, with the exception of the
-                            PPL-ProtGPT2, Novelty and Diversity. For structure-based metrics, the optimal pLDDT score
-                            drops from 75.25 to 66.20, while the optimal PAE increases from 0.96 to 14.53. In terms of
-                            language alignment, the ProTrek Score declines from 17.50 to 14.14, and the optimal Keyword
-                            Recovery score decreases from 42.65% to 28.74%. Most sequence-based metrics also show a
-                            similar downward trend.</li>
-                        <li><strong>Fine-tuning provides limited benefit.</strong> Unlike in the description-guided
-                            task, fine-tuning led to only modest gains in the keyword-guided task, likely due to its
-                            greater complexity. Specifically, both ProteinDT<sub>FT</sub> and PAAG<sub>FT</sub> showed
-                            only marginal improvements on most structure-based and language alignment metrics, with
-                            PAAG<sub>FT</sub> even experiencing a decline in ProTrek Score and PAE.</li>
-                        <li><strong>No model demonstrates satisfactory Foldability.</strong> For the four foldability
-                            metrics, a pLDDT score greater than 70 and a PAE less than 10 are generally required to
-                            indicate that the designed protein has good foldability. However, the highest pLDDT score,
-                            66.20, is achieved by Pinal, with only 45.97% of sequences exceeding this threshold, while
-                            the lowest PAE, 12.55, is achieved by Chroma, with just 40% of sequences meeting the PAE <
-                                10 criterion. These results indicate that none of the models exhibit satisfactory
-                                foldability in the keyword-guided task.</li>
-                        <li><strong>Protein designed by Pinal perform best in Language Alignment.</strong> Pinal
-                            significantly outperforms all other baselines across all Language Alignment metrics, with
-                            its advantage even more pronounced than on the description-guided task. This suggests that
-                            Pinal maintains relatively strong performance and robustness in the more challenging
-                            keyword-guided task.</li>
-                        <li><strong>ESM-designed protein perform best only in Plausibility.</strong> ESM3, optimized
-                            specifically for multiple-hot encoded keywords, uses InterProIDs as input rather than
-                            keyword name prompts, resulting in the best performance only on Plausibility. Moreover, it
-                            exhibits suboptimal or even inferior performance on more critical metrics such as
-                            Foldability and Language Alignment.</li>
-                    </ul>
-                </div>
-                <table class="js-sort-table" id="results-key-seq">
-                    <caption>Table 1: Sequence-based results on the keyword-guided task</caption>
-                    <thead>
-                        <tr>
-                            <th rowspan="2" class="js-sort-number">Models</th>
-                            <th colspan="2" class="js-sort-number">Plausibility</th>
-                            <th colspan="3" class="js-sort-number">Repetitiveness</th>
-                            <th colspan="3" class="js-sort-number">ESMscore</th>
-                            <th rowspan="2" class="js-sort-number">GT-Identity &uarr;</th>
-                        </tr>
-                        <tr>
-                            <th class="js-sort-number">PPL-ProtGPT2 &darr;</th>
-                            <th class="js-sort-number">PPL-ProGen &darr;</th>
-                            <th class="js-sort-number">Repeat &darr;</th>
-                            <th class="js-sort-number">Rep-2 &darr;</th>
-                            <th class="js-sort-number">Rep-5 &darr;</th>
-                            <th class="js-sort-number">F1 &uarr;</th>
-                            <th class="js-sort-number">Precision &uarr;</th>
-                            <th class="js-sort-number">Recall &uarr;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="background-color: #f7f7f7">
-                            <td>Natural</td>
-                            <td>604.34</td>
-                            <td>8.28</td>
-                            <td>2.36</td>
-                            <td>37.01</td>
-                            <td>1.14</td>
-                            <td>100.00</td>
-                            <td>100.00</td>
-                            <td>100.00</td>
-                            <td>100.00</td>
-                        </tr>
-                        <tr>
-                            <td>Random (U)</td>
-                            <td>2436.77±21.26</td>
-                            <td>21.87±0.03</td>
-                            <td>0.01±0.00</td>
-                            <td>0.28±0.00</td>
-                            <td>0.00±0.00</td>
-                            <td>0.72±0.00</td>
-                            <td>0.82±0.00</td>
-                            <td>0.64±0.00</td>
-                            <td>0.32±0.13</td>
-                        </tr>
-                        <tr>
-                            <td>Random (E)</td>
-                            <td>3041.98±38.97</td>
-                            <td>18.70±0.02</td>
-                            <td>1.15±0.06</td>
-                            <td>33.95±0.06</td>
-                            <td>0.00±0.00</td>
-                            <td>72.47±0.05</td>
-                            <td>82.78±0.05</td>
-                            <td>65.01±0.06</td>
-                            <td>0.19±0.06</td>
-                        </tr>
-                        <tr>
-                            <td>ProteinDT</td>
-                            <td>1429.68±22.19</td>
-                            <td id="third">11.52±0.17</td>
-                            <td>10.87±0.58</td>
-                            <td>66.57±0.36</td>
-                            <td>6.03±0.59</td>
-                            <td>72.42±0.04</td>
-                            <td>80.69±0.12</td>
-                            <td>66.34±0.04</td>
-                            <td>0.10±0.09</td>
-                        </tr>
-                        <tr>
-                            <td>ProteinDT<sub>FT</sub></td>
-                            <td>1860.43±7.88</td>
-                            <td>14.09±0.04</td>
-                            <td>4.38±0.11</td>
-                            <td>50.41±0.16</td>
-                            <td>0.86±0.08</td>
-                            <td id="first">73.71±0.04</td>
-                            <td id="third">82.57±0.05</td>
-                            <td id="third">67.09±0.04</td>
-                            <td id="third">0.37±0.17</td>
-                        </tr>
-                        <tr>
-                            <td>Pinal</td>
-                            <td id="second">584.25±12.33</td>
-                            <td id="second">8.48±0.07</td>
-                            <td>14.69±0.21</td>
-                            <td>61.50±0.18</td>
-                            <td>4.99±0.07</td>
-                            <td>72.43±0.08</td>
-                            <td>75.67±0.06</td>
-                            <td id="first">69.86±0.12</td>
-                            <td id="first">5.87±0.44</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG</td>
-                            <td>2545.89±9.82</td>
-                            <td>18.26±0.01</td>
-                            <td id="first">2.36±0.09</td>
-                            <td id="first">33.98±0.29</td>
-                            <td id="first">0.04±0.01</td>
-                            <td id="third">73.58±0.01</td>
-                            <td id="first">83.40±0.03</td>
-                            <td>66.38±0.03</td>
-                            <td>0.10±0.04</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG<sub>FT</sub></td>
-                            <td>2044.39±31.75</td>
-                            <td>14.74±0.11</td>
-                            <td id="third">4.10±0.33</td>
-                            <td id="second">47.92±0.36</td>
-                            <td id="third">0.90±0.21</td>
-                            <td id="second">73.59±0.06</td>
-                            <td id="second">83.19±0.11</td>
-                            <td>66.53±0.03</td>
-                            <td>0.05±0.05</td>
-                        </tr>
-                        <tr>
-                            <td>Chroma</td>
-                            <td id="third">1322.71±18.13</td>
-                            <td>12.21±0.02</td>
-                            <td id="second">2.70±0.12</td>
-                            <td id="third">49.07±0.05</td>
-                            <td id="second">0.29±0.05</td>
-                            <td>72.76±0.05</td>
-                            <td>80.06±0.06</td>
-                            <td id="second">67.13±0.04</td>
-                            <td>0.11±0.09</td>
-                        </tr>
-                        <tr>
-                            <td>ESM3</td>
-                            <td id="first">282.82±7.74</td>
-                            <td id="first">6.05±0.17</td>
-                            <td>29.09±4.31</td>
-                            <td>67.56±2.73</td>
-                            <td>21.81±4.09</td>
-                            <td>69.02±1.24</td>
-                            <td>72.89±0.56</td>
-                            <td>66.07±1.73</td>
-                            <td id="third">2.19±1.68</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="js-sort-table" id="results-key-stc">
-                    <caption>Table 2: Structure-based results on the keyword-guided task</caption>
-                    <thead>
-                        <tr>
-                            <th class="js-sort-number">Models</th>
-                            <th class="js-sort-number">pLDDT &uarr;</th>
-                            <th class="js-sort-number">pLDDT &gt; 70% &uarr;</th>
-                            <th class="js-sort-number">PAE &darr;</th>
-                            <th class="js-sort-number">PAE &lt; 10% &uarr;</th>
-                            <th class="js-sort-number">TMscore % &uarr;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="background-color: #f7f7f7">
-                            <td>Natural</td>
-                            <td>80.57</td>
-                            <td>88.87</td>
-                            <td>7.10</td>
-                            <td>82.13</td>
-                            <td>100.00</td>
-                        </tr>
-                        <tr>
-                            <td>Random (U)</td>
-                            <td>24.95±0.05</td>
-                            <td>0.05±0.09</td>
-                            <td>23.57±0.03</td>
-                            <td>0.16±0.16</td>
-                            <td>17.44±0.03</td>
-                        </tr>
-                        <tr>
-                            <td>Random (E)</td>
-                            <td>27.89±0.12</td>
-                            <td>0.16±0.16</td>
-                            <td>23.45±0.02</td>
-                            <td>0.31±0.00</td>
-                            <td>17.42±0.07</td>
-                        </tr>
-                        <tr>
-                            <td>ProteinDT</td>
-                            <td>38.72±0.20</td>
-                            <td>0.10±0.18</td>
-                            <td>26.26±0.06</td>
-                            <td>0.00±0.00</td>
-                            <td>11.58±0.01</td>
-                        </tr>
-                        <tr>
-                            <td>ProteinDT<sub>FT</sub></td>
-                            <td>38.66±0.11</td>
-                            <td>1.04±0.36</td>
-                            <td>23.90±0.06</td>
-                            <td>0.42±0.32</td>
-                            <td>14.30±0.06</td>
-                        </tr>
-                        <tr>
-                            <td>Pinal</td>
-                            <td id="first">66.20±0.61</td>
-                            <td id="first">45.97±1.59</td>
-                            <td id="second">14.53±0.29</td>
-                            <td id="second">32.94±1.61</td>
-                            <td>15.76±0.22</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG</td>
-                            <td>33.78±0.18</td>
-                            <td>0.16±0.16</td>
-                            <td>23.02±0.06</td>
-                            <td>0.21±0.36</td>
-                            <td id="third">17.28±0.12</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG<sub>FT</sub></td>
-                            <td>41.06±0.24</td>
-                            <td>1.14±0.09</td>
-                            <td>24.10±0.01</td>
-                            <td>0.62±0.63</td>
-                            <td>0.05±0.05</td>
-                        </tr>
-                        <tr>
-                            <td>Chroma</td>
-                            <td id="second">62.30±0.67</td>
-                            <td id="third">29.52±0.86</td>
-                            <td id="first">12.55±0.22</td>
-                            <td id="first">40.80±1.46</td>
-                            <td id="second">18.55±0.07</td>
-                        </tr>
-                        <tr>
-                            <td>ESM3</td>
-                            <td id="third">62.89±3.44</td>
-                            <td id="second">37.36±9.16</td>
-                            <td id="third">15.65±1.64</td>
-                            <td id="third">29.15±9.78</td>
-                            <td id="first">19.92±2.35</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="js-sort-table" id="results-key-alt">
-                    <caption>Table 3: Language Alignment on the keyword-guided task</caption>
-                    <thead>
-                        <tr>
-                            <th rowspan="2" class="js-sort-number">Models</th>
-                            <th rowspan="2" class="js-sort-number">ProTrek Score % &uarr;</th>
-                            <th colspan="3" class="js-sort-number">Retrieval Accuracy@T % &uarr;</th>
-                            <th rowspan="2" class="js-sort-number">Keyword Recovery % &uarr;</th>
-                        </tr>
-                        <tr>
-                            <th class="js-sort-number">T=4</th>
-                            <th class="js-sort-number">T=10</th>
-                            <th class="js-sort-number">T=20</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="background-color: #f7f7f7">
-                            <td>Natural</td>
-                            <td>20.32</td>
-                            <td>86.29</td>
-                            <td>77.41</td>
-                            <td>67.6</td>
-                            <td>100.00</td>
-                        </tr>
-                        <tr>
-                            <td>Random (U)</td>
-                            <td>7.18±0.17</td>
-                            <td>26.74±0.24</td>
-                            <td>11.68±1.09</td>
-                            <td>5.45±1.40</td>
-                            <td>0.00±0.00</td>
-                        </tr>
-                        <tr>
-                            <td>Random (E)</td>
-                            <td>6.43±0.04</td>
-                            <td>26.90±0.44</td>
-                            <td>10.70±0.63</td>
-                            <td>6.02±0.63</td>
-                            <td>0.00±0.00</td>
-                        </tr>
-                        <tr>
-                            <td>ProteinDT</td>
-                            <td>3.89±0.17</td>
-                            <td>31.57±0.77</td>
-                            <td>13.97±0.63</td>
-                            <td>7.43±0.63</td>
-                            <td>0.03±0.05</td>
-                        </tr>
-                        <tr>
-                            <td>ProteinDT<sub>FT</sub></td>
-                            <td id="second">6.28±0.08</td>
-                            <td id="second">44.91±1.80</td>
-                            <td id="second">24.87±0.80</td>
-                            <td id="third">17.03±1.19</td>
-                            <td id="third">1.08±0.14</td>
-                        </tr>
-                        <tr>
-                            <td>Pinal</td>
-                            <td id="first">14.14±0.29</td>
-                            <td id="first">69.83±2.01</td>
-                            <td id="first">59.08±2.95</td>
-                            <td id="first">49.95±1.97</td>
-                            <td id="first">28.74±0.24</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG</td>
-                            <td id="third">5.40±0.04</td>
-                            <td>28.92±1.40</td>
-                            <td>12.57±1.09</td>
-                            <td>7.74±0.88</td>
-                            <td>0.15±0.03</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG<sub>FT</sub></td>
-                            <td>3.86±0.07</td>
-                            <td>32.03±0.65</td>
-                            <td>15.47±1.56</td>
-                            <td>9.14±0.39</td>
-                            <td>0.02±0.03</td>
-                        </tr>
-                        <tr>
-                            <td>Chroma</td>
-                            <td>3.13±0.14</td>
-                            <td>26.58±1.56</td>
-                            <td>10.90±1.50</td>
-                            <td>6.02±0.24</td>
-                            <td>0.18±0.08</td>
-                        </tr>
-                        <tr>
-                            <td>ESM3</td>
-                            <td>4.87±1.51</td>
-                            <td id="third">37.85±9.71</td>
-                            <td id="third">23.31±7.22</td>
-                            <td id="second">17.13±6.48</td>
-                            <td id="second">11.68±7.36</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="js-sort-table" id="results-key-nov-div" style="width: 50%;">
-                    <caption>Table 4: Novelty and Diversity on the keyword-guided task</caption>
-                    <thead>
-                        <tr>
-                            <th class="js-sort-number">Models</th>
-                            <th class="js-sort-number">Novelty % &uarr;</th>
-                            <th class="js-sort-number">Diversity % &uarr;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="background-color: #f7f7f7">
-                            <td>Natural</td>
-                            <td>39.16</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Random (U)</td>
-                            <td>98.70±0.01</td>
-                            <td>97.98</td>
-                        </tr>
-                        <tr>
-                            <td>Random (E)</td>
-                            <td>98.23±0.04</td>
-                            <td>99.75</td>
-                        </tr>
-                        <tr>
-                            <td>ProteinDT</td>
-                            <td id="first">99.22±0.11</td>
-                            <td id="second">99.76</td>
-                        </tr>
-                        <tr>
-                            <td>ProteinDT<sub>FT</sub></td>
-                            <td id="second">99.02±0.02</td>
-                            <td id="third">99.54</td>
-                        </tr>
-                        <tr>
-                            <td>Pinal</td>
-                            <td>75.40±0.72</td>
-                            <td>93.70</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG</td>
-                            <td id="third">98.60±0.08</td>
-                            <td>99.17</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG<sub>FT</sub></td>
-                            <td>97.06±0.14</td>
-                            <td id="first">99.82</td>
-                        </tr>
-                        <tr>
-                            <td>Chroma</td>
-                            <td>98.00±0.17</td>
-                            <td>98.18</td>
-                        </tr>
-                        <tr>
-                            <td>ESM3</td>
-                            <td>85.12±4.19</td>
-                            <td>97.63</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- Function-guided -->
-        </div>
-    </section>
-
+    <!-- Description-guided -->
     <section class="section" id="results-description">
         <div class="container is-max-desktop">
-            <!-- Description-guided -->
             <div class="is-centered has-text-centered">
-                <h2 class="title is-3">Description-Guided</h2>
+                <h1 class="title is-3">Description-guided</h1>
                 <div class="content has-text-justified">
-                    <p>In <a href="#res-desc-seq">Table 5</a>, <a href="#results-desc-stc">Table 6</a>, <a
-                            href="#res-desc-alt">Table 7</a> and <a href="#res-desc-nov-div">Table 8</a>, we report the
-                        benchmark results for description-guided task on all 22 main metrics. Based on these results, we
-                        have findings as follows:</p>
+                    <p>
+                        In <a href="#res-desc-seq">Table 5</a>, <a href="#results-desc-stc">Table 6</a> and <a href="#res-desc-alt">Table 7</a>, we report the benchmark results for the description-guided task on all 16 metrics. Findings are summarized as follows:
+                    </p>
                     <ul>
-                        <li><strong>Chroma perform uneven on foldability and language alignment.</strong> Chroma
-                            performs relatively well in terms of foldability but shows markedly poor results across all
-                            six language alignment metrics. This may be attributed to Chroma's incorporation of protein
-                            structure from the PDB in its training, while the emphasis on "programmability" potentially
-                            reduces its focus on language alignment. In addition, Chroma-designed proteins perform well
-                            in terms of Seqeuncial Plausibilty, Repeat, Novelty and Diversity.</li>
-                        <li><strong>Finetuning improves performance tremendously.</strong> ProteinDT<sub>FT</sub> and
-                            PAAG<sub>FT</sub> demonstrate substantial performance gains over their original versions
-                            across PPL-ProtGPT2, pLDDT, PAE, and all language alignment metrics. Notably, the fine-tuned
-                            versions exhibit 1-2 orders of magnitude improvement in Retrieval Accuracy. However, this
-                            fine-tuning also results in more pronounced declines in GT-Identity, GT-TMscore, Novelty,
-                            and Diversity. In summary, we argue that fine-tuning on SwissMolInst extremely enhances the
-                            model's understanding of function descriptions at the cost of reduced sequncical and
-                            structural diversity.</li>
-                        <li><strong>Pinal can design plausible, foldable, and language-aligned proteins.</strong> Apart
-                            from Repeat, Novelty and Diversity, Pinal performs best on 11 out of 14 metrics. Such
-                            results suggest that the two-stage approach employed by Pinal for protein sequence design
-                            excels in sequencical plausibility, structural foldability, and language alignment.</li>
-                        <li><strong>Baselines receive a fairer evaluation.</strong> PAAG uses only the Success Rate
-                            metric (closely aligned with the definition of Keyword Recovery) for evaluating conditional
-                            generation and claims to outperform ProteinDT and Chroma. However, both PAAG and
-                            PAAG<sub>FT</sub> perform significantly worse on Keyword Recovery. ProteinDT introduces the
-                            Retrieval Accuracy metric to assess the language alignment of designed proteins, reporting
-                            accuracy of over 90. However, while ProteinDT ranks second only to Pinal in language
-                            alignment, no model has actually achieved such a high level of accuracy in our evaluations.
+                        <li><strong>ProDVa can design relatively plausible sequence.</strong> Good sequence plausibility is fundamental to foldability and language alignment. The sequences designed by ProDVa exhibit repeat scores exceeding those of natural proteins and suboptimal perplexity scores in sequence rationality, indicating that ProDVa's design modules are capable of generating reasonable protein sequences.</li>
+                        <li>
+                            <strong>
+                                ProDVa and Pinal Generate Foldable Proteins.
+                            </strong> 
+                            Both ProDVa and Pinal achieve substantially higher foldability scores compared with all other models. Specifically, ProDVa reaches the best pLDDT (76.86) and lowest PAE (8.66), while Pinal follows closely with pLDDT (75.25) and PAE (10.96). These results suggest that the sequences produced by both models are structurally stable and more likely to fold into valid conformations, highlighting the effectiveness of their design modules in capturing the structural constraints of proteins.
                         </li>
-                        <li><strong>Baselines receive a more comprehensive evaluation.</strong> Proteins generated by
-                            all versions of PAAG and ProteinDT exhibit poor foldability and sequence plausibility,
-                            aspects not considered in their original evaluations. Although these models show a clear
-                            advantage in Novelty and Diversity, this alone is insufficient to establish strong design
-                            capabilities for description-guided tasks.</li>
+                        <li>
+                            <strong>
+                                ProDVa and Pinal exhibit comparable performance in Language Alignment, whereas the remaining baselines demonstrate substantially inferior results.
+                            </strong> 
+                            For language alignment, both models outperform all baselines by large margins. ProDVa achieves the best retrieval accuracy (66.83), while Pinal attains a comparable score (63.43). They also perform significantly better in ProTrek Score and EvoLlama Score compared to ProteinDT, Chroma, and PAAG. This indicates that the semantic and evolutionary information embedded in the descriptions are effectively translated into protein sequences by ProDVa and Pinal, whereas the baseline methods fail to capture such alignment.
+                        </li>
+                        <li>
+                            <strong>
+                                ProDVa and Pinal perform poorly with respect to novelty and diversity.
+                            </strong> 
+                            While excelling in plausibility, foldability, and alignment, both models show relatively low novelty and diversity compared with baselines. The low novelty scores (ProDVa Seq/Struct: 14.64/36.31, Pinal Seq/Struct: 43.82/17.23) suggest that the designed sequences tend to remain close to the natural protein landscape. At the same time, their low diversity scores (ProDVa Seq/Struct: 83.29/36.92; Pinal Seq/Struct: 82.96/72.73) indicate that the models may confine functional design to narrow clusters in sequence/structure space. This reflects a trade-off: in order to achieve better functional alignment, ProDVa and Pinal may sacrifice exploration of diverse solutions, thereby limiting their coverage of the broader protein landscape.
+                        </li>
                     </ul>
                 </div>
-                <table class="js-sort-table" id="res-desc-seq">
+                <div class="table-wrapper">
+                    <table class="js-sort-table" id="tab-main-res-desc">
                     <caption>Table 5: Sequence-based results on the description-guided task</caption>
                     <thead>
                         <tr>
                             <th rowspan="2" class="js-sort-number">Models</th>
-                            <th colspan="2" class="js-sort-number">Plausibility</th>
-                            <th colspan="3" class="js-sort-number">Repetitiveness</th>
-                            <th colspan="3" class="js-sort-number">ESMscore</th>
-                            <th rowspan="2" class="js-sort-number">GT-Identity &uarr;</th>
+                            <th colspan="3" class="js-sort-number">Perplexity</th>
+                            <th colspan="3" class="js-sort-number">Repetitveness</th>
+                            <th colspan="4" class="js-sort-number">Foldability</th>
                         </tr>
                         <tr>
                             <th class="js-sort-number">PPL-ProtGPT2 &darr;</th>
                             <th class="js-sort-number">PPL-ProGen &darr;</th>
+                            <th class="js-sort-number">PPL-RITA &darr;</th>
                             <th class="js-sort-number">Repeat &darr;</th>
                             <th class="js-sort-number">Rep-2 &darr;</th>
                             <th class="js-sort-number">Rep-5 &darr;</th>
-                            <th class="js-sort-number">F1 &uarr;</th>
-                            <th class="js-sort-number">Precision &uarr;</th>
-                            <th class="js-sort-number">Recall &uarr;</th>
+                            <th class="js-sort-number">pLDDT &uarr;</th>
+                            <th class="js-sort-number">% > 70 &uarr;</th>
+                            <th class="js-sort-number">PAE &darr;</th>
+                            <th class="js-sort-number">% < 10 &uarr;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -667,213 +205,130 @@
                             <td>Natural</td>
                             <td>318.15</td>
                             <td>5.99</td>
+                            <td>5.52</td>
                             <td>1.99</td>
-                            <td>44.24</td>
-                            <td>0.21</td>
-                            <td>100</td>
-                            <td>100</td>
-                            <td>100</td>
-                            <td>100.00</td>
+                            <td>44.49</td>
+                            <td>0.25</td>
+                            <td>80.64</td>
+                            <td>81.16</td>
+                            <td>9.20</td>
+                            <td>65.64</td>
                         </tr>
                         <tr>
                             <td>Random (U)</td>
-                            <td>2484.03±4.53</td>
+                            <td>2484.04±4.53</td>
                             <td>21.71±0.00</td>
+                            <td>22.14±0.01</td>
+                            <td>0.72±0.01</td>
+                            <td>34.59±0.03</td>
                             <td>0.01±0.00</td>
-                            <td>0.34±0.00</td>
-                            <td>0.00±0.00</td>
-                            <td>0.71±0.00</td>
-                            <td>0.82±0.01</td>
-                            <td>0.63±0.00</td>
-                            <td>0.37±0.03</td>
+                            <td>22.96±0.04</td>
+                            <td>0.16±0.04</td>
+                            <td>24.85±0.01</td>
+                            <td>0.56±0.03</td>
                         </tr>
                         <tr>
                             <td>Random (E)</td>
                             <td>3136.88±4.17</td>
                             <td>18.68±0.00</td>
+                            <td>19.04±0.00</td>
+                            <td>1.15±0.01</td>
+                            <td>40.99±0.01</td>
                             <td>0.01±0.00</td>
-                            <td>0.41±0.00</td>
-                            <td>0.00±0.00</td>
-                            <td>0.72±0.00</td>
-                            <td>0.83±0.01</td>
-                            <td>0.64±0.00</td>
-                            <td>0.23±0.04</td>
-                        </tr>
-                        <tr>
-                            <td>ProteinDT</td>
-                            <td>1576.23±4.33</td>
-                            <td>12.41±0.01</td>
-                            <td>6.83±0.10</td>
-                            <td>62.36±0.15</td>
-                            <td>2.69±0.05</td>
-                            <td>72.80±0.05</td>
-                            <td>81.44±0.03</td>
-                            <td>66.38±0.05</td>
-                            <td>0.18±0.02</td>
-                        </tr>
-                        <tr>
-                            <td>ProteinDT<sub>FT</sub></td>
-                            <td id="second">1213.38±1.92</td>
-                            <td id="second">10.80±0.02</td>
-                            <td>3.80±0.03</td>
-                            <td id="third">50.08±0.08</td>
-                            <td id="third">0.79±0.03</td>
-                            <td id="first">78.61±0.04</td>
-                            <td id="second">83.68±0.04</td>
-                            <td id="second">74.68±0.04</td>
-                            <td id="second">16.88±0.08</td>
-                        </tr>
-                        <tr>
-                            <td>Pinal</td>
-                            <td id="first">308.97±0.67</td>
-                            <td id="first">5.81±0.02</td>
-                            <td>12.83±0.13</td>
-                            <td>58.13±0.16</td>
-                            <td>58.13±0.16</td>
-                            <td id="third">76.63±0.06</td>
-                            <td>77.74±0.08</td>
-                            <td id="first">75.99±0.06</td>
-                            <td id="first">18.65±0.15</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG</td>
-                            <td>2782.70±9.64</td>
-                            <td>17.84±0.02</td>
-                            <td id="second">2.34±0.02</td>
-                            <td id="second">45.66±0.03</td>
-                            <td id="second">0.05±0.01</td>
-                            <td>73.26±0.03</td>
-                            <td id="third">83.10±0.02</td>
-                            <td>66.04±0.03</td>
-                            <td>0.17±0.02</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG<sub>FT</sub></td>
-                            <td>1332.35±3.82</td>
-                            <td id="third">11.09±0.01</td>
-                            <td id="third">3.53±0.04</td>
-                            <td>52.25±0.05</td>
-                            <td>0.83±0.05</td>
-                            <td id="second">77.67±0.00</td>
-                            <td id="first">83.80±0.02</td>
-                            <td id="third">73.04±0.02</td>
-                            <td id="third">13.99±0.12</td>
-                        </tr>
-                        <tr>
-                            <td>Chroma</td>
-                            <td id="third">1322.38±13.61</td>
-                            <td>12.22±0.02</td>
-                            <td id="first">0.03±0.00</td>
-                            <td id="first">0.55±0.00</td>
-                            <td id="first">0.00±0.00</td>
-                            <td>0.73±0.00</td>
-                            <td>0.80±0.00</td>
-                            <td>0.67±0.00</td>
-                            <td>0.22±0.04</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="js-sort-table" id="results-desc-stc">
-                    <caption>Table 6: Structure-based results on the description-guided task</caption>
-                    <thead>
-                        <tr>
-                            <th class="js-sort-number">Models</th>
-                            <th class="js-sort-number">pLDDT &uarr;</th>
-                            <th class="js-sort-number">pLDDT &gt; 70% &uarr;</th>
-                            <th class="js-sort-number">PAE &darr;</th>
-                            <th class="js-sort-number">PAE &lt; 10% &uarr;</th>
-                            <th class="js-sort-number">TMscore % &uarr;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="background-color: #f7f7f7">
-                            <td>Natural</td>
-                            <td>80.64</td>
-                            <td>81.27</td>
-                            <td>9.20</td>
-                            <td>65.73</td>
-                            <td>100.00</td>
-                        </tr>
-                        <tr>
-                            <td>Random (U)</td>
-                            <td>22.96±0.04</td>
-                            <td>0.16±0.04</td>
-                            <td>24.85±0.01</td>
-                            <td>0.56±0.03</td>
-                            <td>16.95±0.03</td>
-                        </tr>
-                        <tr>
-                            <td>Random (E)</td>
                             <td>25.77±0.03</td>
-                            <td>0.20±0.06</td>
+                            <td>0.19±0.06</td>
                             <td>24.71±0.01</td>
-                            <td>0.60±0.04</td>
-                            <td>17.10±0.00</td>
+                            <td>0.60±0.03</td>
                         </tr>
                         <tr>
                             <td>ProteinDT</td>
-                            <td>38.29±0.05</td>
+                            <td>1576.23±4.32</td>
+                            <td>12.41±0.01</td>
+                            <td>12.44±0.01</td>
+                            <td>6.83±0.10</td>
+                            <td>62.47±0.14</td>
+                            <td>2.82±0.05</td>
+                            <td>38.29±0.04</td>
                             <td>0.98±0.17</td>
                             <td>25.13±0.02</td>
                             <td>0.40±0.09</td>
-                            <td>13.94±0.03</td>
                         </tr>
                         <tr>
-                            <td>ProteinDT<sub>FT</sub></td>
-                            <td id="third">51.42±0.04</td>
-                            <td id="second">25.61±0.30</td>
-                            <td id="third">18.57±0.02</td>
-                            <td id="third">23.92±0.17</td>
-                            <td id="second">22.79±0.10</td>
-                        </tr>
-                        <tr>
-                            <td>Pinal</td>
-                            <td id="first">75.25±0.19</td>
-                            <td id="first">68.97±0.35</td>
-                            <td id="first">10.96±0.10</td>
-                            <td id="first">58.44±0.38</td>
-                            <td id="first">23.77±0.15</td>
+                            <td>Chroma</td>
+                            <td id="third">1370.21±1.48</td>
+                            <td id="third">12.19±0.00</td>
+                            <td id="third">12.42±0.01</td>
+                            <td id="third">2.59±0.02</td>
+                            <td id="third">55.41±0.03</td>
+                            <td id="second">0.60±0.01</td>
+                            <td id="third">59.18±0.09</td>
+                            <td id="third">20.17±0.23</td>
+                            <td id="third">15.03±0.04</td>
+                            <td id="third">28.62±0.62</td>
                         </tr>
                         <tr>
                             <td>PAAG</td>
+                            <td>2782.70±9.63</td>
+                            <td>17.84±0.01</td>
+                            <td>18.05±0.02</td>
+                            <td id="second">2.34±0.02</td>
+                            <td id="second">45.83±0.03</td>
+                            <td id="first">0.09±0.01</td>
                             <td>28.39±0.07</td>
                             <td>0.07±0.03</td>
                             <td>25.38±0.01</td>
                             <td>0.10±0.03</td>
-                            <td>14.63±0.03</td>
                         </tr>
                         <tr>
-                            <td>PAAG<sub>FT</sub></td>
-                            <td>50.37±0.17</td>
-                            <td id="third">23.86±0.22</td>
-                            <td>19.96±0.02</td>
-                            <td>21.99±0.26</td>
-                            <td id="third">21.67±0.11</td>
+                            <td>Pinal</td>
+                            <td id="first">308.97±0.68</td>
+                            <td id="first">5.81±0.02</td>
+                            <td id="first">5.78±0.02</td>
+                            <td>12.83±0.13</td>
+                            <td>58.26±0.16</td>
+                            <td>4.73±0.06</td>
+                            <td id="second">75.25±0.19</td>
+                            <td id="second">68.93±0.33</td>
+                            <td id="second">10.96±0.10</td>
+                            <td id="second">58.41±0.38</td>
                         </tr>
                         <tr>
-                            <td>Chroma</td>
-                            <td id="second">59.18±0.09</td>
-                            <td>20.17±0.23</td>
-                            <td id="second">15.03±0.04</td>
-                            <td id="second">28.62±0.62</td>
-                            <td>17.93±0.02</td>
+                            <td>ProDVa</td>
+                            <td id="second">415.64±7.40</td>
+                            <td id="second">7.63±0.09</td>
+                            <td id="second">8.83±0.17</td>
+                            <td id="first">1.92±0.05</td>
+                            <td id="first">35.65±0.15</td>
+                            <td id="third">2.81±0.13</td>
+                            <td id="first">76.84±0.17</td>
+                            <td id="first">76.27±0.59</td>
+                            <td id="first">8.67±0.05</td>
+                            <td id="first">67.65±0.43</td>
                         </tr>
                     </tbody>
-                </table>
-                <table class="js-sort-table" id="res-desc-alt">
-                    <caption>Table 7: Language Alignment on the description-guided task</caption>
+                    </table>
+                </div>
+                <div class="table-wrapper">
+                    <table class="js-sort-table" id="results-desc-stc">
+                    <caption>Table 6: Structure-based results on the description-guided task</caption>
                     <thead>
                         <tr>
-                            <th rowspan="2" class="js-sort-number">Models</th>
-                            <th rowspan="2" class="js-sort-number">ProTrek Score % &uarr;</th>
-                            <th rowspan="2" class="js-sort-number">EvoLlama Score % &uarr;</th>
-                            <th colspan="3" class="js-sort-number">Retrieval Accuracy@T % &uarr;</th>
-                            <th rowspan="2" class="js-sort-number">Keyword Recovery % &uarr;</th>
+                            <th rowspan="2">Models</th>
+                            <th colspan="2">Model-based Alignment</th>
+                            <th colspan="9">Retrieval-based Alignment</th>
                         </tr>
                         <tr>
-                            <th class="js-sort-number">T=4</th>
-                            <th class="js-sort-number">T=10</th>
-                            <th class="js-sort-number">T=20</th>
+                            <th>ProTrek Score &uarr;</th>
+                            <th>EvoLlama Score &uarr;</th>
+                            <th>Soft(4) &uarr;</th>
+                            <th>Soft(10) &uarr;</th>
+                            <th>Soft(20) &uarr;</th>
+                            <th>Normal(4) &uarr;</th>
+                            <th>Normal(10) &uarr;</th>
+                            <th>Normal(20) &uarr;</th>
+                            <th>Hard(4) &uarr;</th>
+                            <th>Hard(10) &uarr;</th>
+                            <th>Hard(20) &uarr;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -881,211 +336,1736 @@
                             <td>Natural</td>
                             <td>27.00</td>
                             <td>60.33</td>
-                            <td>68.57</td>
-                            <td>45.23</td>
-                            <td>28.06</td>
-                            <td>100.00</td>
+                            <td>98.50</td>
+                            <td>97.17</td>
+                            <td>96.09</td>
+                            <td>93.72</td>
+                            <td>89.01</td>
+                            <td>85.11</td>
+                            <td>43.23</td>
+                            <td>33.20</td>
+                            <td>29.78</td>
                         </tr>
                         <tr>
-                            <td>Random (U)</td>
+                            <td>Random(U)</td>
                             <td>1.03±0.04</td>
-                            <td>36.23±0.07</td>
-                            <td>29.33±0.40</td>
-                            <td>13.06±0.39</td>
-                            <td>6.89±0.07</td>
-                            <td>1.86±0.00</td>
+                            <td>36.22±0.07</td>
+                            <td>28.09±0.83</td>
+                            <td>12.62±0.29</td>
+                            <td>6.94±0.20</td>
+                            <td>28.97±0.38</td>
+                            <td>12.83±0.52</td>
+                            <td>7.16±0.29</td>
+                            <td>25.95±0.52</td>
+                            <td>10.57±0.40</td>
+                            <td>5.38±0.39</td>
                         </tr>
                         <tr>
-                            <td>Random (E)</td>
-                            <td>1.04±0.06</td>
-                            <td>34.11±0.11</td>
-                            <td>29.39±0.46</td>
-                            <td>12.91±0.24</td>
-                            <td>6.78±0.36</td>
-                            <td>1.86±0.00</td>
+                            <td>Random(E)</td>
+                            <td>1.04±0.05</td>
+                            <td>34.11±0.10</td>
+                            <td>28.35±0.62</td>
+                            <td>12.83±0.51</td>
+                            <td>6.73±0.66</td>
+                            <td>28.97±0.62</td>
+                            <td>12.59±0.29</td>
+                            <td>6.84±0.39</td>
+                            <td>25.79±0.45</td>
+                            <td>10.39±0.67</td>
+                            <td>5.46±0.45</td>
                         </tr>
                         <tr>
                             <td>ProteinDT</td>
                             <td>1.20±0.06</td>
-                            <td>40.57±0.05</td>
-                            <td>34.24±0.23</td>
-                            <td>16.93±0.39</td>
-                            <td>9.28±0.36</td>
-                            <td>2.03±0.03</td>
+                            <td id="third">40.57±0.05</td>
+                            <td id="third">42.91±0.68</td>
+                            <td id="third">24.97±1.33</td>
+                            <td id="third">16.77±1.16</td>
+                            <td id="third">34.58±0.99</td>
+                            <td id="third">16.56±0.44</td>
+                            <td id="third">9.43±0.33</td>
+                            <td>25.09±1.17</td>
+                            <td>10.38±0.55</td>
+                            <td>5.01±0.43</td>
                         </tr>
                         <tr>
-                            <td>ProteinDT<sub>FT</sub></td>
-                            <td id="second">13.89±0.04</td>
-                            <td id="second">52.84±0.20</td>
-                            <td id="second">68.88±0.61</td>
-                            <td id="second">55.56±0.37</td>
-                            <td id="second">47.29±0.53</td>
-                            <td id="second">37.00±0.08</td>
-                        </tr>
-                        <tr>
-                            <td>Pinal</td>
-                            <td id="first">17.50±0.08</td>
-                            <td id="first">53.42±0.31</td>
-                            <td id="first">71.53±0.66</td>
-                            <td id="first">63.49±0.81</td>
-                            <td id="first">57.95±0.31</td>
-                            <td id="first">42.65±0.38</td>
+                            <td>Chroma</td>
+                            <td id="third">2.10±0.02</td>
+                            <td>40.10±0.23</td>
+                            <td>29.54±0.59</td>
+                            <td>13.43±0.18</td>
+                            <td>7.41±0.22</td>
+                            <td>29.63±0.58</td>
+                            <td>13.26±0.50</td>
+                            <td>7.44±0.21</td>
+                            <td id="third">25.51±0.47</td>
+                            <td id="third">10.68±0.43</td>
+                            <td id="third">5.73±0.19</td>
                         </tr>
                         <tr>
                             <td>PAAG</td>
                             <td>1.29±0.04</td>
                             <td>34.39±0.18</td>
-                            <td>29.54±0.23</td>
-                            <td>13.63±0.23</td>
-                            <td>7.06±0.27</td>
-                            <td>1.86±0.00</td>
+                            <td>33.33±0.25</td>
+                            <td>15.24±0.33</td>
+                            <td>8.27±0.20</td>
+                            <td>29.63±0.70</td>
+                            <td>12.83±0.14</td>
+                            <td>6.87±0.17</td>
+                            <td>25.19±0.65</td>
+                            <td>10.13±0.34</td>
+                            <td>4.96±0.23</td>
                         </tr>
                         <tr>
-                            <td>PAAG<sub>FT</sub></td>
-                            <td id="third">10.04±0.06</td>
-                            <td id="third">49.69±0.12</td>
-                            <td id="third">55.66±0.17</td>
-                            <td id="third">40.66±0.73</td>
-                            <td id="third">33.66±0.55</td>
-                            <td id="third">28.86±0.07</td>
+                            <td>Pinal</td>
+                            <td id="first">17.50±0.09</td>
+                            <td id="first">53.40±0.31</td>
+                            <td id="second">82.42±0.45</td>
+                            <td id="second">74.44±0.63</td>
+                            <td id="second">69.99±0.67</td>
+                            <td id="second">71.69±0.59</td>
+                            <td id="second">63.53±0.24</td>
+                            <td id="second">58.43±0.48</td>
+                            <td id="first">29.51±0.31</td>
+                            <td id="first">17.89±0.26</td>
+                            <td id="first">14.17±0.27</td>
                         </tr>
                         <tr>
-                            <td>Chroma</td>
-                            <td>2.10±0.02</td>
-                            <td>40.10±0.24</td>
-                            <td>29.63±0.27</td>
-                            <td>13.58±0.62</td>
-                            <td>7.33±0.33</td>
-                            <td>1.94±0.03</td>
+                            <td>ProDVa</td>
+                            <td id="second">17.40±0.06</td>
+                            <td id="second">51.19±0.17</td>
+                            <td id="first">85.64±0.06</td>
+                            <td id="first">77.37±0.44</td>
+                            <td id="first">72.75±0.61</td>
+                            <td id="first">77.52±0.28</td>
+                            <td id="first">66.67±0.37</td>
+                            <td id="first">59.03±0.44</td>
+                            <td id="second">27.84±0.71</td>
+                            <td id="second">15.77±0.29</td>
+                            <td id="second">12.11±0.28</td>
                         </tr>
                     </tbody>
-                </table>
-                <table class="js-sort-table" id="res-desc-nov-div" style="width: 50%;">
-                    <caption>Table 8: Novelty and Diversity on the description-guided task</caption>
+                    </table>
+                </div>
+                <div class="table-wrapper">
+                    <table class="js-sort-table" id="res-desc-alt">
+                    <caption>Table 7: Language Alignment on the description-guided task</caption>
                     <thead>
                         <tr>
-                            <th class="js-sort-number">Models</th>
-                            <th class="js-sort-number">Novelty % &uarr;</th>
-                            <th class="js-sort-number">Diversity % &uarr;</th>
+                            <th rowspan="2">Models</th>
+                            <th colspan="5">Similarity</th>
+                            <th colspan="4">Novelty</th>
+                            <th colspan="2">Diversity</th>
+                        </tr>
+                        <tr>
+                            <th>GT-Identity &uarr;</th>
+                            <th>GT-TMScore &uarr;</th>
+                            <th>ESM-F1 &uarr;</th>
+                            <th>ESM-Precision &uarr;</th>
+                            <th>ESM-Recall &uarr;</th>
+                            <th>Seq<sub>Easy</sub> &uarr;</th>
+                            <th>Seq<sub>Hard</sub> &uarr;</th>
+                            <th>Struct<sub>Easy</sub> &uarr;</th>
+                            <th>Struct<sub>Hard</sub> &uarr;</th>
+                            <th>Seq &uarr;</th>
+                            <th>Struct &uarr;</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr style="background-color: #f7f7f7">
                             <td>Natural</td>
-                            <td>36.12</td>
+                            <td>100.00</td>
+                            <td>100.00</td>
+                            <td>100.00</td>
+                            <td>100.00</td>
+                            <td>100.00</td>
+                            <td>36.11</td>
+                            <td>4.90</td>
+                            <td>38.51</td>
+                            <td>13.56</td>
+                            <td>-</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Random (U)</td>
+                            <td>Random(U)</td>
+                            <td>0.37±0.03</td>
+                            <td>16.95±0.03</td>
+                            <td>71.06±0.02</td>
+                            <td>81.66±0.02</td>
+                            <td>63.46±0.02</td>
                             <td>98.77±0.03</td>
+                            <td>58.14±0.07</td>
+                            <td>96.82±0.03</td>
+                            <td>77.64±0.12</td>
                             <td>97.01</td>
+                            <td>81.59</td>
                         </tr>
                         <tr>
-                            <td>Random (E)</td>
-                            <td>98.46±0.01</td>
+                            <td>Random(E)</td>
+                            <td>0.23±0.04</td>
+                            <td>17.10±0.00</td>
+                            <td>71.95±0.02</td>
+                            <td>82.51±0.02</td>
+                            <td>64.35±0.02</td>
+                            <td>98.45±0.01</td>
+                            <td>60.19±0.14</td>
+                            <td>96.25±0.04</td>
+                            <td>76.82±0.10</td>
                             <td>99.56</td>
+                            <td>81.45</td>
                         </tr>
                         <tr>
                             <td>ProteinDT</td>
-                            <td id="third">96.93±0.12</td>
+                            <td>0.18±0.02</td>
+                            <td id="second">13.94±0.03</td>
+                            <td>72.80±0.05</td>
+                            <td id="second">81.44±0.03</td>
+                            <td>66.38±0.05</td>
+                            <td id="third">96.92±0.12</td>
+                            <td id="first">70.74±0.07</td>
+                            <td id="second">94.68±0.02</td>
+                            <td id="second">71.16±0.08</td>
                             <td id="first">99.23</td>
-                        </tr>
-                        <tr>
-                            <td>ProteinDT<sub>FT</sub></td>
-                            <td>75.09±0.04</td>
-                            <td>79.87</td>
-                        </tr>
-                        <tr>
-                            <td>Pinal</td>
-                            <td>55.56±0.17</td>
-                            <td>95.28</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG</td>
-                            <td id="first">98.90±0.02</td>
-                            <td id="second">99.15</td>
-                        </tr>
-                        <tr>
-                            <td>PAAG<sub>FT</sub></td>
-                            <td>78.55±0.11</td>
-                            <td>86.09</td>
+                            <td id="first">83.67</td>
                         </tr>
                         <tr>
                             <td>Chroma</td>
-                            <td id="second">97.27±0.02</td>
-                            <td id="third">97</td>
+                            <td id="third">0.22±0.04</td>
+                            <td id="third">17.93±0.02</td>
+                            <td>72.82±0.02</td>
+                            <td id="third">80.22±0.03</td>
+                            <td id="third">67.06±0.01</td>
+                            <td id="second">97.28±0.02</td>
+                            <td id="third">58.68±0.09</td>
+                            <td id="third">80.99±0.04</td>
+                            <td id="third">51.06±0.21</td>
+                            <td id="third">96.13</td>
+                            <td id="third">79.9</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>0.17±0.02</td>
+                            <td>14.63±0.03</td>
+                            <td id="third">73.26±0.03</td>
+                            <td id="first">83.10±0.02</td>
+                            <td>66.04±0.03</td>
+                            <td id="first">98.90±0.02</td>
+                            <td id="second">63.64±0.09</td>
+                            <td id="first">96.44±0.03</td>
+                            <td id="first">77.34±0.12</td>
+                            <td id="second">99.15</td>
+                            <td id="second">82.16</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="second">18.65±0.15</td>
+                            <td id="first">23.75±0.14</td>
+                            <td id="first">76.63±0.06</td>
+                            <td>77.74±0.08</td>
+                            <td id="first">75.99±0.06</td>
+                            <td>55.55±0.19</td>
+                            <td>43.82±0.22</td>
+                            <td>40.07±0.33</td>
+                            <td>17.23±0.23</td>
+                            <td>82.96</td>
+                            <td>72.73</td>
+                        </tr>
+                        <tr>
+                            <td>ProDVa</td>
+                            <td id="first">21.48±0.15</td>
+                            <td id="second">20.03±0.11</td>
+                            <td id="second">75.23±0.01</td>
+                            <td>77.01±0.05</td>
+                            <td id="second">74.11±0.02</td>
+                            <td>38.23±0.31</td>
+                            <td>14.64±0.23</td>
+                            <td>56.18±23.36</td>
+                            <td>36.31±33.02</td>
+                            <td>83.29</td>
+                            <td>36.92</td>
                         </tr>
                     </tbody>
-                </table>
+                    </table>
+                </div>
             </div>
             <!-- Description-guided -->
         </div>
     </section>
 
-    <section class="section" id="rethinking">
+    <!-- Keyword-guided -->
+    <section class="section" id="results-keyword">
         <div class="container is-max-desktop">
-            <!-- rethinking -->
             <div class="is-centered has-text-centered">
-                <h2 class="title is-3">Rethinking the Evaluation Metrics</h2>
+                <h1 class="title is-3">Keyword-guided</h1>
                 <div class="content has-text-justified">
-                    <p>In this section, we provide a comprehensive analysis regarding the correlations among different
-                        evaluation metrics on <strong>PDFBENCH</strong>.</p>
+                    <p>In <a href="#results-key-seq">Table 1</a>, <a href="#results-key-stc">Table 2</a>, <a
+                            href="#results-key-alt">Table 3</a> and <a href="#results-key-nov-div">Table 4</a>, we
+                        report the benchmark results for keyword-guided task. Based on these results, our key findings
+                        are as follows:</p>
                     <ul>
-                        <li><strong>Does PPL Accurately Reflect pLDDT and PAE?</strong> In the low PPL range, proteins
-                            are well-folded, exhibiting high pLDDT scoresand low PAE values. In contrast, proteins in
-                            the high PPL range struggle to fold into plausible structures. Within the medium PPL range,
-                            proteins with higher PPL values tend to display lower pLDDT scores and higher PAE values.
+                        <li>
+                            <strong>
+                                CFP-Gen, Pinal and ESM3 show great performance in Perplexity while the Repeat show poorly.
+                            </strong> 
+                            These models achieve the lowest perplexity scores (CFP-Gen: 4.94–5.23; Pinal: 6.85–8.12; ESM3: 6.33), indicating that their generated sequences exhibit strong rationality under the protein language model. However, they also show much higher Repeat (ranging from 11.86 to 28.13) compared with ProDVa or Chroma, suggesting that the improved plausibility comes at the cost of local redundancy in sequence design.
                         </li>
-                        <img src="./static/images/ppl_plddt_merged.png" alt="PPL_PLDDT">
-                        <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
-                            <strong>Figure 2:</strong> <strong>(a)</strong> presents the distribution of PPL and pLDDT.
-                            <strong>(b)</strong> displays the distribution of PPL and PAE. <strong>(c)</strong>
-                            illustrates the Pearson correlation among these metrics. Note that PPL values are
-                            categorized into three ranges: values below 500 indicate a low PPL range, values between 500
-                            and 2,000 represent a medium PPL range, and values above 2,000 correspond to a high PPL
-                            range.
-                        </div>
-                        <li><strong>Do Repetitive Patterns Lead to Lower Structural Plausibility?</strong> High Repeat
-                            scores (typically above 10) in protein sequences are associated with lower structural
-                            plausibility as indicated by lower pLDDT and higher PAE values.</li>
-                        <img src="./static/images/pae_plddt_merged.png" alt="Repeat">
-                        <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
-                            <strong>Figure 3:</strong> <strong>(a)</strong> presents the distribution of Repeat and
-                            pLDDT. <strong>(b)</strong> presents the distribution of Repeat and PAE.
-                        </div>
-                        <li><strong>How Faithfully Do Designed Proteins Align with Functional Descriptions?</strong> The
-                            ProTrek Score and the EvoLlama Score are two oracle-based metrics that demonstrate high
-                            agreement in evaluating protein functions. Proteins with a ProTrek Score above 15 and an
-                            EvoLlama Score above 50 are considered well-aligned, indicating they faithfully match the
-                            input functional descriptions.</li>
-                        <img src="./static/images/language_alignment_merged.png" alt="Language Alignment">
-                        <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
-                            <strong>Figure 4:</strong> <strong>(a)</strong> presents the distribution of the ProTrek
-                            Score and EvoLlama Score for natural proteins. <strong>(b)</strong> and <strong>(c)</strong>
-                            present the distributions of the GT-TM Score, ProTrek Score, and EvoLlama Score for proteins
-                            designed by Pinal and the fine-tuned ProteinDT.
-                        </div>
-                        <li><strong>Does High Dtructural Dimilarity Indicate High Language Alignment?</strong> A high
-                            GT-TM Score generally indicates functional similarity among structurally similar proteins.
-                            However, high structural similarity is not a prerequisite for designing well-aligned
-                            proteins. Therefore, relying solely on this metric provides limited insight into whether the
-                            designed proteins align well with their functional descriptions.</li>
-                        <li><strong>Retrieval Accuracy Varies with Changes in Strategy.</strong> As Shown in Figure{},
-                            the retrieval strategy employed in the Retrieval Accuracy metric has a significant impact on
-                            the evaluation results. Randomly sampling the negative pairs can serve as a workaround, but
-                            caution should be exercised when interpreting the absolute values of the metric.</li>
-                        <img src="./static/images/retrieval_accuracy_merged.png" alt="Retrieval Accuracy">
-                        <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">Figure 5:
-                            Experimental results are reported for Soft, Random, and Hard Retrieval Accuracy. The random
-                            variant refers to the original implementation. </div>
+                        <li>
+                            <strong>
+                                CFP-Gen, ProDVa and Pinal can design foldable proteins.
+                            </strong> 
+                            These models consistently achieve high pLDDT and low PAE across different evaluation settings. ProDVa stands out with the best overall foldability (pLDDT: 72.80–74.73; PAE: 6.11–8.06), while CFP-Gen and Pinal also produce structures with good confidence (pLDDT around 69–76; PAE around 11–14). This indicates that their design strategies are particularly effective at generating sequences that fold into stable 3D structures.
+                        </li>
+                        <li>
+                            <strong>
+                                CFP-Gen shows great performance among the keyword-guided baselines, while weak performance among the description-guided baselines.
+                            </strong> 
+                            Compared to other keyword-guided baselines such as ProteinDT, Chroma, or PAAG, CFP-Gen achieves significantly higher alignment with biological annotations (e.g., IPR Recovery up to 35.21 and GO Recovery up to 21.05). In contrast, its performance was still less competitive than Pinal and ProDVa.
+                        </li>
+                        <li>
+                            <strong>
+                                Baselines perform better on IPR-guided task than GO-guided task.
+                            </strong> 
+                            In the single-keyword setting, models achieve higher recovery performance on the metric that matches the input type. Moreover, using IPR as input generally leads to stronger performance across Plausibility, Foldability, and most Language Alignment metrics, indicating that IPR annotations provide more precise constraints for protein design than GO terms. 
+                        </li>
+                        <li>
+                            <strong>
+                                The IPR&GO-guided task imposes stricter constraints than the other two tasks, while less than description-guided task.
+                            </strong>
+                            When extending from single- to dual-keyword guidance, we observe a nuanced trade-off. IPR Recovery increases while GO Recovery decreases, suggesting that IPR contributes more strongly to functional alignment in this joint setting. Meanwhile, both ProTrek Score and Retrieval Accuracy are improved, while Plausibility and Foldability remain largely unchanged. These results imply that combining IPR and GO constraints reduces the design difficulty in terms of language alignment, enabling models to better converge on functionally consistent sequences without sacrificing structural quality. Nevertheless, the alignment scores are still higher than those obtained in the description-guided setting, showing that structured keyword guidance provides clearer signals for functional targeting, albeit at the cost of reduced novelty and diversity. 
+                        </li>
                     </ul>
                 </div>
+                <div class="table-wrapper">
+                    <table class="js-sort-table" id="results-key-seq">
+                    <caption>Table 1: Plausibility and Foldability results on the keyword-guided task</caption>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Models</th>
+                            <th colspan="3">Perplexity</th>
+                            <th colspan="3">Repetitveness</th>
+                            <th colspan="4">Foldability</th>
+                        </tr>
+                        <tr>
+                            <th>PPL-ProtGPT2 &darr;</th>
+                            <th>PPL-ProGen &darr;</th>
+                            <th>PPL-RITA &darr;</th>
+                            <th>Repeat &darr;</th>
+                            <th>Rep-2 &darr;</th>
+                            <th>Rep-5 &darr;</th>
+                            <th>pLDDT &uarr;</th>
+                            <th>% > 70 &uarr;</th>
+                            <th>PAE &darr;</th>
+                            <th>% < 10 &uarr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="11" style="background-color:#cac7c7">
+                                <strong><em>guided with GO keywords</em></strong>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #f7f7f7">
+                            <td>Natural</td>
+                            <td>554.35</td>
+                            <td>9.17</td>
+                            <td>8.89</td>
+                            <td>2.17</td>
+                            <td>44.43</td>
+                            <td>0.43</td>
+                            <td>76.92</td>
+                            <td>72.44</td>
+                            <td>10.54</td>
+                            <td>54.69</td>
+                        </tr>
+                        <tr>
+                            <td>Random(U)</td>
+                            <td>2473.84±10.48</td>
+                            <td>21.74±0.01</td>
+                            <td>22.18±0.02</td>
+                            <td>0.72±0.03</td>
+                            <td>35.52±0.04</td>
+                            <td>0.01±0.00</td>
+                            <td>23.20±0.02</td>
+                            <td>0.10±0.08</td>
+                            <td>24.56±0.01</td>
+                            <td>0.19±0.08</td>
+                        </tr>
+                        <tr>
+                            <td>Random(E)</td>
+                            <td>3096.13±18.42</td>
+                            <td>18.68±0.01</td>
+                            <td>19.05±0.01</td>
+                            <td>1.14±0.04</td>
+                            <td>41.45±0.07</td>
+                            <td>0.02±0.00</td>
+                            <td>25.99±0.12</td>
+                            <td>0.05±0.08</td>
+                            <td>24.47±0.03</td>
+                            <td>0.24±0.08</td>
+                        </tr>
+                        <tr>
+                            <td>ProteoGAN</td>
+                            <td>2708.39±32.50</td>
+                            <td>18.03±0.01</td>
+                            <td>18.31±0.02</td>
+                            <td id="third">2.50±0.05</td>
+                            <td id="third">42.73±0.86</td>
+                            <td id="first">0.03±0.00</td>
+                            <td>28.72±0.43</td>
+                            <td>0.06±0.10</td>
+                            <td>24.67±0.17</td>
+                            <td>0.12±0.20</td>
+                        </tr>
+                        <tr>
+                            <td>CFP-Gen</td>
+                            <td id="first">187.72±9.71</td>
+                            <td id="first">5.16±0.03</td>
+                            <td id="first">4.65±0.02</td>
+                            <td>12.67±0.79</td>
+                            <td>59.67±0.83</td>
+                            <td>13.82±0.74</td>
+                            <td id="second">73.38±0.26</td>
+                            <td id="second">65.65±1.11</td>
+                            <td id="third">14.61±0.27</td>
+                            <td id="third">35.20±1.76</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>1531.76±17.19</td>
+                            <td>12.23±0.06</td>
+                            <td id="third">12.29±0.06</td>
+                            <td>7.98±0.51</td>
+                            <td>64.01±0.25</td>
+                            <td>3.32±0.38</td>
+                            <td>40.35±0.30</td>
+                            <td>1.15±0.00</td>
+                            <td>25.57±0.03</td>
+                            <td>0.00±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>1354.61±4.81</td>
+                            <td>12.18±0.03</td>
+                            <td>12.40±0.03</td>
+                            <td>2.71±0.05</td>
+                            <td>55.09±0.12</td>
+                            <td id="third">0.67±0.03</td>
+                            <td>59.27±0.20</td>
+                            <td>22.17±0.65</td>
+                            <td>15.00±0.10</td>
+                            <td>30.93±0.08</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>2650.36±11.01</td>
+                            <td>18.08±0.02</td>
+                            <td>18.38±0.02</td>
+                            <td id="second">2.48±0.20</td>
+                            <td id="second">39.23±0.05</td>
+                            <td id="second">0.05±0.01</td>
+                            <td>31.47±0.10</td>
+                            <td>0.34±0.36</td>
+                            <td>23.88±0.05</td>
+                            <td>0.24±0.08</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="second">414.26±77.15</td>
+                            <td id="second">6.85±0.59</td>
+                            <td id="second">6.89±0.64</td>
+                            <td>14.13±2.58</td>
+                            <td>59.84±4.37</td>
+                            <td>4.85±1.63</td>
+                            <td id="third">72.58±5.55</td>
+                            <td id="third">62.10±14.24</td>
+                            <td id="second">11.79±2.52</td>
+                            <td id="second">52.19±12.03</td>
+                        </tr>
+                        <tr>
+                            <td>ProDVa</td>
+                            <td id="third">486.77±9.51</td>
+                            <td id="third">11.16±0.29</td>
+                            <td>18.71±0.77</td>
+                            <td id="first">1.87±0.07</td>
+                            <td id="first">22.04±0.09</td>
+                            <td>0.88±0.05</td>
+                            <td id="first">74.73±0.24</td>
+                            <td id="first">68.40±0.38</td>
+                            <td id="first">6.11±0.02</td>
+                            <td id="first">84.90±0.46</td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" style="background-color:#cac7c7">
+                                <strong><em>guided with IPR keywords</em></strong>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #f7f7f7">
+                            <td>Natural</td>
+                            <td>611.99</td>
+                            <td>9.73</td>
+                            <td>9.47</td>
+                            <td>2.23</td>
+                            <td>44.05</td>
+                            <td>0.48</td>
+                            <td>75.77</td>
+                            <td>68.85</td>
+                            <td>11.13</td>
+                            <td>50.92</td>
+                        </tr>
+                        <tr>
+                            <td>Random(U)</td>
+                            <td>2475.07±10.83</td>
+                            <td>21.76±0.02</td>
+                            <td>22.21±0.02</td>
+                            <td>0.69±0.06</td>
+                            <td>35.18±0.07</td>
+                            <td>0.01±0.00</td>
+                            <td>23.40±0.07</td>
+                            <td>0.08±0.07</td>
+                            <td>24.42±0.02</td>
+                            <td>0.11±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Random(E)</td>
+                            <td>3104.89±24.07</td>
+                            <td>18.67±0.02</td>
+                            <td>19.05±0.02</td>
+                            <td>1.16±0.02</td>
+                            <td>40.91±0.08</td>
+                            <td>0.02±0.01</td>
+                            <td>26.29±0.18</td>
+                            <td>0.08±0.07</td>
+                            <td>24.34±0.03</td>
+                            <td>0.19±0.07</td>
+                        </tr>
+                        <tr>
+                            <td>ESM3</td>
+                            <td id="second">330.44±9.90</td>
+                            <td id="second">6.33±0.07</td>
+                            <td id="second">6.59±0.07</td>
+                            <td>28.13±0.24</td>
+                            <td>68.98±0.42</td>
+                            <td>21.11±0.47</td>
+                            <td>60.90±0.77</td>
+                            <td>32.93±2.43</td>
+                            <td>16.73±0.27</td>
+                            <td>22.68±1.83</td>
+                        </tr>
+                        <tr>
+                            <td>CFP-Gen</td>
+                            <td id="first">135.57±4.51</td>
+                            <td id="first">4.94±0.12</td>
+                            <td id="first">5.03±0.11</td>
+                            <td>11.86±0.29</td>
+                            <td>59.17±0.57</td>
+                            <td>13.57±0.88</td>
+                            <td id="first">76.36±0.35</td>
+                            <td id="first">72.52±1.45</td>
+                            <td id="second">12.54±0.26</td>
+                            <td id="second">47.23±2.51</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>1506.64±5.70</td>
+                            <td>11.87±0.02</td>
+                            <td>11.93±0.02</td>
+                            <td>10.02±0.38</td>
+                            <td>65.68±0.30</td>
+                            <td>5.83±0.39</td>
+                            <td>37.59±0.15</td>
+                            <td>0.04±0.07</td>
+                            <td>26.19±0.03</td>
+                            <td>0.00±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>1336.19±7.55</td>
+                            <td>12.17±0.01</td>
+                            <td>12.39±0.02</td>
+                            <td id="third">2.60±0.08</td>
+                            <td id="third">54.53±0.08</td>
+                            <td id="second">0.54±0.03</td>
+                            <td>59.76±0.26</td>
+                            <td>23.75±1.35</td>
+                            <td>14.67±0.05</td>
+                            <td>31.38±0.75</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>2748.12±25.25</td>
+                            <td>17.85±0.04</td>
+                            <td>18.06±0.03</td>
+                            <td id="second">2.32±0.11</td>
+                            <td id="second">44.78±0.06</td>
+                            <td id="first">0.08±0.01</td>
+                            <td>30.89±0.03</td>
+                            <td>0.11±0.11</td>
+                            <td>24.98±0.02</td>
+                            <td>0.19±0.13</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="third">525.38±80.49</td>
+                            <td id="third">8.12±0.45</td>
+                            <td id="third">8.22±0.47</td>
+                            <td>16.73±1.96</td>
+                            <td>59.97±3.55</td>
+                            <td>6.32±1.28</td>
+                            <td id="third">65.69±5.42</td>
+                            <td id="third">44.90±12.43</td>
+                            <td id="third">14.10±2.19</td>
+                            <td id="third">36.13±9.57</td>
+                        </tr>
+                        <tr>
+                            <td>ProDVa</td>
+                            <td>574.60±5.52</td>
+                            <td>12.47±0.77</td>
+                            <td>19.07±1.06</td>
+                            <td id="first">1.99±0.02</td>
+                            <td id="first">21.64±0.11</td>
+                            <td id="third">1.51±0.12</td>
+                            <td id="second">72.80±0.48</td>
+                            <td id="second">60.65±0.65</td>
+                            <td id="first">6.86±0.10</td>
+                            <td id="first">79.92±1.03</td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" style="background-color:#cac7c7">
+                                <strong><em>guided with IPR&amp;GO keywords</em></strong>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #f7f7f7">
+                            <td>Natural</td>
+                            <td>534.49</td>
+                            <td>8.96</td>
+                            <td>8.66</td>
+                            <td>2.16</td>
+                            <td>45.01</td>
+                            <td>0.44</td>
+                            <td>77.17</td>
+                            <td>73.15</td>
+                            <td>10.48</td>
+                            <td>54.9</td>
+                        </tr>
+                        <tr>
+                            <td>Random(U)</td>
+                            <td>2482.06±21.06</td>
+                            <td>21.72±0.01</td>
+                            <td>22.14±0.01</td>
+                            <td>0.73±0.05</td>
+                            <td>36.12±0.06</td>
+                            <td>0.01±0.00</td>
+                            <td>22.85±0.10</td>
+                            <td>0.00±0.00</td>
+                            <td>24.72±0.01</td>
+                            <td>0.00±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Random(E)</td>
+                            <td>3120.95±10.54</td>
+                            <td>18.68±0.02</td>
+                            <td>19.03±0.01</td>
+                            <td>1.14±0.03</td>
+                            <td>42.08±0.02</td>
+                            <td>0.02±0.00</td>
+                            <td>25.60±0.06</td>
+                            <td>0.00±0.00</td>
+                            <td>24.59±0.02</td>
+                            <td>0.00±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>CFP-Gen</td>
+                            <td id="first">163.51±6.62</td>
+                            <td id="first">5.23±0.04</td>
+                            <td id="first">5.23±0.07</td>
+                            <td>13.14±1.18</td>
+                            <td>59.86±0.53</td>
+                            <td>14.17±0.32</td>
+                            <td id="second">72.70±1.07</td>
+                            <td id="second">60.90±1.11</td>
+                            <td id="third">14.45±0.28</td>
+                            <td id="second">42.69±1.76</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>1697.89±9.15</td>
+                            <td>12.81±0.05</td>
+                            <td>12.87±0.05</td>
+                            <td>6.81±0.17</td>
+                            <td>63.58±0.36</td>
+                            <td id="third">2.91±0.21</td>
+                            <td>36.46±0.31</td>
+                            <td>0.20±0.17</td>
+                            <td>25.75±0.06</td>
+                            <td>0.00±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>1360.90±5.58</td>
+                            <td>12.19±0.04</td>
+                            <td id="third">12.40±0.04</td>
+                            <td id="second">2.53±0.12</td>
+                            <td id="third">55.65±0.16</td>
+                            <td id="second">0.56±0.05</td>
+                            <td>58.71±0.59</td>
+                            <td>19.29±2.67</td>
+                            <td>15.33±0.30</td>
+                            <td>29.72±1.34</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>2807.41±13.89</td>
+                            <td>17.80±0.01</td>
+                            <td>17.98±0.02</td>
+                            <td id="first">2.32±0.04</td>
+                            <td id="second">47.64±0.24</td>
+                            <td id="first">0.09±0.01</td>
+                            <td>30.05±0.27</td>
+                            <td>0.00±0.00</td>
+                            <td>25.69±0.10</td>
+                            <td>0.00±0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="second">442.23±69.42</td>
+                            <td id="second">7.39±0.49</td>
+                            <td id="second">7.49±0.51</td>
+                            <td>16.22±2.42</td>
+                            <td>59.71±3.71</td>
+                            <td>6.07±1.49</td>
+                            <td id="third">69.32±5.10</td>
+                            <td id="third">53.56±12.44</td>
+                            <td id="second">12.97±2.18</td>
+                            <td id="third">42.53±10.69</td>
+                        </tr>
+                        <tr>
+                            <td>ProDVa</td>
+                            <td id="third">500.40±7.93</td>
+                            <td id="third">10.48±0.07</td>
+                            <td>13.61±0.95</td>
+                            <td id="third">2.61±0.43</td>
+                            <td id="first">28.73±0.63</td>
+                            <td>3.89±0.68</td>
+                            <td id="first">74.26±0.27</td>
+                            <td id="first">67.46±1.49</td>
+                            <td id="first">8.06±0.07</td>
+                            <td id="first">72.16±0.23</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <div class="table-wrapper">
+                    <table class="js-sort-table" id="results-key-stc">
+                    <caption>Table 2: Language Alignment results on the keyword-guided task</caption>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Models</th>
+                            <th colspan="3">Model-based Alignment &uarr;</th>
+                            <th colspan="9">Retrieval-based Alignment &uarr;</th>
+                        </tr>
+                        <tr>
+                            <th>ProTrek Score</th>
+                            <th>IPR Recovery</th>
+                            <th>GO Recovery</th>
+                            <th>Soft(4)</th>
+                            <th>Soft(10)</th>
+                            <th>Soft(20)</th>
+                            <th>Normal(4)</th>
+                            <th>Normal(10)</th>
+                            <th>Normal(20)</th>
+                            <th>Hard(4)</th>
+                            <th>Hard(10)</th>
+                            <th>Hard(20)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="13" style="background-color:#cac7c7">
+                                <strong><em>guided with GO keywords</em></strong>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #f7f7f7;">
+                            <td>Natural</td>
+                            <td>21.6</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>94.52</td>
+                            <td>92.78</td>
+                            <td>89.75</td>
+                            <td>87.59</td>
+                            <td>77.49</td>
+                            <td>69.41</td>
+                            <td>37.23</td>
+                            <td>28.72</td>
+                            <td>26.7</td>
+                        </tr>
+                        <tr>
+                            <td>Random(U)</td>
+                            <td>4.29±0.04</td>
+                            <td>0.00±0.00</td>
+                            <td>20.79±0.37</td>
+                            <td>30.06±1.33</td>
+                            <td>14.00±4.45</td>
+                            <td>7.50±2.57</td>
+                            <td>26.89±1.83</td>
+                            <td>10.00±0.08</td>
+                            <td>5.05±1.44</td>
+                            <td>30.01±3.21</td>
+                            <td>9.72±0.46</td>
+                            <td>5.05±0.29</td>
+                        </tr>
+                        <tr>
+                            <td>Random(E)</td>
+                            <td>3.44±0.01</td>
+                            <td>0.00±0.00</td>
+                            <td>11.71±1.48</td>
+                            <td>29.87±0.50</td>
+                            <td>12.41±2.18</td>
+                            <td>6.69±1.04</td>
+                            <td>27.08±0.30</td>
+                            <td>11.06±0.55</td>
+                            <td>5.96±0.98</td>
+                            <td>28.62±2.22</td>
+                            <td>11.98±0.66</td>
+                            <td>5.87±0.79</td>
+                        </tr>
+                        <tr>
+                            <td>ProteoGAN</td>
+                            <td>4.42±0.02</td>
+                            <td>0.00±0.00</td>
+                            <td>14.99±1.36</td>
+                            <td>38.64±2.86</td>
+                            <td>19.84±2.14</td>
+                            <td>10.27±1.11</td>
+                            <td>32.70±1.42</td>
+                            <td>13.84±0.69</td>
+                            <td>8.13±0.52</td>
+                            <td>27.16±1.67</td>
+                            <td>10.90±1.05</td>
+                            <td>5.65±0.53</td>
+                        </tr>
+                        <tr>
+                            <td>CFP-Gen</td>
+                            <td id="third">10.03±0.33</td>
+                            <td id="third">9.67±1.07</td>
+                            <td>18.98±1.14</td>
+                            <td id="third">66.24±2.17</td>
+                            <td id="third">57.40±1.85</td>
+                            <td id="third">47.39±3.10</td>
+                            <td id="third">53.46±2.49</td>
+                            <td id="third">38.87±2.00</td>
+                            <td id="third">30.09±0.92</td>
+                            <td>27.80±3.72</td>
+                            <td id="third">13.37±0.74</td>
+                            <td id="third">8.15±0.42</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>1.70±0.21</td>
+                            <td>0.03±0.05</td>
+                            <td>18.52±0.71</td>
+                            <td>37.52±6.22</td>
+                            <td>16.59±1.25</td>
+                            <td>8.90±0.36</td>
+                            <td>34.05±1.91</td>
+                            <td>15.39±1.42</td>
+                            <td>8.51±0.88</td>
+                            <td>27.08±1.79</td>
+                            <td>12.51±1.23</td>
+                            <td>6.30±0.73</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>1.84±0.03</td>
+                            <td>0.23±0.05</td>
+                            <td>16.33±2.36</td>
+                            <td>32.13±0.79</td>
+                            <td>13.80±2.03</td>
+                            <td>7.74±0.87</td>
+                            <td>27.90±0.96</td>
+                            <td>12.07±1.06</td>
+                            <td>5.92±0.38</td>
+                            <td>27.99±0.43</td>
+                            <td>12.22±0.92</td>
+                            <td>5.15±0.82</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>4.38±0.17</td>
+                            <td>0.00±0.00</td>
+                            <td id="third">21.66±2.71</td>
+                            <td>38.58±1.75</td>
+                            <td>20.49±1.59</td>
+                            <td>11.16±1.42</td>
+                            <td>34.10±0.92</td>
+                            <td>16.45±0.76</td>
+                            <td>8.85±0.79</td>
+                            <td id="third">31.36±2.33</td>
+                            <td>12.07±0.46</td>
+                            <td>6.30±1.21</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="second">12.69±1.42</td>
+                            <td id="second">19.26±1.90</td>
+                            <td id="second">22.76±1.78</td>
+                            <td id="second">73.98±4.37</td>
+                            <td id="second">61.90±8.29</td>
+                            <td id="first">56.66±7.96</td>
+                            <td id="second">61.52±4.86</td>
+                            <td id="second">49.93±3.82</td>
+                            <td id="second">42.95±3.35</td>
+                            <td id="second">35.88±4.96</td>
+                            <td id="second">21.26±2.48</td>
+                            <td id="second">17.89±2.27</td>
+                        </tr>
+                        <tr>
+                            <td>ProDVa</td>
+                            <td id="first">14.42±0.07</td>
+                            <td id="first">20.22±0.14</td>
+                            <td id="first">30.24±0.75</td>
+                            <td id="first">86.48±1.78</td>
+                            <td id="first">71.38±5.34</td>
+                            <td id="second">55.80±0.60</td>
+                            <td id="first">66.43±0.58</td>
+                            <td id="first">52.38±0.66</td>
+                            <td id="first">45.07±0.30</td>
+                            <td id="first">35.93±3.38</td>
+                            <td id="first">21.45±2.75</td>
+                            <td id="first">18.13±0.96</td>
+                        </tr>
+                        <tr>
+                            <td colspan="13" style="background-color:#cac7c7">
+                                <strong><em>guided with IPR keywords</em></strong>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #f7f7f7;">
+                            <td>Natural</td>
+                            <td>25.29</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>98.51</td>
+                            <td>96.67</td>
+                            <td>95.17</td>
+                            <td>91.72</td>
+                            <td>83.22</td>
+                            <td>75.75</td>
+                            <td>40.8</td>
+                            <td>32.76</td>
+                            <td>30.69</td>
+                        </tr>
+                        <tr>
+                            <td>Random(U)</td>
+                            <td>7.53±0.07</td>
+                            <td>0.00±0.00</td>
+                            <td>25.75±3.21</td>
+                            <td>27.70±3.13</td>
+                            <td>10.84±1.76</td>
+                            <td>6.44±0.75</td>
+                            <td>26.44±1.78</td>
+                            <td>11.72±0.11</td>
+                            <td>6.21±0.64</td>
+                            <td>28.05±1.44</td>
+                            <td>9.85±0.63</td>
+                            <td>4.87±0.24</td>
+                        </tr>
+                        <tr>
+                            <td>Random(E)</td>
+                            <td>6.11±0.08</td>
+                            <td>0.00±0.00</td>
+                            <td>13.06±1.17</td>
+                            <td>27.62±2.25</td>
+                            <td>13.18±1.93</td>
+                            <td>8.01±1.29</td>
+                            <td>28.51±2.22</td>
+                            <td>12.80±0.13</td>
+                            <td>6.74±0.93</td>
+                            <td>26.36±0.65</td>
+                            <td>11.34±1.53</td>
+                            <td>5.48±0.27</td>
+                        </tr>
+                        <tr>
+                            <td>ESM3</td>
+                            <td>6.22±0.18</td>
+                            <td>20.17±0.86</td>
+                            <td>15.43±2.74</td>
+                            <td>55.41±7.66</td>
+                            <td>37.77±1.88</td>
+                            <td>31.64±1.72</td>
+                            <td>48.31±1.52</td>
+                            <td>33.01±1.24</td>
+                            <td>26.47±1.63</td>
+                            <td id="third">29.82±0.88</td>
+                            <td>14.69±0.18</td>
+                            <td>10.69±0.43</td>
+                        </tr>
+                        <tr>
+                            <td>CFP-Gen</td>
+                            <td id="third">10.21±0.16</td>
+                            <td id="first">32.79±0.93</td>
+                            <td id="second">23.41±1.82</td>
+                            <td id="third">64.47±1.84</td>
+                            <td id="third">50.78±1.88</td>
+                            <td id="third">43.36±0.65</td>
+                            <td id="third">55.90±1.73</td>
+                            <td id="third">40.96±1.19</td>
+                            <td id="third">34.38±1.48</td>
+                            <td>29.36±1.73</td>
+                            <td id="third">15.88±1.31</td>
+                            <td id="third">12.43±0.48</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>3.85±0.03</td>
+                            <td>0.08±0.05</td>
+                            <td id="third">20.76±1.46</td>
+                            <td>40.38±3.85</td>
+                            <td>22.68±1.32</td>
+                            <td>13.83±0.98</td>
+                            <td>34.44±0.29</td>
+                            <td>16.13±1.04</td>
+                            <td>9.23±0.58</td>
+                            <td>26.82±2.94</td>
+                            <td>10.92±1.66</td>
+                            <td>5.63±1.41</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>3.82±0.03</td>
+                            <td>0.17±0.01</td>
+                            <td>17.15±1.93</td>
+                            <td>37.13±1.05</td>
+                            <td>17.05±3.30</td>
+                            <td>9.27±1.04</td>
+                            <td>29.35±1.09</td>
+                            <td>13.68±0.30</td>
+                            <td>6.78±0.20</td>
+                            <td>27.20±2.24</td>
+                            <td>11.15±0.87</td>
+                            <td>5.25±0.87</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>5.98±0.17</td>
+                            <td>0.08±0.05</td>
+                            <td>13.85±1.02</td>
+                            <td>32.07±3.27</td>
+                            <td>14.41±2.50</td>
+                            <td>9.58±1.78</td>
+                            <td>30.69±2.26</td>
+                            <td>14.37±1.85</td>
+                            <td>7.78±0.86</td>
+                            <td>26.90±0.92</td>
+                            <td>11.46±2.17</td>
+                            <td>6.05±0.87</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="second">14.38±1.38</td>
+                            <td id="second">25.63±3.95</td>
+                            <td>15.93±1.49</td>
+                            <td id="first">80.96±7.50</td>
+                            <td id="first">70.88±9.31</td>
+                            <td id="first">64.21±10.47</td>
+                            <td id="first">71.00±4.87</td>
+                            <td id="first">57.59±5.60</td>
+                            <td id="first">48.24±6.90</td>
+                            <td id="second">31.88±1.90</td>
+                            <td id="second">20.31±1.36</td>
+                            <td id="first">16.59±1.90</td>
+                        </tr>
+                        <tr>
+                            <td>ProDVa</td>
+                            <td id="first">15.19±0.19</td>
+                            <td id="third">24.58±0.69</td>
+                            <td id="first">26.59±0.40</td>
+                            <td id="second">80.15±2.25</td>
+                            <td id="second">64.90±3.11</td>
+                            <td id="second">57.05±4.15</td>
+                            <td id="second">65.29±0.64</td>
+                            <td id="second">51.99±0.93</td>
+                            <td id="second">44.44±0.88</td>
+                            <td id="first">33.26±1.24</td>
+                            <td id="first">20.73±1.50</td>
+                            <td id="second">15.90±0.54</td>
+                        </tr>
+                        <tr>
+                            <td colspan="13" style="background-color:#cac7c7">
+                                <strong><em>guided with IPR&amp;GO keywords</em></strong>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #f7f7f7;">
+                            <td>Natural</td>
+                            <td>27.36</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>99.55</td>
+                            <td>99.11</td>
+                            <td>98.96</td>
+                            <td>93.62</td>
+                            <td>87.39</td>
+                            <td>79.82</td>
+                            <td>45.85</td>
+                            <td>36.65</td>
+                            <td>34.27</td>
+                        </tr>
+                        <tr>
+                            <td>Random(U)</td>
+                            <td>4.84±0.09</td>
+                            <td>0.00±0.00</td>
+                            <td>25.38±3.32</td>
+                            <td>29.77±1.88</td>
+                            <td>12.86±2.64</td>
+                            <td>5.64±1.27</td>
+                            <td>26.36±1.34</td>
+                            <td>9.45±1.44</td>
+                            <td>4.50±1.84</td>
+                            <td>26.41±1.12</td>
+                            <td>9.69±0.45</td>
+                            <td>4.75±1.07</td>
+                        </tr>
+                        <tr>
+                            <td>Random(E)</td>
+                            <td>3.72±0.09</td>
+                            <td>0.00±0.00</td>
+                            <td>14.67±4.14</td>
+                            <td>30.42±2.20</td>
+                            <td>12.12±0.62</td>
+                            <td>5.93±0.90</td>
+                            <td>27.00±1.46</td>
+                            <td>11.28±1.04</td>
+                            <td>6.28±1.30</td>
+                            <td>26.56±1.46</td>
+                            <td>10.29±1.30</td>
+                            <td>5.24±0.31</td>
+                        </tr>
+                        <tr>
+                            <td>CFP-Gen</td>
+                            <td id="third">11.68±0.15</td>
+                            <td id="first">35.21±0.30</td>
+                            <td id="second">23.31±2.49</td>
+                            <td id="third">73.97±1.60</td>
+                            <td id="third">63.46±2.00</td>
+                            <td id="third">59.23±1.54</td>
+                            <td id="third">57.95±1.94</td>
+                            <td id="third">45.77±1.92</td>
+                            <td id="third">35.51±3.11</td>
+                            <td id="third">29.36±1.46</td>
+                            <td id="third">15.00±0.00</td>
+                            <td id="third">11.54±0.77</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>3.06±0.11</td>
+                            <td>0.36±0.03</td>
+                            <td>15.92±1.14</td>
+                            <td>47.08±1.20</td>
+                            <td>29.13±1.43</td>
+                            <td>19.63±1.63</td>
+                            <td>38.72±1.43</td>
+                            <td>19.29±0.68</td>
+                            <td>9.99±0.97</td>
+                            <td>27.45±2.32</td>
+                            <td>10.48±0.69</td>
+                            <td>5.39±1.09</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>2.19±0.12</td>
+                            <td>0.16±0.06</td>
+                            <td>14.12±1.86</td>
+                            <td>32.29±2.15</td>
+                            <td>14.34±2.12</td>
+                            <td>8.56±0.48</td>
+                            <td>28.83±0.69</td>
+                            <td>11.67±1.65</td>
+                            <td>6.38±0.53</td>
+                            <td>27.00±2.50</td>
+                            <td>11.67±0.73</td>
+                            <td>5.79±0.74</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>4.66±0.12</td>
+                            <td>0.02±0.02</td>
+                            <td>9.77±0.90</td>
+                            <td>28.24±3.82</td>
+                            <td>14.14±3.71</td>
+                            <td>7.22±2.06</td>
+                            <td>28.19±1.67</td>
+                            <td>11.82±0.82</td>
+                            <td>6.03±0.60</td>
+                            <td>29.08±1.80</td>
+                            <td>12.17±1.55</td>
+                            <td>6.08±0.51</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="second">15.26±1.27</td>
+                            <td id="second">33.08±3.75</td>
+                            <td id="third">21.64±0.47</td>
+                            <td id="second">82.34±3.25</td>
+                            <td id="second">73.10±4.55</td>
+                            <td id="second">68.55±4.53</td>
+                            <td id="first">72.50±3.87</td>
+                            <td id="second">60.88±2.79</td>
+                            <td id="second">52.62±3.12</td>
+                            <td id="first">34.47±1.34</td>
+                            <td id="second">21.76±1.12</td>
+                            <td id="second">18.50±1.24</td>
+                        </tr>
+                        <tr>
+                            <td>ProDVa</td>
+                            <td id="first">16.78±0.12</td>
+                            <td id="third">30.95±0.56</td>
+                            <td id="first">25.24±0.45</td>
+                            <td id="first">82.54±1.19</td>
+                            <td id="first">74.18±1.36</td>
+                            <td id="first">69.24±1.63</td>
+                            <td id="second">71.51±0.93</td>
+                            <td id="first">61.23±1.50</td>
+                            <td id="first">52.97±2.43</td>
+                            <td id="second">33.88±1.79</td>
+                            <td id="first">22.45±1.09</td>
+                            <td id="first">19.93±1.09</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <div class="table-wrapper">
+                    <table class="js-sort-table" id="results-key-alt">
+                    <caption>Table 3: Similarity, Novelty and Diversity results on the keyword-guided task</caption>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Models</th>
+                            <th colspan="5">Similarity</th>
+                            <th colspan="4">Novelty</th>
+                            <th colspan="2">Diversity</th>
+                        </tr>
+                        <tr>
+                            <th>GT-Identity &uarr;</th>
+                            <th>GT-TMScore &uarr;</th>
+                            <th>ESM-F1 &uarr;</th>
+                            <th>ESM-Precision &uarr;</th>
+                            <th>ESM-Recall &uarr;</th>
+                            <th>Seq<sub>Easy</sub> &uarr;</th>
+                            <th>Seq<sub>Hard</sub> &uarr;</th>
+                            <th>Struct<sub>Easy</sub> &uarr;</th>
+                            <th>Struct<sub>Hard</sub> &uarr;</th>
+                            <th>Seq &uarr;</th>
+                            <th>Struct &uarr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="12" style="background-color:#cac7c7">
+                                <strong><em>guided with GO keywords</em></strong>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #f7f7f7;">
+                            <td>Natural</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>44.34</td>
+                            <td>4.07</td>
+                            <td>56.96</td>
+                            <td>18.15</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Random(U)</td>
+                            <td>0.84±0.23</td>
+                            <td>16.76±0.05</td>
+                            <td>73.37±0.04</td>
+                            <td>82.81±0.05</td>
+                            <td>66.40±0.03</td>
+                            <td>98.66±0.07</td>
+                            <td>58.04±0.69</td>
+                            <td>96.54±0.11</td>
+                            <td>76.75±0.20</td>
+                            <td>94.29</td>
+                            <td>81.56</td>
+                        </tr>
+                        <tr>
+                            <td>Random(E)</td>
+                            <td>0.63±0.16</td>
+                            <td>17.03±0.03</td>
+                            <td>74.24±0.04</td>
+                            <td>83.70±0.05</td>
+                            <td>67.24±0.03</td>
+                            <td>98.44±0.04</td>
+                            <td>60.28±0.09</td>
+                            <td>95.85±0.15</td>
+                            <td>75.92±0.19</td>
+                            <td>98.65</td>
+                            <td>81.54</td>
+                        </tr>
+                        <tr>
+                            <td>ProteoGAN</td>
+                            <td>0.28±0.07</td>
+                            <td>14.75±0.24</td>
+                            <td>74.25±0.07</td>
+                            <td id="first">84.37±0.10</td>
+                            <td>66.84±0.05</td>
+                            <td id="second">99.13±0.06</td>
+                            <td id="second">65.24±0.27</td>
+                            <td id="second">96.19±0.17</td>
+                            <td id="first">75.82±0.29</td>
+                            <td id="second">98.94</td>
+                            <td id="second">84.37</td>
+                        </tr>
+                        <tr>
+                            <td>CFP-Gen</td>
+                            <td id="third">2.30±0.25</td>
+                            <td>13.98±0.26</td>
+                            <td>67.52±0.17</td>
+                            <td>68.36±0.26</td>
+                            <td>67.46±0.30</td>
+                            <td>59.60±0.61</td>
+                            <td>47.85±0.95</td>
+                            <td>54.07±1.87</td>
+                            <td>28.28±1.47</td>
+                            <td>85.14</td>
+                            <td id="third">81.76</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>0.20±0.12</td>
+                            <td>12.67±0.05</td>
+                            <td id="second">74.83±0.02</td>
+                            <td id="third">82.67±0.10</td>
+                            <td>68.93±0.05</td>
+                            <td id="first">99.28±0.06</td>
+                            <td id="first">75.41±0.30</td>
+                            <td id="first">96.29±0.05</td>
+                            <td id="second">74.62±0.63</td>
+                            <td id="first">99.7</td>
+                            <td id="first">84.53</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>0.38±0.07</td>
+                            <td id="second">17.67±0.06</td>
+                            <td id="third">74.29±0.02</td>
+                            <td>80.80±0.02</td>
+                            <td id="third">69.15±0.02</td>
+                            <td>97.44±0.16</td>
+                            <td>59.35±0.58</td>
+                            <td>80.22±0.45</td>
+                            <td>50.88±0.84</td>
+                            <td>93.7</td>
+                            <td>79.79</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>0.16±0.05</td>
+                            <td id="third">16.22±0.18</td>
+                            <td id="first">75.40±0.05</td>
+                            <td id="second">84.22±0.07</td>
+                            <td>68.77±0.05</td>
+                            <td id="third">98.80±0.03</td>
+                            <td id="third">62.36±0.47</td>
+                            <td id="third">95.20±0.27</td>
+                            <td id="third">73.36±0.18</td>
+                            <td id="third">98.57</td>
+                            <td>81.73</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="second">5.35±0.35</td>
+                            <td>15.84±0.47</td>
+                            <td>71.36±0.66</td>
+                            <td>72.24±1.85</td>
+                            <td id="first">71.06±0.46</td>
+                            <td>61.98±8.67</td>
+                            <td>46.06±5.23</td>
+                            <td>46.42±9.10</td>
+                            <td>19.27±6.43</td>
+                            <td>87.61</td>
+                            <td>79.0</td>
+                        </tr>
+                        <tr>
+                            <td>ProDVa</td>
+                            <td id="first">9.07±0.14</td>
+                            <td id="first">20.25±0.13</td>
+                            <td>72.54±0.10</td>
+                            <td>75.81±0.06</td>
+                            <td id="second">70.25±0.12</td>
+                            <td>48.37±0.72</td>
+                            <td>25.02±0.81</td>
+                            <td>62.12±0.19</td>
+                            <td>32.72±0.02</td>
+                            <td>98.17</td>
+                            <td>35.76</td>
+                        </tr>
+                        <tr>
+                            <td colspan="12" style="background-color:#cac7c7">
+                                <strong><em>guided with IPR keywords</em></strong>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #f7f7f7;">
+                            <td>Natural</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>44.92</td>
+                            <td>4.47</td>
+                            <td>59.46</td>
+                            <td>20.09</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Random(U)</td>
+                            <td>0.88±0.03</td>
+                            <td>16.69±0.04</td>
+                            <td>73.97±0.04</td>
+                            <td>82.79±0.02</td>
+                            <td>67.38±0.05</td>
+                            <td>98.70±0.06</td>
+                            <td>57.21±0.77</td>
+                            <td>96.37±0.05</td>
+                            <td>76.47±0.35</td>
+                            <td>94.44</td>
+                            <td>81.56</td>
+                        </tr>
+                        <tr>
+                            <td>Random(E)</td>
+                            <td>0.70±0.15</td>
+                            <td>16.85±0.12</td>
+                            <td>74.79±0.03</td>
+                            <td>83.65±0.03</td>
+                            <td>68.16±0.04</td>
+                            <td>98.44±0.08</td>
+                            <td>59.57±0.81</td>
+                            <td>95.62±0.14</td>
+                            <td>75.05±0.48</td>
+                            <td>98.58</td>
+                            <td>81.46</td>
+                        </tr>
+                        <tr>
+                            <td>ESM3</td>
+                            <td>4.43±0.22</td>
+                            <td id="first">21.30±0.28</td>
+                            <td>72.22±0.09</td>
+                            <td>75.06±0.13</td>
+                            <td>69.96±0.25</td>
+                            <td>85.30±0.68</td>
+                            <td id="second">71.87±1.23</td>
+                            <td>73.80±1.08</td>
+                            <td>37.56±0.41</td>
+                            <td>91.41</td>
+                            <td>76.79</td>
+                        </tr>
+                        <tr>
+                            <td>CFP-Gen</td>
+                            <td id="first">7.75±0.16</td>
+                            <td>16.73±0.42</td>
+                            <td>66.82±0.17</td>
+                            <td>68.61±0.13</td>
+                            <td>65.74±0.25</td>
+                            <td>63.79±0.11</td>
+                            <td>49.46±0.57</td>
+                            <td>50.44±1.32</td>
+                            <td>23.15±0.97</td>
+                            <td>85.31</td>
+                            <td id="second">82.08</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>0.13±0.02</td>
+                            <td>12.38±0.06</td>
+                            <td id="second">75.23±0.04</td>
+                            <td id="second">82.13±0.08</td>
+                            <td id="third">70.07±0.02</td>
+                            <td id="first">99.08±0.13</td>
+                            <td id="first">73.57±0.65</td>
+                            <td id="second">96.64±0.12</td>
+                            <td id="second">76.03±0.19</td>
+                            <td id="first">99.71</td>
+                            <td id="first">84.81</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>0.38±0.13</td>
+                            <td id="third">17.45±0.06</td>
+                            <td id="third">74.81±0.02</td>
+                            <td id="third">80.85±0.03</td>
+                            <td>70.00±0.01</td>
+                            <td id="third">97.35±0.13</td>
+                            <td>59.25±0.27</td>
+                            <td id="third">80.19±0.68</td>
+                            <td id="third">50.77±1.26</td>
+                            <td>94.06</td>
+                            <td>79.88</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>0.26±0.07</td>
+                            <td>14.37±0.07</td>
+                            <td id="first">76.19±0.01</td>
+                            <td id="first">84.43±0.03</td>
+                            <td>69.93±0.03</td>
+                            <td id="second">98.93±0.07</td>
+                            <td id="third">64.71±0.70</td>
+                            <td id="first">96.66±0.16</td>
+                            <td id="first">79.23±0.22</td>
+                            <td id="second">99.16</td>
+                            <td id="third">81.48</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="third">6.70±0.90</td>
+                            <td>17.23±0.57</td>
+                            <td>74.14±0.28</td>
+                            <td>76.19±1.29</td>
+                            <td id="first">72.59±0.62</td>
+                            <td>74.01±6.01</td>
+                            <td>51.61±3.45</td>
+                            <td>60.24±6.98</td>
+                            <td>27.00±6.19</td>
+                            <td>87.02</td>
+                            <td>80.38</td>
+                        </tr>
+                        <tr>
+                            <td>ProDVa</td>
+                            <td id="second">7.39±0.08</td>
+                            <td id="second">20.75±0.36</td>
+                            <td>73.31±0.09</td>
+                            <td>76.62±0.17</td>
+                            <td id="second">70.99±0.09</td>
+                            <td>51.80±1.34</td>
+                            <td>28.86±1.37</td>
+                            <td>65.58±0.77</td>
+                            <td>31.26±1.57</td>
+                            <td id="third">95.02</td>
+                            <td>45.6</td>
+                        </tr>
+                        <tr>
+                            <td colspan="12" style="background-color:#cac7c7"><strong><em>guided with IPR&amp;GO keywords</em></strong></td>
+                        </tr>
+                        <tr style="background-color: #f7f7f7;">
+                            <td>Natural</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>100.0</td>
+                            <td>43.23</td>
+                            <td>3.89</td>
+                            <td>56.17</td>
+                            <td>17.72</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Random(U)</td>
+                            <td>0.85±0.34</td>
+                            <td>16.73±0.10</td>
+                            <td>73.09±0.02</td>
+                            <td>82.66±0.03</td>
+                            <td>66.02±0.01</td>
+                            <td>98.85±0.03</td>
+                            <td>57.48±0.13</td>
+                            <td>96.58±0.23</td>
+                            <td>77.18±0.45</td>
+                            <td>94.24</td>
+                            <td>81.73</td>
+                        </tr>
+                        <tr>
+                            <td>Random(E)</td>
+                            <td>0.69±0.04</td>
+                            <td>16.89±0.05</td>
+                            <td>73.97±0.06</td>
+                            <td>83.59±0.05</td>
+                            <td>66.85±0.05</td>
+                            <td>98.54±0.03</td>
+                            <td>60.06±0.40</td>
+                            <td>95.79±0.02</td>
+                            <td>75.98±0.28</td>
+                            <td>98.39</td>
+                            <td>81.57</td>
+                        </tr>
+                        <tr>
+                            <td>CFP-Gen</td>
+                            <td id="third">8.00±0.30</td>
+                            <td>16.12±0.13</td>
+                            <td>66.07±0.27</td>
+                            <td>68.60±0.12</td>
+                            <td>64.41±0.40</td>
+                            <td>65.78±1.27</td>
+                            <td>54.72±1.90</td>
+                            <td>52.97±1.96</td>
+                            <td>28.89±0.77</td>
+                            <td>80.61</td>
+                            <td id="second">81.91</td>
+                        </tr>
+                        <tr>
+                            <td>ProteinDT</td>
+                            <td>0.29±0.14</td>
+                            <td>13.08±0.03</td>
+                            <td id="second">74.91±0.02</td>
+                            <td id="second">82.88±0.06</td>
+                            <td id="third">68.91±0.06</td>
+                            <td id="second">98.75±0.06</td>
+                            <td id="first">71.44±0.50</td>
+                            <td id="second">96.53±0.05</td>
+                            <td id="second">75.73±0.21</td>
+                            <td id="first">99.39</td>
+                            <td id="first">84.18</td>
+                        </tr>
+                        <tr>
+                            <td>Chroma</td>
+                            <td>0.29±0.08</td>
+                            <td id="third">17.51±0.10</td>
+                            <td id="third">74.09±0.06</td>
+                            <td id="third">80.76±0.07</td>
+                            <td>68.84±0.05</td>
+                            <td id="third">97.49±0.07</td>
+                            <td id="third">59.36±0.05</td>
+                            <td id="third">80.76±0.50</td>
+                            <td id="third">51.45±1.07</td>
+                            <td id="third">94.27</td>
+                            <td>79.97</td>
+                        </tr>
+                        <tr>
+                            <td>PAAG</td>
+                            <td>0.20±0.08</td>
+                            <td>13.77±0.07</td>
+                            <td id="first">75.52±0.05</td>
+                            <td id="first">84.45±0.05</td>
+                            <td>68.81±0.05</td>
+                            <td id="first">99.12±0.06</td>
+                            <td id="second">65.07±0.68</td>
+                            <td id="first">97.22±0.09</td>
+                            <td id="first">81.53±0.18</td>
+                            <td id="second">99.22</td>
+                            <td id="third">81.51</td>
+                        </tr>
+                        <tr>
+                            <td>Pinal</td>
+                            <td id="second">9.41±1.27</td>
+                            <td id="second">18.11±0.94</td>
+                            <td>74.00±0.38</td>
+                            <td>75.46±1.50</td>
+                            <td id="first">73.01±0.68</td>
+                            <td>66.95±6.76</td>
+                            <td>49.03±4.31</td>
+                            <td>54.41±7.66</td>
+                            <td>22.43±6.35</td>
+                            <td>85.2</td>
+                            <td>78.2</td>
+                        </tr>
+                        <tr>
+                            <td>ProDVa</td>
+                            <td id="first">10.08±0.36</td>
+                            <td id="first">19.36±0.26</td>
+                            <td>73.11±0.15</td>
+                            <td>75.47±0.22</td>
+                            <td id="second">71.48±0.10</td>
+                            <td>46.43±0.51</td>
+                            <td>21.97±0.59</td>
+                            <td>60.12±0.63</td>
+                            <td>24.20±0.41</td>
+                            <td>91.94</td>
+                            <td>52.18</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Rethinking -->
+    <section class="section" id="rethinking">
+        <div class="container is-max-desktop">
+            <div class="is-centered has-text-centered">
+                <h1 class="title is-3">Rethinking the Evaluation Metrics</h1>
+                <p><strong>
+                    In this section, we provide a comprehensive analysis regarding the correlations among different
+                    evaluation metrics on <strong>PDFBENCH</strong>.
+                </strong></p>
+                <h2 class="title is-4">1. Does PPL Accurately Reflect pLDDT and PAE?</h2>
+                <div class="content has-text-justified">
+                    <p>We begin by exploring to what extent sequence-level metrics reflect protein structures. Folding proteins into 3D structures using AlphaFold or ESMFold is time-consuming and requires substantial computational resources, particularly for longer sequences. Previous studies (ProtGPT2, ProGen2 and RITA) have observed a correlation between PPL and pLDDT scores. However, no empirical results or further analyses have been conducted to investigate the correlation.</p>
+
+                    <img id="fig-ppl-plddt-pae" src="static/images/discussion/ppl_plddt_pae/merge.png" alt="PPL_pLDDT_PAE">
+                    <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
+                        <strong>Figure 3:</strong> <strong>(a)</strong> presents the distribution of PPL and pLDDT.
+                        <strong>(b)</strong> displays the distribution of PPL and PAE. <strong>(c)</strong>
+                        illustrates the Pearson correlation among these metrics. Note that PPL values are
+                        categorized into three ranges: values below 500 indicate a low PPL range, values between 500
+                        and 2,000 represent a medium PPL range, and values above 2,000 correspond to a high PPL
+                        range.
+                    </div>
+                    
+                    <p>Results are randomly sampled from natural proteins with low PPL scores, Chroma-designed proteins with medium PPL scores, and randomly generated proteins with high PPL scores. <a href="#fig-ppl-plddt-pae">Figure 3</a> presents the distributions of PPL, pLDDT, and PAE. Proteins with high pLDDT values are predominantly clustered in the low PPL range, whereas those with low pLDDT values are concentrated in the high PPL range. For the proteins situated between these two clusters, a negative correlation is observed between PPL and pLDDT values. Specifically, lower PPL values are generally associated with higher pLDDT scores. A similar pattern is observed in the distribution of PPL and PAE. Therefore, we empirically categorize PPL values into three ranges, denoted as low PPL range (values above 500), medium PPL range (values between 500 and 2,000), and high PPL range (values above 2,000). Additionally, the Pearson correlation in <a href="#fig-ppl-plddt-pae">Figure 3(c) </a>highlights the relationships between PPL, pLDDT, and PAE.</p>
+
+                    <strong>
+                        In the low PPL range, proteins are well-folded, exhibiting high pLDDT scores and low PAE values. In contrast, proteins in the high PPL range struggle to fold into plausible structures. Within the medium PPL range, proteins with higher PPL values tend to display lower pLDDT scores and higher PAE values.
+                    </strong>
+                </div>
+                <h2 class="title is-4">2. Do Repetitive Patterns Lead to Lower Structural Plausibility?</h2>
+                <div class="content has-text-justified">
+                    <p>Previous research <a href="https://github.com/bytedance/dplm">DPLM</a> has found that repetitive patterns occurring in amino acid sequences may result in low pLDDT scores, thereby leading to lower structural plausibility. We conduct an empirical analysis using the Repeat metric to measure the correlation between this pattern and foldability. Proteins designed by ESM3 and Pinal exhibit repetitive patterns, as indicated by their high scores on the Repeat metric. <a href="#fig-rep-plddt-pae">Figure 4</a> presents the distribution of Repeat scores and pLDDT and PAE values for proteins randomly sampled from natural sequences and those designed by ESM3 and Pinal. One observation is that when the Repeat score remains relatively low, there is no clear relationship between Repeat and foldability. In other words, a low Repeat score does not necessarily indicate that a protein is well-folded. However, when the Repeat score exceeds 10, higher Repeat values are associated with lower pLDDT scores and higher PAE values. Therefore, it is important to maintain repetitive patterns below a certain threshold (e.g., Repeat < 10) when designing well-folded proteins.</p> 
+
+                    <img id="fig-rep-plddt-pae" src="static/images/discussion/rep_plddt/merge.png" alt="Repeat_pLDDT">
+                    <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
+                        <strong>Figure 4:</strong> <strong>(a)</strong> Distribution of Repeat and pLDDT. <strong>(b)</strong> Distribution of Repeat and PAE. <strong>(c)</strong> Results for random mutations in natural proteins. Motif and Non-motif indicate mutations within or outside motif regions. Overall includes all mutations.
+                    </div>
+
+                    <strong>High Repeat scores (typically above 10) in protein sequences are associated with lower structural plausibility as indicated by lower pLDDT and higher PAE values.</strong>
+                </div>
+                <h2 class="title is-4">3. How Faithfully Do Designed Proteins Align with Functional Descriptions?</h2>
+                <div class="content has-text-justified">
+                    <p>The most reliable strategy for evaluating the alignment between designed proteins and input textual descriptions is through wet-lab experiments. However, such experiments are time-consuming and costly. Therefore, employing computational methods to screen proteins involves a trade-off between efficiency and accuracy. To more effectively evaluate the functions of designed proteins, both oracle model-based and retrieval-based metrics have been proposed.</p>
+                    
+                    <p>We first investigate whether the two oracle model-based language alignment metrics exhibit consistency in evaluating natural proteins. These two metrics differ in two key perspectives. First, the ProTrek Score measures similarity between ground truth and designed proteins directly based on their embeddings, whereas the EvoLlama Score assesses similarity through predicted functional descriptions. Second, ProTrek is an oracle model pre-trained on large-scale datasets without further fine-tuning on specific downstream tasks. In contrast, EvoLlama is trained from scratch on the downstream task, leading to a distinct intrinsic knowledge distribution between the two oracle models. <a href="#fig-language-oracle">Figure 5(a)</a> illustrates the consistency between the ProTrek Score and the EvoLlama Score for natural proteins sampled from the validation and test sets of our description-guided task. The results show that most proteins are accurately predicted and tightly clustered in the upper-right corner, indicating strong agreement between the two metrics. Furthermore, following <a href="https://www.biorxiv.org/content/10.1101/2024.08.01.606258v7">Pinal</a> and the definitions introduced in Section~the metrics section, we establish empirical score thresholds to identify well-aligned proteins. Specifically, proteins with a ProTrek Score above 15 and an EvoLlama Score above 50 are considered to faithfully match the input functional descriptions.</p>
+
+                    <img id="fig-language-oracle" src="static/images/discussion/language_alignment/merge.png" alt="Language Alignment">
+                    <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
+                        <strong>Figure 5:</strong> <strong>(a)</strong> presents the distribution of the ProTrek Score and EvoLlama Score for natural proteins. <strong>(b)</strong> and <strong>(c)</strong> present the distributions of the GT-TM Score, ProTrek Score, and EvoLlama Score for proteins designed by Pinal and the ProDVa.
+                    </div>
+
+                    <strong>
+                        The ProTrek Score and the EvoLlama Score are two oracle-based metrics that demonstrate high agreement in evaluating protein functions. Proteins with a ProTrek Score above 15 and an EvoLlama Score above 50 are considered well-aligned, indicating they faithfully match the input functional descriptions.
+                    </strong>
+
+                    <p>The above discussion has remained focused on the global level of protein function. However, attention must also be directed toward local sequence alignment within proteins, particularly minor mutations in functional sub-sequences (motifs). To assess whether ProTrek is sensitive to protein mutations, we randomly select 1,000 natural proteins from \desctest and introduce random mutations with specified probabilities. The results are illustrated in Figure~6.</p>
+
+                    <strong>
+                        The ProTrek Score assesses both global alignment between the overall proteins and the functions, as well as local alignment between motifs and functions.
+                    </strong>
+
+                    <p>Next, we discuss the language alignment metrics that do not rely on oracle models. The GT-TM Score measures the similarity between a designed protein and the ground truth structure. Since protein structure determines function, it is generally assumed that structurally similar proteins exhibit similar functions. However, we argue whether proteins with similar functions can fold into dissimilar structures. In <a href="#fig-language-oracle">Figures 5(b) and (c)</a>, proteins designed by Pinal and ProDVa are sampled for illustration. The average score reported in <a href="#tab-main-res-desc">Table 5</a> is used as the threshold to determine whether the GT-TM score is considered high. It can be observed that 96.73% of the Pinal-designed proteins with high similarity to the ground truth exhibit high ProTrek scores (above 15), while 75.89% achieve high EvoLlama scores (above 50). A similar conclusion can be drawn from the ProDVa-designed proteins, demonstrating that high structural similarity leads to similar functions. Furthermore, for proteins with lower structural similarity, no correlation between the two similarities is observed.</p>
+
+                    <strong>
+                        A high GT-TM Score generally indicates functional similarity among structurally similar proteins. However, high structural similarity is not a prerequisite for designing well-aligned proteins. Therefore, relying solely on this metric provides limited insight into whether the designed proteins align well with their functional descriptions.
+                    </strong>
+
+                    <p>In addition to the aforementioned metrics, Retrieval Accuracy is a retrieval-based metric that measures whether the embeddings of the positive function-sequence pair are the most similar among all candidates. However, this metric is highly dependent on the retrieved sequences. To assess the extent to which the retrieval strategy influences the results, we further define Soft Retrieval Accuracy and Hard Retrieval Accuracy. The difference between them lies in whether the (T-1) most or least relevant texts and their corresponding sequences are retrieved in relation to the positive pair. The relevance between textual descriptions is defined by the cosine similarity of their embeddings. In <a href="#fig-retrieval-accuracy">Figure 6</a>, for proteins designed by ProDVa and Pinal, the gap between Hard Retrieval Accuracy and Soft Retrieval Accuracy is 60.64% and 55.82%, respectively. Even for natural proteins, the gap between the two metrics on the ground truth can be as high as 66.31%. Therefore, the results demonstrate that the retrieval strategy significantly impacts performance.</p>
+
+                    <img id="fig-retrieval-accuracy" src="static/images/discussion/retrieval_accuracy/merge.png" alt="Retrieval Accuracy">
+                    <div style="text-align: center;font-size: 1rem;margin-bottom: 2%;font-weight:550;">
+                        <strong>Figure 6:</strong> Experimental results are reported for Soft, Random, and Hard Retrieval Accuracy. The random variant refers to the original implementation.
+                    </div>
+
+                    <strong>
+                        The retrieval strategy employed in the Retrieval Accuracy metric has a significant impact on the evaluation results. Randomly sampling the negative pairs can serve as a workaround, but caution should be exercised when interpreting the absolute values of the metric.
+                    </strong>
+                </div>
             <!-- rethinking -->
         </div>
     </section>
 
-
+    <!-- BibTeX -->
     <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">
             <h2 class="title">BibTeX</h2>
@@ -1099,6 +2079,7 @@
     url={https://arxiv.org/abs/2505.20346}, 
 }</pre>
         </div>
+        
     </section>
 
 
